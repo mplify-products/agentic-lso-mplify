@@ -248,6 +248,26 @@ button.chapter-item.active {
   letter-spacing: 0.5px;
   text-transform: none;
 }
+.title-meta a {
+  display: block;
+  color: var(--navy);
+  font-weight: 600;
+  font-size: 13px;
+  margin-top: 4px;
+  letter-spacing: 0.5px;
+  text-transform: none;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.title-meta a:hover {
+  color: var(--orange);
+  border-bottom-color: var(--orange);
+}
+.title-meta a:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
+}
 
 /* =================== SECTION HEADER =================== */
 .slide-eyebrow {
@@ -788,9 +808,7 @@ svg.icon { width: 22px; height: 22px; }
         <div class="title-main">Agentic LSO<br>Reference Architecture</div>
         <div class="title-sub">A work-in-progress snapshot of the reference architecture and blueprints — for Mplify member review and discussion.</div>
         <div class="title-meta">
-          <div>Working Group<strong>Agentic LSO</strong></div>
-          <div>Status<strong>Draft for member review</strong></div>
-          <div>Audience<strong>Mplify member SMEs</strong></div>
+          <div>Working Group<a href="https://members.mplify.net/s/detail/a2cUI00002FvSKWYA3" target="_blank" rel="noopener">Agentic LSO Reference Architecture and Blueprints (MP0092)</a></div>
         </div>
       </div>
     </div>
