@@ -1,0 +1,27 @@
+flowchart LR
+    Buyer((Buyer)) -->|chat| Agent((Agent))
+
+    Agent -->|MCP| PC[Product Catalog MCP Server]
+    Agent -->|MCP| AV[Address Validation MCP Server]
+    Agent -->|MCP| POQ[POQ MCP Server]
+    Agent -->|MCP| QUOTE[Quote MCP Server]
+    Agent -->|MCP| ORDER[Product Order MCP Server]
+    Agent -->|MCP| INV[Product Inventory MCP Server]
+
+    PC -->|LSO API| BSE[Backend System Emulator]
+    AV -->|LSO API| BSE
+    POQ -->|LSO API| BSE
+    QUOTE -->|LSO API| BSE
+    ORDER -->|LSO API| BSE
+    INV -->|LSO API| BSE
+
+    classDef actor fill:#e5e7eb,stroke:#4b5563,color:#111827,stroke-width:2px;
+    classDef agent fill:#bae6fd,stroke:#0369a1,color:#0c4a6e,stroke-width:2px;
+    classDef mcp fill:#dbeafe,stroke:#2563eb,color:#1e3a8a,stroke-width:1.5px;
+    classDef backend fill:#ede9fe,stroke:#7c3aed,color:#4c1d95,stroke-width:1.5px;
+    classDef mplify fill:#7e22ce,stroke:#6b21a8,color:#ffffff,stroke-width:1.5px;
+
+    class Buyer actor;
+    class Agent agent;
+    class PC,AV,POQ,QUOTE,ORDER,INV mcp;
+    class BSE backend;
