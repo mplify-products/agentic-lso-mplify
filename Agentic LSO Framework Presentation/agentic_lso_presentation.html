@@ -807,6 +807,34 @@ svg.icon { width: 22px; height: 22px; }
 <body>
 
 <!-- ============================================================
+     SIDEBAR
+     ============================================================ -->
+<nav id="sidebar" aria-label="Slide navigation">
+  <div id="sidebar-logo"></div>
+
+  <div class="sidebar-group">Framing</div>
+  <button class="chapter-item active" onclick="goTo(0)" data-slide="0"><span class="chapter-number">01</span> Cover</button>
+  <button class="chapter-item" onclick="goTo(1)" data-slide="1"><span class="chapter-number">02</span> What is Agentic LSO?</button>
+
+  <div class="sidebar-group">Architecture</div>
+  <button class="chapter-item" onclick="goTo(2)" data-slide="2"><span class="chapter-number">03</span> Reference Architecture</button>
+  <button class="chapter-item" onclick="goTo(3)" data-slide="3"><span class="chapter-number">04</span> Blueprints — intro</button>
+  <button class="chapter-item" onclick="goTo(4)" data-slide="4"><span class="chapter-number">05</span> MCP server vs. agent</button>
+  <button class="chapter-item" onclick="goTo(5)" data-slide="5"><span class="chapter-number">06</span> Sub-agent conformance</button>
+
+  <div class="sidebar-group">Design considerations</div>
+  <button class="chapter-item" onclick="goTo(6)" data-slide="6"><span class="chapter-number">07</span> Customisation</button>
+  <button class="chapter-item" onclick="goTo(7)" data-slide="7"><span class="chapter-number">08</span> Non-LSO APIs</button>
+  <button class="chapter-item" onclick="goTo(8)" data-slide="8"><span class="chapter-number">09</span> Sandboxes &amp; emulation</button>
+  <button class="chapter-item" onclick="goTo(9)" data-slide="9"><span class="chapter-number">10</span> Certification</button>
+  <button class="chapter-item" onclick="goTo(10)" data-slide="10"><span class="chapter-number">11</span> Deployment scenarios (1/2)</button>
+  <button class="chapter-item" onclick="goTo(11)" data-slide="11"><span class="chapter-number">12</span> Deployment scenarios (2/2)</button>
+
+  <div class="sidebar-group">Forward</div>
+  <button class="chapter-item" onclick="goTo(12)" data-slide="12"><span class="chapter-number">13</span> Use cases</button>
+  <button class="chapter-item" onclick="goTo(13)" data-slide="13"><span class="chapter-number">14</span> Open questions</button>
+  <button class="chapter-item" onclick="goTo(14)" data-slide="14"><span class="chapter-number">15</span> Next steps</button>
+</nav>
 
 <!-- ============================================================
      MAIN
