@@ -1,0 +1,46 @@
+flowchart LR
+    subgraph Buyer["Buyer"]
+        BuyerUser((Buyer Agent))
+    end
+
+    subgraph Seller["Seller"]
+        Agent((Agent))
+
+        PC[Product Catalog MCP Server]
+        AV[Address Validation MCP Server]
+        POQ[POQ MCP Server]
+        QUOTE[Quote MCP Server]
+        ORDER[Product Order MCP Server]
+        INV[Product Inventory MCP Server]
+
+        BSE[Backend System Emulator]
+    end
+
+    BuyerUser -->|A2A| Agent
+
+    Agent -->|MCP| PC
+    Agent -->|MCP| AV
+    Agent -->|MCP| POQ
+    Agent -->|MCP| QUOTE
+    Agent -->|MCP| ORDER
+    Agent -->|MCP| INV
+
+    PC -->|LSO API| BSE
+    AV -->|LSO API| BSE
+    POQ -->|LSO API| BSE
+    QUOTE -->|LSO API| BSE
+    ORDER -->|LSO API| BSE
+    INV -->|LSO API| BSE
+
+    classDef actor fill:#e5e7eb,stroke:#4b5563,color:#111827,stroke-width:2px;
+    classDef agent fill:#bae6fd,stroke:#0369a1,color:#0c4a6e,stroke-width:2px;
+    classDef mcp fill:#dbeafe,stroke:#2563eb,color:#1e3a8a,stroke-width:1.5px;
+    classDef backend fill:#ede9fe,stroke:#7c3aed,color:#4c1d95,stroke-width:1.5px;
+
+    class BuyerUser actor;
+    class Agent agent;
+    class PC,AV,POQ,QUOTE,ORDER,INV mcp;
+    class BSE backend;
+
+    style Buyer fill:#FFF4EB,stroke:#FD7801,stroke-width:1.5px,color:#111827
+    style Seller fill:#EBF3FC,stroke:#3D7BC7,stroke-width:1.5px,color:#111827

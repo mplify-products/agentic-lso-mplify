@@ -1,0 +1,50 @@
+flowchart LR
+    subgraph L3["Agent Level 3"]
+        BuyerAgent((L3 Agent))
+    end
+
+    subgraph L2["Agent Level 2"]
+        SellerAgent((L2 Agent))
+        SellerAgent2((L2 Agent 2))
+        SellerAgent3((L2 Agent n))
+    end
+
+    subgraph L1["Agent Level 1"]
+        SA1((L1 Agent 1))
+        SA2((L1 Agent 2))
+        SA3((L1 Agent 3))
+        SAn((L1 Agent n))
+    end
+
+    BuyerAgent -->|A2A| SellerAgent
+    BuyerAgent -->|A2A| SellerAgent2
+    BuyerAgent -->|A2A| SellerAgent3
+
+    SellerAgent -->|A2A| SA1
+    SellerAgent -->|A2A| SA2
+    SellerAgent -->|A2A| SA3
+    SellerAgent -.->|...| SAn
+
+    SA1 -->|MCP| MCP1[API 1 MCP Server]
+    SA2 -->|MCP| MCP2[API 2 MCP Server]
+    SA3 -->|MCP| MCP3[API 3 MCP Server]
+    SAn -->|MCP| MCPn[API n MCP Server]
+
+    MCP1 -->|LSO API| BSE[Backend Systems]
+    MCP2 -->|LSO API| BSE
+    MCP3 -->|LSO API| BSE
+    MCPn -->|LSO API| BSE
+
+    classDef actor fill:#e5e7eb,stroke:#4b5563,color:#111827,stroke-width:2px;
+    classDef agent fill:#bae6fd,stroke:#0369a1,color:#0c4a6e,stroke-width:2px;
+    classDef subagent fill:#a7f3d0,stroke:#047857,color:#064e3b,stroke-width:2px;
+    classDef mcp fill:#dbeafe,stroke:#2563eb,color:#1e3a8a,stroke-width:1.5px;
+    classDef backend fill:#ede9fe,stroke:#7c3aed,color:#4c1d95,stroke-width:1.5px;
+    classDef sellerOther fill:#fde68a,stroke:#d97706,color:#78350f,stroke-width:1.5px;
+
+    class BuyerAgent actor;
+    class SellerAgent agent;
+    class SellerAgent2,SellerAgent3 sellerOther;
+    class SA1,SA2,SA3,SAn subagent;
+    class MCP1,MCP2,MCP3,MCPn mcp;
+    class BSE backend;

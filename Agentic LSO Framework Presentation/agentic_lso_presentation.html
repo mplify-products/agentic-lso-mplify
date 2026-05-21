@@ -793,15 +793,66 @@ svg.icon { width: 22px; height: 22px; }
   });
   window.__mermaid = mermaid;
 
-  // Try to load diagram source from the external .mmd file (works when served via HTTP).
+  // Try to load diagram sources from external .mmd files (works when served via HTTP).
   // Falls back to the inline content already in the <pre> when opened as file://.
-  window.__diagramsReady = fetch('agentic_lso_architecture_no_identity_blueprint.mmd')
-    .then(r => { if (!r.ok) throw new Error('fetch failed'); return r.text(); })
-    .then(src => {
-      const el = document.getElementById('arch-diagram');
-      if (el) el.textContent = src;
-    })
-    .catch(() => Promise.resolve()); // silently fall back to inline content
+  window.__diagramsReady = Promise.all([
+    fetch('agentic_lso_architecture_no_identity_blueprint.mmd')
+      .then(r => { if (!r.ok) throw new Error('fetch failed'); return r.text(); })
+      .then(src => {
+        const el = document.getElementById('arch-diagram');
+        if (el) el.textContent = src;
+      })
+      .catch(() => Promise.resolve()),
+    fetch('agentic_lso_abstract_architecture.mmd')
+      .then(r => { if (!r.ok) throw new Error('fetch failed'); return r.text(); })
+      .then(src => {
+        const el = document.getElementById('arch-diagram-abstract');
+        if (el) el.textContent = src;
+      })
+      .catch(() => Promise.resolve()),
+    fetch('agentic_lso_use_case_1.mmd')
+      .then(r => { if (!r.ok) throw new Error('fetch failed'); return r.text(); })
+      .then(src => {
+        const el = document.getElementById('uc1-diagram');
+        if (el) el.textContent = src;
+      })
+      .catch(() => Promise.resolve()),
+    fetch('agentic_lso_use_case_2.mmd')
+      .then(r => { if (!r.ok) throw new Error('fetch failed'); return r.text(); })
+      .then(src => {
+        const el = document.getElementById('uc2-diagram');
+        if (el) el.textContent = src;
+      })
+      .catch(() => Promise.resolve()),
+    fetch('agentic_lso_use_case_3.mmd')
+      .then(r => { if (!r.ok) throw new Error('fetch failed'); return r.text(); })
+      .then(src => {
+        const el = document.getElementById('uc3-diagram');
+        if (el) el.textContent = src;
+      })
+      .catch(() => Promise.resolve()),
+    fetch('agentic_lso_use_case_4.mmd')
+      .then(r => { if (!r.ok) throw new Error('fetch failed'); return r.text(); })
+      .then(src => {
+        const el = document.getElementById('uc4-diagram');
+        if (el) el.textContent = src;
+      })
+      .catch(() => Promise.resolve()),
+    fetch('agentic_lso_use_case_5.mmd')
+      .then(r => { if (!r.ok) throw new Error('fetch failed'); return r.text(); })
+      .then(src => {
+        const el = document.getElementById('uc5-diagram');
+        if (el) el.textContent = src;
+      })
+      .catch(() => Promise.resolve()),
+    fetch('agentic_lso_use_case_6.mmd')
+      .then(r => { if (!r.ok) throw new Error('fetch failed'); return r.text(); })
+      .then(src => {
+        const el = document.getElementById('uc6-diagram');
+        if (el) el.textContent = src;
+      })
+      .catch(() => Promise.resolve())
+  ]);
 </script>
 </head>
 <body>
@@ -818,22 +869,24 @@ svg.icon { width: 22px; height: 22px; }
 
   <div class="sidebar-group">Architecture</div>
   <button class="chapter-item" onclick="goTo(2)" data-slide="2"><span class="chapter-number">03</span> Reference Architecture</button>
-  <button class="chapter-item" onclick="goTo(3)" data-slide="3"><span class="chapter-number">04</span> Blueprints — intro</button>
-  <button class="chapter-item" onclick="goTo(4)" data-slide="4"><span class="chapter-number">05</span> MCP server vs. agent</button>
-  <button class="chapter-item" onclick="goTo(5)" data-slide="5"><span class="chapter-number">06</span> Sub-agent conformance</button>
+  <button class="chapter-item" onclick="goTo(3)" data-slide="3"><span class="chapter-number">04</span> Abstract Architecture</button>
+  <button class="chapter-item" onclick="goTo(4)" data-slide="4"><span class="chapter-number">05</span> Blueprints — intro</button>
+  <button class="chapter-item" onclick="goTo(5)" data-slide="5"><span class="chapter-number">06</span> MCP server vs. agent</button>
+  <button class="chapter-item" onclick="goTo(6)" data-slide="6"><span class="chapter-number">07</span> Sub-agent conformance</button>
 
   <div class="sidebar-group">Design considerations</div>
-  <button class="chapter-item" onclick="goTo(6)" data-slide="6"><span class="chapter-number">07</span> Customisation</button>
-  <button class="chapter-item" onclick="goTo(7)" data-slide="7"><span class="chapter-number">08</span> Non-LSO APIs</button>
-  <button class="chapter-item" onclick="goTo(8)" data-slide="8"><span class="chapter-number">09</span> Sandboxes &amp; emulation</button>
-  <button class="chapter-item" onclick="goTo(9)" data-slide="9"><span class="chapter-number">10</span> Certification</button>
-  <button class="chapter-item" onclick="goTo(10)" data-slide="10"><span class="chapter-number">11</span> Deployment scenarios (1/2)</button>
-  <button class="chapter-item" onclick="goTo(11)" data-slide="11"><span class="chapter-number">12</span> Deployment scenarios (2/2)</button>
+  <button class="chapter-item" onclick="goTo(7)" data-slide="7"><span class="chapter-number">08</span> Customisation</button>
+  <button class="chapter-item" onclick="goTo(8)" data-slide="8"><span class="chapter-number">09</span> Non-LSO APIs</button>
+  <button class="chapter-item" onclick="goTo(9)" data-slide="9"><span class="chapter-number">10</span> Sandboxes &amp; emulation</button>
+  <button class="chapter-item" onclick="goTo(10)" data-slide="10"><span class="chapter-number">11</span> Certification</button>
+  <button class="chapter-item" onclick="goTo(11)" data-slide="11"><span class="chapter-number">12</span> Deployment scenarios (1/3)</button>
+  <button class="chapter-item" onclick="goTo(12)" data-slide="12"><span class="chapter-number">13</span> Deployment scenarios (2/3)</button>
+  <button class="chapter-item" onclick="goTo(13)" data-slide="13"><span class="chapter-number">14</span> Deployment scenarios (3/3)</button>
 
   <div class="sidebar-group">Forward</div>
-  <button class="chapter-item" onclick="goTo(12)" data-slide="12"><span class="chapter-number">13</span> Use cases</button>
-  <button class="chapter-item" onclick="goTo(13)" data-slide="13"><span class="chapter-number">14</span> Open questions</button>
-  <button class="chapter-item" onclick="goTo(14)" data-slide="14"><span class="chapter-number">15</span> Next steps</button>
+  <button class="chapter-item" onclick="goTo(14)" data-slide="14"><span class="chapter-number">15</span> Use cases</button>
+  <button class="chapter-item" onclick="goTo(15)" data-slide="15"><span class="chapter-number">16</span> Open questions</button>
+  <button class="chapter-item" onclick="goTo(16)" data-slide="16"><span class="chapter-number">17</span> Next steps</button>
 </nav>
 
 <!-- ============================================================
@@ -841,7 +894,7 @@ svg.icon { width: 22px; height: 22px; }
      ============================================================ -->
 <div id="main">
   <div id="stage">
-    <div id="counter" aria-live="polite" aria-atomic="true">1 / 15</div>
+    <div id="counter" aria-live="polite" aria-atomic="true">1 / 17</div>
     <button class="nav-arrow" id="prev" onclick="prevSlide()" aria-label="Previous slide">&#8592;</button>
     <button class="nav-arrow" id="next" onclick="nextSlide()" aria-label="Next slide">&#8594;</button>
 
@@ -878,7 +931,7 @@ svg.icon { width: 22px; height: 22px; }
       <div class="slide-eyebrow">Reference Architecture <span class="status-pill pill-draft">Current draft</span></div>
       <div class="slide-title">What is the Agentic LSO <span>Reference Architecture</span>?</div>
 
-      <div class="card-grid-2" style="grid-template-rows:1fr 1fr;">
+      <div class="card-grid-3">
         <div class="card">
           <div class="card-title">The role MEF 51.1 played for LSO APIs.</div>
           <div class="card-text">The Reference Architecture is being developed to underpin the agentic layer the way MEF 51.1 underpinned the LSO API programme — defining entities, interfaces, and how they relate to stakeholders.</div>
@@ -889,17 +942,89 @@ svg.icon { width: 22px; height: 22px; }
         </div>
         <div class="card">
           <div class="card-title">What it does not specify.</div>
-          <div class="card-text">Implementation details of any specific agent or MCP server — those belong to the Blueprints (see next three slides).</div>
-        </div>
-        <div class="card" style="border-color:var(--orange);">
-          <div class="card-title" style="color:var(--orange);">For discussion</div>
-          <div class="card-text" style="color:var(--orange);font-weight:500;">Are the entities and relationships shown the right ones? Anything missing — additional agent types, MCP server types, or protocols?</div>
+          <div class="card-text">Implementation details of any specific agent or MCP server — those belong to the Blueprints (see next slides).</div>
         </div>
       </div>
     </div>
 
-    <!-- ========== SLIDE 4: BLUEPRINTS OVERVIEW ========== -->
+    <!-- ========== SLIDE 4: PROPOSED ABSTRACT ARCHITECTURE ========== -->
     <div class="slide slide-light" id="slide-4">
+      <div class="slide-eyebrow">Reference Architecture <span class="status-pill pill-draft">Proposed</span></div>
+      <div class="slide-title">Proposed Agentic LSO <span>Abstract Architecture</span></div>
+
+      <div class="arch-layout">
+        <div style="display:flex;flex-direction:column;gap:14px;min-height:0;overflow:auto;">
+          <div class="card">
+            <div class="card-title">Generalised multi-agent topology</div>
+            <div class="card-text">The abstract architecture generalises the proof-of-concept into a vendor- and API-neutral view. One MCP Server per LSO API domain; one dedicated sub-agent per MCP Server; a Seller Agent orchestrating them via A2A; and a Buyer Agent negotiating with one or more Seller Agents.</div>
+          </div>
+          <div class="card">
+            <div class="card-title">Agent Levels — definitions</div>
+            <div class="card-text"><strong style="color:var(--navy);">Level 1</strong> — Domain-specific agents, each dedicated to a single LSO API via its MCP Server. Stateless tool operators.<br><strong style="color:var(--navy);">Level 2</strong> — Orchestrating agents that coordinate multiple Level 1 agents within a single seller’s domain. Per-seller scope.<br><strong style="color:var(--navy);">Level 3</strong> — Cross-domain agents that negotiate with multiple Level 2 agents across organisational boundaries.</div>
+          </div>
+          <div class="card" style="border-color:var(--orange);">
+            <div class="card-title" style="color:var(--orange);">For discussion</div>
+            <div class="card-text" style="color:var(--orange);font-weight:500;">Are the entities and relationships shown the right ones? Anything missing — additional agent types, MCP server types, or protocols?</div>
+          </div>
+        </div>
+        <div class="arch-figure">
+          <pre class="mermaid" id="arch-diagram-abstract">flowchart LR
+    subgraph L3["Agent Level 3"]
+        BuyerAgent((Buyer Agent))
+    end
+
+    subgraph L2["Agent Level 2"]
+        SellerAgent((Seller Agent))
+        SellerAgent2((Seller Agent 2))
+        SellerAgent3((Seller Agent n))
+    end
+
+    subgraph L1["Agent Level 1"]
+        SA1((API 1 Agent))
+        SA2((API 2 Agent))
+        SA3((API 3 Agent))
+        SAn((API n Agent))
+    end
+
+    BuyerAgent -->|A2A| SellerAgent
+    BuyerAgent -->|A2A| SellerAgent2
+    BuyerAgent -->|A2A| SellerAgent3
+
+    SellerAgent -->|A2A| SA1
+    SellerAgent -->|A2A| SA2
+    SellerAgent -->|A2A| SA3
+    SellerAgent -.->|...| SAn
+
+    SA1 -->|MCP| MCP1[API 1 MCP Server]
+    SA2 -->|MCP| MCP2[API 2 MCP Server]
+    SA3 -->|MCP| MCP3[API 3 MCP Server]
+    SAn -->|MCP| MCPn[API n MCP Server]
+
+    MCP1 -->|LSO API| BSE[Backend Systems]
+    MCP2 -->|LSO API| BSE
+    MCP3 -->|LSO API| BSE
+    MCPn -->|LSO API| BSE
+
+    classDef actor fill:#e5e7eb,stroke:#4b5563,color:#111827,stroke-width:2px;
+    classDef agent fill:#bae6fd,stroke:#0369a1,color:#0c4a6e,stroke-width:2px;
+    classDef subagent fill:#a7f3d0,stroke:#047857,color:#064e3b,stroke-width:2px;
+    classDef mcp fill:#dbeafe,stroke:#2563eb,color:#1e3a8a,stroke-width:1.5px;
+    classDef backend fill:#ede9fe,stroke:#7c3aed,color:#4c1d95,stroke-width:1.5px;
+    classDef sellerOther fill:#fde68a,stroke:#d97706,color:#78350f,stroke-width:1.5px;
+
+    class BuyerAgent actor;
+    class SellerAgent agent;
+    class SellerAgent2,SellerAgent3 sellerOther;
+    class SA1,SA2,SA3,SAn subagent;
+    class MCP1,MCP2,MCP3,MCPn mcp;
+    class BSE backend;</pre>
+          <div class="arch-caption">Proposed abstract architecture — generalised from the PoC implementation</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SLIDE 5: BLUEPRINTS OVERVIEW ========== -->
+    <div class="slide slide-light" id="slide-5">
       <div class="slide-eyebrow">Blueprints · Part 1 of 3 <span class="status-pill pill-progress">In progress</span></div>
       <div class="slide-title">What are the Agentic LSO <span>Blueprints</span>?</div>
       <div class="slide-lead">If the Reference Architecture says <em>"a Quote MCP Server exists, and it sits here"</em>, a Blueprint says <em>"and this is exactly what tools it exposes, what its identity claims look like, and how it must behave."</em></div>
@@ -930,7 +1055,6 @@ svg.icon { width: 22px; height: 22px; }
           </div>
           <div class="card-title">Blueprint inventory — current scope</div>
           <div class="card-text">One Blueprint per MCP Server type in the Reference Architecture (today: Product Catalog, Address Validation, POQ, Quote, Product Order, Product Inventory), plus one or more Agent Blueprints.</div>
-          <div class="card-callout">For discussion: is one Blueprint per MCP server the right granularity, or fewer generic Blueprints with per-domain profiles?</div>
         </div>
         </div>
         <div class="arch-figure">
@@ -961,13 +1085,13 @@ svg.icon { width: 22px; height: 22px; }
     class Agent agent;
     class PC,AV,POQ,QUOTE,ORDER,INV mcp;
     class BSE backend;</pre>
-            <div class="arch-caption">Current working draft of the Agentic LSO Reference Architecture</div>
+            <div class="arch-caption">Current scope of the draft Proof of Concept implementation</div>
         </div>
       </div>
     </div>
 
-    <!-- ========== SLIDE 5: MCP SERVER vs AGENT ========== -->
-    <div class="slide slide-light" id="slide-5">
+    <!-- ========== SLIDE 6: MCP SERVER vs AGENT ========== -->
+    <div class="slide slide-light" id="slide-6">
       <div class="slide-eyebrow">Blueprints · Part 2 of 3 <span class="status-pill pill-open">Open question</span></div>
       <div class="slide-title">MCP server or agent — <span>where does the logic live</span>?</div>
       <div class="slide-lead">Two design philosophies are in play. The Blueprints will need to take a reference position on the spectrum between them.</div>
@@ -995,8 +1119,8 @@ svg.icon { width: 22px; height: 22px; }
       </div>
     </div>
 
-    <!-- ========== SLIDE 6: SUB-AGENT CONFORMANCE ========== -->
-    <div class="slide slide-light" id="slide-6">
+    <!-- ========== SLIDE 7: SUB-AGENT CONFORMANCE ========== -->
+    <div class="slide slide-light" id="slide-7">
       <div class="slide-eyebrow">Blueprints · Part 3 of 3 <span class="status-pill pill-open">Open question</span></div>
       <div class="slide-title">When agents spin up sub-agents, <span>do they use the Blueprint</span>?</div>
       <div class="slide-lead">A second open governance question. Three positions are on the table — no committee position yet.</div>
@@ -1025,8 +1149,8 @@ svg.icon { width: 22px; height: 22px; }
       </div>
     </div>
 
-    <!-- ========== SLIDE 7: CUSTOMISATION LAYERS ========== -->
-    <div class="slide slide-light" id="slide-7">
+    <!-- ========== SLIDE 8: CUSTOMISATION LAYERS ========== -->
+    <div class="slide slide-light" id="slide-8">
       <div class="slide-eyebrow">Design considerations <span class="status-pill pill-progress">In progress</span></div>
       <div class="slide-title">Customisation: <span>where, and by whom</span>?</div>
       <div class="slide-lead">Different operators expose different capabilities, products, and conventions. A key architectural question is: for each of these customisation areas, which component — the agent, the MCP server, or both — should be responsible for carrying and applying that operator-specific context?</div>
@@ -1051,8 +1175,8 @@ svg.icon { width: 22px; height: 22px; }
       </div>
     </div>
 
-    <!-- ========== SLIDE 8: NON-LSO APIs ========== -->
-    <div class="slide slide-light" id="slide-8">
+    <!-- ========== SLIDE 9: NON-LSO APIs ========== -->
+    <div class="slide slide-light" id="slide-9">
       <div class="slide-eyebrow">Design considerations <span class="status-pill pill-progress">In progress</span></div>
       <div class="slide-title">Supporting <span>non-LSO APIs</span></div>
       <div class="slide-lead">Agentic LSO can wrap pre-existing, non-standard provider APIs — important for members who have not yet implemented LSO APIs (and may not).</div>
@@ -1090,8 +1214,8 @@ svg.icon { width: 22px; height: 22px; }
       </div>
     </div>
 
-    <!-- ========== SLIDE 9: SANDBOXES & EMULATION ========== -->
-    <div class="slide slide-light" id="slide-9">
+    <!-- ========== SLIDE 10: SANDBOXES & EMULATION ========== -->
+    <div class="slide slide-light" id="slide-10">
       <div class="slide-eyebrow">Operational readiness <span class="status-pill pill-progress">In progress</span></div>
       <div class="slide-title">Sandboxes and <span>emulation</span></div>
       <div class="slide-lead">Companies can safely trial new Agentic LSO components — their own or third-party — against the verified Mplify emulator before connecting to live partners.</div>
@@ -1131,8 +1255,8 @@ svg.icon { width: 22px; height: 22px; }
       </div>
     </div>
 
-    <!-- ========== SLIDE 10: CERTIFICATION ========== -->
-    <div class="slide slide-light" id="slide-10">
+    <!-- ========== SLIDE 11: CERTIFICATION ========== -->
+    <div class="slide slide-light" id="slide-11">
       <div class="slide-eyebrow">Certification <span class="status-pill pill-progress">In progress</span></div>
       <div class="slide-title">Agentic LSO and <span>Mplify certification</span></div>
       <div class="slide-lead">Agentic LSO has a dual relationship with certification. Both directions are in scope; sequencing is open.</div>
@@ -1169,100 +1293,331 @@ svg.icon { width: 22px; height: 22px; }
       </div>
     </div>
 
-    <!-- ========== SLIDE 11: AGENT DEPLOYMENT SCENARIOS — TWO-PARTY ========== -->
-    <div class="slide slide-light" id="slide-11">
-      <div class="slide-eyebrow">Design considerations · Part 1 of 2 <span class="status-pill pill-open">Open question</span></div>
-      <div class="slide-title">Agent deployment scenarios — <span>two-party</span></div>
-      <div class="slide-lead">Agentic LSO has to work across a range of deployment topologies. The first three describe how a single buyer and single seller might interact — varying only in which side runs an agent.</div>
+    <!-- ========== SLIDE 12: AGENT DEPLOYMENT SCENARIOS — TWO-PARTY (1/3) ========== -->
+    <div class="slide slide-light" id="slide-12">
+      <div class="slide-eyebrow">Design considerations · Part 1 of 3 <span class="status-pill pill-open">Open question</span></div>
+      <div class="slide-title">Agent deployment scenarios — <span>use cases 1 &amp; 2</span></div>
+      <div class="slide-lead">Two initial topologies showing where the agentic surface lives — varying only in which side runs the agent and MCP servers.</div>
 
-      <div class="card-grid-3">
-        <div class="num-card num-card-top-orange">
+      <div class="card-grid-2">
+        <div class="num-card num-card-top-orange" style="display:flex;flex-direction:column;">
           <div class="num-badge num-orange">01</div>
           <div class="card-title">Seller-side agent only</div>
-          <div class="card-text">A seller exposes an agent (and MCP servers) to the world; the buyer interacts through traditional means — portal, human operator, or scripted LSO API calls. The agentic surface lives entirely on one side.</div>
+          <div class="card-text">A seller exposes an agent (and MCP servers) to the world; the buyer interacts through traditional means — portal, human operator, or scripted LSO API calls. The agentic surface lives entirely on the seller side.</div>
+          <div style="flex:1;min-height:120px;margin-top:14px;display:flex;align-items:center;justify-content:center;">
+            <pre class="mermaid" id="uc1-diagram" style="width:100%;">flowchart LR
+    subgraph Buyer["Buyer"]
+        BuyerUser((Buyer))
+    end
+    subgraph Seller["Seller"]
+        Agent((Agent))
+        PC[Product Catalog MCP Server]
+        AV[Address Validation MCP Server]
+        POQ[POQ MCP Server]
+        QUOTE[Quote MCP Server]
+        ORDER[Product Order MCP Server]
+        INV[Product Inventory MCP Server]
+        BSE[Backend System Emulator]
+    end
+    BuyerUser -->|chat| Agent
+    Agent -->|MCP| PC
+    Agent -->|MCP| AV
+    Agent -->|MCP| POQ
+    Agent -->|MCP| QUOTE
+    Agent -->|MCP| ORDER
+    Agent -->|MCP| INV
+    PC -->|LSO API| BSE
+    AV -->|LSO API| BSE
+    POQ -->|LSO API| BSE
+    QUOTE -->|LSO API| BSE
+    ORDER -->|LSO API| BSE
+    INV -->|LSO API| BSE
+    classDef actor fill:#e5e7eb,stroke:#4b5563,color:#111827,stroke-width:2px;
+    classDef agent fill:#bae6fd,stroke:#0369a1,color:#0c4a6e,stroke-width:2px;
+    classDef mcp fill:#dbeafe,stroke:#2563eb,color:#1e3a8a,stroke-width:1.5px;
+    classDef backend fill:#ede9fe,stroke:#7c3aed,color:#4c1d95,stroke-width:1.5px;
+    class BuyerUser actor;
+    class Agent agent;
+    class PC,AV,POQ,QUOTE,ORDER,INV mcp;
+    class BSE backend;
+    style Buyer fill:#FFF4EB,stroke:#FD7801,stroke-width:1.5px,color:#111827
+    style Seller fill:#EBF3FC,stroke:#3D7BC7,stroke-width:1.5px,color:#111827</pre>
+          </div>
         </div>
 
-        <div class="num-card num-card-top-orange">
+        <div class="num-card num-card-top-orange" style="display:flex;flex-direction:column;">
           <div class="num-badge num-orange">02</div>
           <div class="card-title">Buyer-side agent only</div>
-          <div class="card-text">A buyer operates an agent that consumes existing LSO APIs (or non-LSO APIs, see Slide 8) directly. The seller side is unchanged. This is often the easiest entry point for member organisations.</div>
-        </div>
-
-        <div class="num-card num-card-top-orange">
-          <div class="num-badge num-orange">03</div>
-          <div class="card-title">A2A — buyer and seller agents</div>
-          <div class="card-text">Both sides run agents that negotiate over A2A. This is the canonical Agentic LSO topology and the one the Reference Architecture is primarily drawn against.</div>
+          <div class="card-text">A buyer operates an agent and MCP servers that consume existing LSO APIs directly. The seller side is unchanged — only a back-end system is exposed.</div>
+          <div style="flex:1;min-height:120px;margin-top:14px;display:flex;align-items:center;justify-content:center;">
+            <pre class="mermaid" id="uc2-diagram" style="width:100%;">flowchart LR
+    subgraph Buyer["Buyer"]
+        BuyerUser((Buyer))
+        Agent((Agent))
+        PC[Product Catalog MCP Server]
+        AV[Address Validation MCP Server]
+        POQ[POQ MCP Server]
+        QUOTE[Quote MCP Server]
+        ORDER[Product Order MCP Server]
+        INV[Product Inventory MCP Server]
+    end
+    subgraph Seller["Seller"]
+        BSE[Backend System Emulator]
+    end
+    BuyerUser -->|chat| Agent
+    Agent -->|MCP| PC
+    Agent -->|MCP| AV
+    Agent -->|MCP| POQ
+    Agent -->|MCP| QUOTE
+    Agent -->|MCP| ORDER
+    Agent -->|MCP| INV
+    PC -->|LSO API| BSE
+    AV -->|LSO API| BSE
+    POQ -->|LSO API| BSE
+    QUOTE -->|LSO API| BSE
+    ORDER -->|LSO API| BSE
+    INV -->|LSO API| BSE
+    classDef actor fill:#e5e7eb,stroke:#4b5563,color:#111827,stroke-width:2px;
+    classDef agent fill:#bae6fd,stroke:#0369a1,color:#0c4a6e,stroke-width:2px;
+    classDef mcp fill:#dbeafe,stroke:#2563eb,color:#1e3a8a,stroke-width:1.5px;
+    classDef backend fill:#ede9fe,stroke:#7c3aed,color:#4c1d95,stroke-width:1.5px;
+    class BuyerUser actor;
+    class Agent agent;
+    class PC,AV,POQ,QUOTE,ORDER,INV mcp;
+    class BSE backend;
+    style Buyer fill:#FFF4EB,stroke:#FD7801,stroke-width:1.5px,color:#111827
+    style Seller fill:#EBF3FC,stroke:#3D7BC7,stroke-width:1.5px,color:#111827</pre>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- ========== SLIDE 12: AGENT DEPLOYMENT SCENARIOS — MULTI-PARTY ========== -->
-    <div class="slide slide-light" id="slide-12">
-      <div class="slide-eyebrow">Design considerations · Part 2 of 2 <span class="status-pill pill-open">Open question</span></div>
+    <!-- ========== SLIDE 13: AGENT DEPLOYMENT SCENARIOS — TWO-PARTY (2/3) ========== -->
+    <div class="slide slide-light" id="slide-13">
+      <div class="slide-eyebrow">Design considerations · Part 2 of 3 <span class="status-pill pill-open">Open question</span></div>
+      <div class="slide-title">Agent deployment scenarios — <span>use cases 3 &amp; 4</span></div>
+      <div class="slide-lead">Two topologies where the buyer operates an agent — varying in whether it talks to the seller's MCP servers directly or negotiates with a seller agent over A2A.</div>
+
+      <div class="card-grid-2">
+        <div class="num-card num-card-top-orange" style="display:flex;flex-direction:column;">
+          <div class="num-badge num-orange">03</div>
+          <div class="card-title">Buyer Agent — Seller MCP</div>
+          <div class="card-text">A buyer-side agent connects directly to the seller's MCP servers — no seller agent involved. The buyer handles orchestration; the seller exposes MCP tooling only.</div>
+          <div style="flex:1;min-height:120px;margin-top:14px;display:flex;align-items:center;justify-content:center;">
+            <pre class="mermaid" id="uc3-diagram" style="width:100%;">flowchart LR
+    subgraph Buyer["Buyer"]
+        BuyerUser((Buyer))
+        Agent((Agent))
+    end
+    subgraph Seller["Seller"]
+        PC[Product Catalog MCP Server]
+        AV[Address Validation MCP Server]
+        POQ[POQ MCP Server]
+        QUOTE[Quote MCP Server]
+        ORDER[Product Order MCP Server]
+        INV[Product Inventory MCP Server]
+        BSE[Backend System Emulator]
+    end
+    BuyerUser -->|chat| Agent
+    Agent -->|MCP| PC
+    Agent -->|MCP| AV
+    Agent -->|MCP| POQ
+    Agent -->|MCP| QUOTE
+    Agent -->|MCP| ORDER
+    Agent -->|MCP| INV
+    PC -->|LSO API| BSE
+    AV -->|LSO API| BSE
+    POQ -->|LSO API| BSE
+    QUOTE -->|LSO API| BSE
+    ORDER -->|LSO API| BSE
+    INV -->|LSO API| BSE
+    classDef actor fill:#e5e7eb,stroke:#4b5563,color:#111827,stroke-width:2px;
+    classDef agent fill:#bae6fd,stroke:#0369a1,color:#0c4a6e,stroke-width:2px;
+    classDef mcp fill:#dbeafe,stroke:#2563eb,color:#1e3a8a,stroke-width:1.5px;
+    classDef backend fill:#ede9fe,stroke:#7c3aed,color:#4c1d95,stroke-width:1.5px;
+    class BuyerUser actor;
+    class Agent agent;
+    class PC,AV,POQ,QUOTE,ORDER,INV mcp;
+    class BSE backend;
+    style Buyer fill:#FFF4EB,stroke:#FD7801,stroke-width:1.5px,color:#111827
+    style Seller fill:#EBF3FC,stroke:#3D7BC7,stroke-width:1.5px,color:#111827</pre>
+          </div>
+        </div>
+
+        <div class="num-card num-card-top-orange" style="display:flex;flex-direction:column;">
+          <div class="num-badge num-orange">04</div>
+          <div class="card-title">A2A — buyer and seller agents</div>
+          <div class="card-text">Both sides run agents that negotiate over A2A. The canonical Agentic LSO topology and the one the Reference Architecture is primarily drawn against.</div>
+          <div style="flex:1;min-height:120px;margin-top:14px;display:flex;align-items:center;justify-content:center;">
+            <pre class="mermaid" id="uc4-diagram" style="width:100%;">flowchart LR
+    subgraph Buyer["Buyer"]
+        BuyerUser((Buyer Agent))
+    end
+    subgraph Seller["Seller"]
+        Agent((Agent))
+        PC[Product Catalog MCP Server]
+        AV[Address Validation MCP Server]
+        POQ[POQ MCP Server]
+        QUOTE[Quote MCP Server]
+        ORDER[Product Order MCP Server]
+        INV[Product Inventory MCP Server]
+        BSE[Backend System Emulator]
+    end
+    BuyerUser -->|A2A| Agent
+    Agent -->|MCP| PC
+    Agent -->|MCP| AV
+    Agent -->|MCP| POQ
+    Agent -->|MCP| QUOTE
+    Agent -->|MCP| ORDER
+    Agent -->|MCP| INV
+    PC -->|LSO API| BSE
+    AV -->|LSO API| BSE
+    POQ -->|LSO API| BSE
+    QUOTE -->|LSO API| BSE
+    ORDER -->|LSO API| BSE
+    INV -->|LSO API| BSE
+    classDef actor fill:#e5e7eb,stroke:#4b5563,color:#111827,stroke-width:2px;
+    classDef agent fill:#bae6fd,stroke:#0369a1,color:#0c4a6e,stroke-width:2px;
+    classDef mcp fill:#dbeafe,stroke:#2563eb,color:#1e3a8a,stroke-width:1.5px;
+    classDef backend fill:#ede9fe,stroke:#7c3aed,color:#4c1d95,stroke-width:1.5px;
+    class BuyerUser actor;
+    class Agent agent;
+    class PC,AV,POQ,QUOTE,ORDER,INV mcp;
+    class BSE backend;
+    style Buyer fill:#FFF4EB,stroke:#FD7801,stroke-width:1.5px,color:#111827
+    style Seller fill:#EBF3FC,stroke:#3D7BC7,stroke-width:1.5px,color:#111827</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SLIDE 14: AGENT DEPLOYMENT SCENARIOS — MULTI-PARTY ========== -->
+    <div class="slide slide-light" id="slide-14">
+      <div class="slide-eyebrow">Design considerations · Part 3 of 3 <span class="status-pill pill-open">Open question</span></div>
       <div class="slide-title">Agent deployment scenarios — <span>multi-party</span></div>
       <div class="slide-lead">Beyond the two-party cases, Agentic LSO has to support topologies with more than two participants. These raise additional questions about identity, trust boundaries, and concurrency.</div>
 
-      <div class="card-grid-3">
-        <div class="num-card num-card-top-blue">
-          <div class="num-badge num-blue">04</div>
+      <div class="card-grid-2">
+        <div class="num-card num-card-top-blue" style="display:flex;flex-direction:column;">
+          <div class="num-badge num-blue">05</div>
           <div class="card-title">Third-party agents in the middle</div>
           <div class="card-text">An intermediary agent — broker, aggregator, or marketplace — sits between buyer and seller agents. Raises clear questions about Legal Identity, trust boundaries, and where Blueprint conformance applies.</div>
+          <div style="flex:1;min-height:120px;margin-top:14px;display:flex;align-items:center;justify-content:center;">
+            <pre class="mermaid" id="uc5-diagram" style="width:100%;">flowchart LR
+    subgraph Buyer["Buyer"]
+        BuyerUser((Buyer))
+    end
+    subgraph ThirdParty["3rd Party"]
+        Agent((Agent))
+        PC[Product Catalog MCP Server]
+        AV[Address Validation MCP Server]
+        POQ[POQ MCP Server]
+        QUOTE[Quote MCP Server]
+        ORDER[Product Order MCP Server]
+        INV[Product Inventory MCP Server]
+    end
+    subgraph Seller["Seller"]
+        BSE[Backend System Emulator]
+    end
+    BuyerUser -->|chat| Agent
+    Agent -->|MCP| PC
+    Agent -->|MCP| AV
+    Agent -->|MCP| POQ
+    Agent -->|MCP| QUOTE
+    Agent -->|MCP| ORDER
+    Agent -->|MCP| INV
+    PC -->|LSO API| BSE
+    AV -->|LSO API| BSE
+    POQ -->|LSO API| BSE
+    QUOTE -->|LSO API| BSE
+    ORDER -->|LSO API| BSE
+    INV -->|LSO API| BSE
+    classDef actor fill:#e5e7eb,stroke:#4b5563,color:#111827,stroke-width:2px;
+    classDef agent fill:#bae6fd,stroke:#0369a1,color:#0c4a6e,stroke-width:2px;
+    classDef mcp fill:#dbeafe,stroke:#2563eb,color:#1e3a8a,stroke-width:1.5px;
+    classDef backend fill:#ede9fe,stroke:#7c3aed,color:#4c1d95,stroke-width:1.5px;
+    class BuyerUser actor;
+    class Agent agent;
+    class PC,AV,POQ,QUOTE,ORDER,INV mcp;
+    class BSE backend;
+    style Buyer fill:#FFF4EB,stroke:#FD7801,stroke-width:1.5px,color:#111827
+    style ThirdParty fill:#F3E8FF,stroke:#7C3AED,stroke-width:1.5px,color:#111827
+    style Seller fill:#EBF3FC,stroke:#3D7BC7,stroke-width:1.5px,color:#111827</pre>
+          </div>
         </div>
 
-        <div class="num-card num-card-top-blue">
-          <div class="num-badge num-blue">05</div>
+        <div class="num-card num-card-top-blue" style="display:flex;flex-direction:column;">
+          <div class="num-badge num-blue">06</div>
           <div class="card-title">One buyer, many sellers</div>
           <div class="card-text">A buyer agent interacts with multiple seller agents — sequentially for comparison, or simultaneously for parallel quoting. Concurrency, fairness, and disclosure of competing offers all need consideration.</div>
-        </div>
-
-        <div style="background:rgba(253,120,1,0.06); border-left:3px solid var(--orange); border-radius:0 6px 6px 0; padding:22px 24px; display:flex; flex-direction:column; justify-content:center;">
-          <div style="font-family:'DM Sans',sans-serif; color:var(--orange); text-transform:uppercase; letter-spacing:1.2px; font-size:11px; font-weight:600; margin-bottom:10px;">For discussion</div>
-          <div style="font-family:'DM Sans',sans-serif; font-size:13.5px; color:var(--navy); line-height:1.55;">Across both two-party and multi-party scenarios — which should the Reference Architecture and Blueprints prioritise? Are there deployment topologies missing from these lists?</div>
+          <div style="flex:1;min-height:120px;margin-top:14px;display:flex;align-items:center;justify-content:center;">
+            <pre class="mermaid" id="uc6-diagram" style="width:100%;">flowchart LR
+    subgraph Buyer["Buyer"]
+        BuyerAgent((Buyer Agent))
+    end
+    subgraph Seller["Seller"]
+        SellerAgent((Seller Agent))
+        SellerAgent2((Seller Agent 2))
+        SellerAgent3((Seller Agent n))
+    end
+    BuyerAgent -->|A2A| SellerAgent
+    BuyerAgent -->|A2A| SellerAgent2
+    BuyerAgent -->|A2A| SellerAgent3
+    classDef actor fill:#e5e7eb,stroke:#4b5563,color:#111827,stroke-width:2px;
+    classDef agent fill:#bae6fd,stroke:#0369a1,color:#0c4a6e,stroke-width:2px;
+    classDef sellerOther fill:#fde68a,stroke:#d97706,color:#78350f,stroke-width:1.5px;
+    class BuyerAgent actor;
+    class SellerAgent agent;
+    class SellerAgent2,SellerAgent3 sellerOther;
+    style Buyer fill:#FFF4EB,stroke:#FD7801,stroke-width:1.5px,color:#111827
+    style Seller fill:#EBF3FC,stroke:#3D7BC7,stroke-width:1.5px,color:#111827</pre>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- ========== SLIDE 13: USE CASES ========== -->
-    <div class="slide slide-light" id="slide-13">
+    <!-- ========== SLIDE 15: USE CASES ========== -->
+    <div class="slide slide-light" id="slide-15">
       <div class="slide-eyebrow">What next <span class="status-pill pill-candidate">Candidate list</span></div>
       <div class="slide-title">Use cases — <span>where to focus first</span></div>
-      <div class="slide-lead">The deployment scenarios from slides 11 and 12, presented here for prioritisation. Which should the Reference Architecture and Blueprints focus on first — and where would your organisation commit pilot resources?</div>
+      <div class="slide-lead">The six deployment scenarios from slides 12–14, consolidated for prioritisation. Which should the Reference Architecture and Blueprints focus on first — and where would your organisation commit pilot resources? Are there deployment topologies missing from this list?</div>
 
       <div class="card-grid-3" style="grid-template-rows: 1fr 1fr;">
         <div class="num-card num-card-top-orange">
           <div class="num-badge num-orange">01</div>
           <div class="card-title">Seller-side agent only</div>
-          <div class="card-text">A seller exposes an agent (and MCP servers) to the world; the buyer interacts through traditional means — portal, human operator, or scripted LSO API calls.</div>
+          <div class="card-text">A seller exposes an agent (and MCP servers) to the world; the buyer interacts through traditional means — portal, human operator, or scripted LSO API calls. <span class="mini-label" style="display:inline;margin:0;">Slide 12</span></div>
         </div>
         <div class="num-card num-card-top-orange">
           <div class="num-badge num-orange">02</div>
           <div class="card-title">Buyer-side agent only</div>
-          <div class="card-text">A buyer operates an agent that consumes existing LSO APIs directly. The seller side is unchanged. Often the easiest entry point for member organisations.</div>
+          <div class="card-text">A buyer operates an agent and MCP servers that consume LSO APIs directly. The seller side is unchanged — only a back-end system is exposed. <span class="mini-label" style="display:inline;margin:0;">Slide 12</span></div>
         </div>
         <div class="num-card num-card-top-orange">
           <div class="num-badge num-orange">03</div>
-          <div class="card-title">A2A — buyer and seller agents</div>
-          <div class="card-text">Both sides run agents that negotiate over A2A. The canonical Agentic LSO topology and the one the Reference Architecture is primarily drawn against.</div>
+          <div class="card-title">Buyer Agent — Seller MCP</div>
+          <div class="card-text">A buyer-side agent connects directly to the seller's MCP servers. The buyer handles orchestration; the seller exposes MCP tooling only. <span class="mini-label" style="display:inline;margin:0;">Slide 13</span></div>
         </div>
-        <div class="num-card num-card-top-blue">
-          <div class="num-badge num-blue">04</div>
-          <div class="card-title">Third-party agents in the middle</div>
-          <div class="card-text">An intermediary agent — broker, aggregator, or marketplace — sits between buyer and seller agents. Raises questions about Legal Identity, trust boundaries, and Blueprint conformance.</div>
+        <div class="num-card num-card-top-orange">
+          <div class="num-badge num-orange">04</div>
+          <div class="card-title">A2A — buyer and seller agents</div>
+          <div class="card-text">Both sides run agents that negotiate over A2A. The canonical Agentic LSO topology and the one the Reference Architecture is primarily drawn against. <span class="mini-label" style="display:inline;margin:0;">Slide 13</span></div>
         </div>
         <div class="num-card num-card-top-blue">
           <div class="num-badge num-blue">05</div>
-          <div class="card-title">One buyer, many sellers</div>
-          <div class="card-text">A buyer agent interacts with multiple seller agents — sequentially for comparison, or simultaneously for parallel quoting. Raises concurrency, fairness, and disclosure questions.</div>
+          <div class="card-title">Third-party agents in the middle</div>
+          <div class="card-text">An intermediary agent — broker, aggregator, or marketplace — sits between buyer and seller agents. Raises questions about Legal Identity, trust boundaries, and Blueprint conformance. <span class="mini-label" style="display:inline;margin:0;">Slide 14</span></div>
         </div>
-        <div style="background:rgba(253,120,1,0.06); border-left:3px solid var(--orange); border-radius:0 6px 6px 0; padding:22px 24px; display:flex; flex-direction:column; justify-content:center;">
-          <div style="font-family:'DM Sans',sans-serif; color:var(--orange); text-transform:uppercase; letter-spacing:1.2px; font-size:11px; font-weight:600; margin-bottom:10px;">For discussion</div>
-          <div style="font-family:'DM Sans',sans-serif; font-size:13.5px; color:var(--navy); line-height:1.55;">Which of these scenarios would your organisation commit pilot resources to? Are there deployment topologies missing from this list?</div>
+        <div class="num-card num-card-top-blue">
+          <div class="num-badge num-blue">06</div>
+          <div class="card-title">One buyer, many sellers</div>
+          <div class="card-text">A buyer agent interacts with multiple seller agents — sequentially for comparison, or simultaneously for parallel quoting. Raises concurrency, fairness, and disclosure questions. <span class="mini-label" style="display:inline;margin:0;">Slide 14</span></div>
         </div>
       </div>
     </div>
 
-    <!-- ========== SLIDE 14: OPEN QUESTIONS ========== -->
-    <div class="slide slide-light" id="slide-14">
+    <!-- ========== SLIDE 16: OPEN QUESTIONS ========== -->
+    <div class="slide slide-light" id="slide-16">
       <div class="slide-eyebrow">Open questions <span class="status-pill pill-open">Member input requested</span></div>
       <div class="slide-title">Where <span>we need your input</span></div>
       <div class="slide-lead">The questions surfaced through this deck, consolidated in one place. This is the operative slide of the session — please come ready to contribute.</div>
@@ -1306,8 +1661,8 @@ svg.icon { width: 22px; height: 22px; }
       </div>
     </div>
 
-    <!-- ========== SLIDE 15: NEXT STEPS ========== -->
-    <div class="slide slide-light" id="slide-15">
+    <!-- ========== SLIDE 17: NEXT STEPS ========== -->
+    <div class="slide slide-light" id="slide-17">
       <div class="slide-eyebrow">What next · How to engage</div>
       <div class="slide-title">Next <span>steps</span></div>
 
