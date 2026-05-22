@@ -1,5 +1,5 @@
 flowchart LR
-    Buyer((Buyer)) -->|chat| Agent((Agent))
+    Buyer((Buyer (User))) -->|chat| Agent((L2 Agent))
 
     Agent -->|MCP| PC[Product Catalog MCP Server]
     Agent -->|MCP| AV[Address Validation MCP Server]
@@ -8,7 +8,7 @@ flowchart LR
     Agent -->|MCP| ORDER[Product Order MCP Server]
     Agent -->|MCP| INV[Product Inventory MCP Server]
 
-    PC -->|LSO API| BSE[Backend System Emulator]
+    PC -->|LSO API| BSE[Mplify  OIT]
     AV -->|LSO API| BSE
     POQ -->|LSO API| BSE
     QUOTE -->|LSO API| BSE
