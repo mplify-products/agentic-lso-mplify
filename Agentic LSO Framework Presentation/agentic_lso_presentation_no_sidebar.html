@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -34,91 +34,6 @@ body {
 .nav-arrow:focus-visible {
   outline: 2px solid var(--orange);
   outline-offset: 2px;
-}
-
-/* =================== SIDEBAR =================== */
-#sidebar {
-  width: 260px;
-  min-width: 260px;
-  background: var(--navy);
-  color: white;
-  display: flex;
-  flex-direction: column;
-  padding: 20px 0;
-  overflow-y: auto;
-  z-index: 10;
-}
-
-#sidebar-logo {
-  padding: 16px 20px 20px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  margin-bottom: 12px;
-  min-height: 32px;
-}
-
-.chapter-item {
-  padding: 8px 20px;
-  cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 11.5px;
-  font-weight: 400;
-  color: rgba(255,255,255,0.55);
-  border-left: 3px solid transparent;
-  transition: all 0.2s;
-  line-height: 1.3;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.chapter-item:hover {
-  color: rgba(255,255,255,0.9);
-  background: rgba(255,255,255,0.05);
-}
-
-.chapter-item.active {
-  color: var(--orange);
-  border-left-color: var(--orange);
-  background: rgba(253,120,1,0.08);
-  font-weight: 600;
-}
-
-.chapter-item:focus-visible,
-.nav-arrow:focus-visible {
-  outline: 2px solid var(--orange);
-  outline-offset: 2px;
-}
-
-button.chapter-item {
-  border: 0;
-  background: transparent;
-  text-align: left;
-  width: 100%;
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
-}
-button.chapter-item.active {
-  background: rgba(253,120,1,0.08);
-}
-
-.chapter-number {
-  display: inline-block;
-  width: 16px;
-  font-size: 10px;
-  opacity: 0.6;
-  margin-right: 4px;
-}
-
-/* Section group label inside the sidebar */
-.sidebar-group {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 9.5px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.35);
-  padding: 14px 20px 6px;
 }
 
 /* =================== MAIN STAGE =================== */
@@ -861,41 +776,6 @@ svg.icon { width: 22px; height: 22px; }
 </script>
 </head>
 <body>
-
-<!-- ============================================================
-     SIDEBAR
-     ============================================================ -->
-<nav id="sidebar" aria-label="Slide navigation">
-  <div id="sidebar-logo"></div>
-
-  <div class="sidebar-group">Framing</div>
-  <button class="chapter-item active" onclick="goTo(0)" data-slide="0"><span class="chapter-number">01</span> Cover</button>
-  <button class="chapter-item" onclick="goTo(1)" data-slide="1"><span class="chapter-number">02</span> What is Agentic LSO?</button>
-
-  <div class="sidebar-group">Architecture</div>
-  <button class="chapter-item" onclick="goTo(2)" data-slide="2"><span class="chapter-number">03</span> Reference Architecture</button>
-  <button class="chapter-item" onclick="goTo(3)" data-slide="3"><span class="chapter-number">04</span> Abstract Architecture</button>
-  <button class="chapter-item" onclick="goTo(4)" data-slide="4"><span class="chapter-number">05</span> Blueprints - intro</button>
-  <button class="chapter-item" onclick="goTo(5)" data-slide="5"><span class="chapter-number">06</span> MCP server vs. agent</button>
-  <button class="chapter-item" onclick="goTo(6)" data-slide="6"><span class="chapter-number">07</span> Sub-agent conformance</button>
-
-  <div class="sidebar-group">Design considerations</div>
-  <button class="chapter-item" onclick="goTo(7)" data-slide="7"><span class="chapter-number">08</span> Customisation</button>
-  <button class="chapter-item" onclick="goTo(8)" data-slide="8"><span class="chapter-number">09</span> Standard Product Payloads</button>
-  <button class="chapter-item" onclick="goTo(9)" data-slide="9"><span class="chapter-number">10</span> Harness Engineering</button>
-  <button class="chapter-item" onclick="goTo(10)" data-slide="10"><span class="chapter-number">11</span> Non-LSO APIs</button>
-  <button class="chapter-item" onclick="goTo(11)" data-slide="11"><span class="chapter-number">12</span> Sandboxes &amp; emulation</button>
-  <button class="chapter-item" onclick="goTo(12)" data-slide="12"><span class="chapter-number">13</span> Certification</button>
-  <button class="chapter-item" onclick="goTo(13)" data-slide="13"><span class="chapter-number">14</span> Deployment scenarios (1/3)</button>
-  <button class="chapter-item" onclick="goTo(14)" data-slide="14"><span class="chapter-number">15</span> Deployment scenarios (2/3)</button>
-  <button class="chapter-item" onclick="goTo(15)" data-slide="15"><span class="chapter-number">16</span> Deployment scenarios (3/3)</button>
-  <button class="chapter-item" onclick="goTo(16)" data-slide="16"><span class="chapter-number">17</span> Security considerations</button>
-
-  <div class="sidebar-group">Forward</div>
-  <button class="chapter-item" onclick="goTo(17)" data-slide="17"><span class="chapter-number">18</span> Use cases</button>
-  <button class="chapter-item" onclick="goTo(18)" data-slide="18"><span class="chapter-number">19</span> Open questions</button>
-  <button class="chapter-item" onclick="goTo(19)" data-slide="19"><span class="chapter-number">20</span> Next steps</button>
-</nav>
 
 <!-- ============================================================
   MAIN
@@ -1837,13 +1717,11 @@ svg.icon { width: 22px; height: 22px; }
 
 <script>
 const slides = document.querySelectorAll('.slide');
-const chapterItems = document.querySelectorAll('.chapter-item');
 const counter = document.getElementById('counter');
 let current = 0;
 
 function updateUI() {
   slides.forEach((s, i) => s.classList.toggle('active', i === current));
-  chapterItems.forEach((c, i) => c.classList.toggle('active', i === current));
   counter.textContent = (current + 1) + ' / ' + slides.length;
   if (window.__mermaid && window.__diagramsReady) {
     window.__diagramsReady.then(() =>

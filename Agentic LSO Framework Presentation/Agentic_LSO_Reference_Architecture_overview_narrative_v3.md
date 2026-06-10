@@ -82,9 +82,9 @@ Slides 12 and 13 close the loop with an audience that is being asked to engage, 
 - **Title:** What is the Agentic LSO Reference Architecture?
 - **Eyebrow:** `REFERENCE ARCHITECTURE · CURRENT DRAFT`
 - **Layout:** Two-region custom layout — left column: short framing paragraph + 2–3 bullet-style cards; right column: the architecture diagram (`obraz.png`). If a full-width diagram reads better, split into Slide 3a (framing) and Slide 3b (diagram full-bleed).
-- **Audience takeaway:** The Reference Architecture is the structural backbone of Agentic LSO — analogous to the role MEF 51.1 plays for the LSO API programme. The diagram shown is the current working draft.
+- **Audience takeaway:** The Reference Architecture is the structural backbone of Agentic LSO — analogous to the role MEF 55.1 plays for the LSO API programme. The diagram shown is the current working draft.
 - **Content points:**
-  - **Analogy to MEF 51.1.** MEF 51.1 defined the reference architecture (entities, interfaces, management domains) that underpinned the entire LSO API programme. The Agentic LSO Reference Architecture is being developed to play the same role for the agentic layer: defining the entities (agents, MCP servers, identities), the interfaces between them (A2A, MCP, LSO API), and how they relate to stakeholders.
+  - **Analogy to MEF 55.1.** MEF 55.1 defined the reference architecture (entities, interfaces, management domains) that underpinned the entire LSO API programme. The Agentic LSO Reference Architecture is being developed to play the same role for the agentic layer: defining the entities (agents, MCP servers, identities), the interfaces between them (A2A, MCP, LSO API), and how they relate to stakeholders.
   - **What the current draft specifies:**
     - The **types of agents** required and which stakeholders they belong to (buyer-side, seller-side, intermediary).
     - The **types of MCP servers** that expose LSO capabilities (one per LSO API domain: Product Catalog, Address Validation, POQ, Quote, Product Order, Product Inventory).

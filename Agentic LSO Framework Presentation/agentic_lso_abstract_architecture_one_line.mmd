@@ -1,0 +1,24 @@
+flowchart LR
+
+    L3Agent((L3 Agent))
+    L2Agent((L2 Agent))
+    L1Agent((L1 Agent))
+    MCP1[API MCP Server]
+    BSE[Backend System]
+
+    L3Agent -->|A2A| L2Agent
+    L2Agent -->|A2A| L1Agent
+    L1Agent -->|MCP| MCP1
+    MCP1 -->|LSO API| BSE
+
+    classDef actor fill:#e5e7eb,stroke:#4b5563,color:#111827,stroke-width:2px;
+    classDef agent fill:#bae6fd,stroke:#0369a1,color:#0c4a6e,stroke-width:2px;
+    classDef subagent fill:#a7f3d0,stroke:#047857,color:#064e3b,stroke-width:2px;
+    classDef mcp fill:#dbeafe,stroke:#2563eb,color:#1e3a8a,stroke-width:1.5px;
+    classDef backend fill:#ede9fe,stroke:#7c3aed,color:#4c1d95,stroke-width:1.5px;
+
+    class L3Agent actor;
+    class L2Agent agent;
+    class L1Agent subagent;
+    class MCP1 mcp;
+    class BSE backend;

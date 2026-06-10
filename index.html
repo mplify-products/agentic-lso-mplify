@@ -31,6 +31,11 @@ body {
   color: var(--navy);
 }
 
+.nav-arrow:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 2px;
+}
+
 /* =================== SIDEBAR =================== */
 #sidebar {
   width: 260px;
@@ -796,56 +801,56 @@ svg.icon { width: 22px; height: 22px; }
   // Try to load diagram sources from external .mmd files (works when served via HTTP).
   // Falls back to the inline content already in the <pre> when opened as file://.
   window.__diagramsReady = Promise.all([
-    fetch('agentic_lso_architecture_no_identity_blueprint.mmd')
+    fetch('Agentic LSO Framework Presentation/agentic_lso_architecture_no_identity_blueprint.mmd')
       .then(r => { if (!r.ok) throw new Error('fetch failed'); return r.text(); })
       .then(src => {
         const el = document.getElementById('arch-diagram');
         if (el) el.textContent = src;
       })
       .catch(() => Promise.resolve()),
-    fetch('agentic_lso_abstract_architecture.mmd')
+    fetch('Agentic LSO Framework Presentation/agentic_lso_abstract_architecture.mmd')
       .then(r => { if (!r.ok) throw new Error('fetch failed'); return r.text(); })
       .then(src => {
         const el = document.getElementById('arch-diagram-abstract');
         if (el) el.textContent = src;
       })
       .catch(() => Promise.resolve()),
-    fetch('agentic_lso_use_case_1.mmd')
+    fetch('Agentic LSO Framework Presentation/agentic_lso_use_case_1.mmd')
       .then(r => { if (!r.ok) throw new Error('fetch failed'); return r.text(); })
       .then(src => {
         const el = document.getElementById('uc1-diagram');
         if (el) el.textContent = src;
       })
       .catch(() => Promise.resolve()),
-    fetch('agentic_lso_use_case_2.mmd')
+    fetch('Agentic LSO Framework Presentation/agentic_lso_use_case_2.mmd')
       .then(r => { if (!r.ok) throw new Error('fetch failed'); return r.text(); })
       .then(src => {
         const el = document.getElementById('uc2-diagram');
         if (el) el.textContent = src;
       })
       .catch(() => Promise.resolve()),
-    fetch('agentic_lso_use_case_3.mmd')
+    fetch('Agentic LSO Framework Presentation/agentic_lso_use_case_3.mmd')
       .then(r => { if (!r.ok) throw new Error('fetch failed'); return r.text(); })
       .then(src => {
         const el = document.getElementById('uc3-diagram');
         if (el) el.textContent = src;
       })
       .catch(() => Promise.resolve()),
-    fetch('agentic_lso_use_case_4.mmd')
+    fetch('Agentic LSO Framework Presentation/agentic_lso_use_case_4.mmd')
       .then(r => { if (!r.ok) throw new Error('fetch failed'); return r.text(); })
       .then(src => {
         const el = document.getElementById('uc4-diagram');
         if (el) el.textContent = src;
       })
       .catch(() => Promise.resolve()),
-    fetch('agentic_lso_use_case_5.mmd')
+    fetch('Agentic LSO Framework Presentation/agentic_lso_use_case_5.mmd')
       .then(r => { if (!r.ok) throw new Error('fetch failed'); return r.text(); })
       .then(src => {
         const el = document.getElementById('uc5-diagram');
         if (el) el.textContent = src;
       })
       .catch(() => Promise.resolve()),
-    fetch('agentic_lso_use_case_6.mmd')
+    fetch('Agentic LSO Framework Presentation/agentic_lso_use_case_6.mmd')
       .then(r => { if (!r.ok) throw new Error('fetch failed'); return r.text(); })
       .then(src => {
         const el = document.getElementById('uc6-diagram');
@@ -870,28 +875,31 @@ svg.icon { width: 22px; height: 22px; }
   <div class="sidebar-group">Architecture</div>
   <button class="chapter-item" onclick="goTo(2)" data-slide="2"><span class="chapter-number">03</span> Reference Architecture</button>
   <button class="chapter-item" onclick="goTo(3)" data-slide="3"><span class="chapter-number">04</span> Abstract Architecture</button>
-  <button class="chapter-item" onclick="goTo(4)" data-slide="4"><span class="chapter-number">05</span> Blueprints — intro</button>
+  <button class="chapter-item" onclick="goTo(4)" data-slide="4"><span class="chapter-number">05</span> Blueprints - intro</button>
   <button class="chapter-item" onclick="goTo(5)" data-slide="5"><span class="chapter-number">06</span> MCP server vs. agent</button>
   <button class="chapter-item" onclick="goTo(6)" data-slide="6"><span class="chapter-number">07</span> Sub-agent conformance</button>
 
   <div class="sidebar-group">Design considerations</div>
   <button class="chapter-item" onclick="goTo(7)" data-slide="7"><span class="chapter-number">08</span> Customisation</button>
-  <button class="chapter-item" onclick="goTo(8)" data-slide="8"><span class="chapter-number">09</span> Non-LSO APIs</button>
-  <button class="chapter-item" onclick="goTo(9)" data-slide="9"><span class="chapter-number">10</span> Sandboxes &amp; emulation</button>
-  <button class="chapter-item" onclick="goTo(10)" data-slide="10"><span class="chapter-number">11</span> Certification</button>
-  <button class="chapter-item" onclick="goTo(11)" data-slide="11"><span class="chapter-number">12</span> Deployment scenarios (1/3)</button>
-  <button class="chapter-item" onclick="goTo(12)" data-slide="12"><span class="chapter-number">13</span> Deployment scenarios (2/3)</button>
-  <button class="chapter-item" onclick="goTo(13)" data-slide="13"><span class="chapter-number">14</span> Deployment scenarios (3/3)</button>
+  <button class="chapter-item" onclick="goTo(8)" data-slide="8"><span class="chapter-number">09</span> Standard Product Payloads</button>
+  <button class="chapter-item" onclick="goTo(9)" data-slide="9"><span class="chapter-number">10</span> Harness Engineering</button>
+  <button class="chapter-item" onclick="goTo(10)" data-slide="10"><span class="chapter-number">11</span> Non-LSO APIs</button>
+  <button class="chapter-item" onclick="goTo(11)" data-slide="11"><span class="chapter-number">12</span> Sandboxes &amp; emulation</button>
+  <button class="chapter-item" onclick="goTo(12)" data-slide="12"><span class="chapter-number">13</span> Certification</button>
+  <button class="chapter-item" onclick="goTo(13)" data-slide="13"><span class="chapter-number">14</span> Deployment scenarios (1/3)</button>
+  <button class="chapter-item" onclick="goTo(14)" data-slide="14"><span class="chapter-number">15</span> Deployment scenarios (2/3)</button>
+  <button class="chapter-item" onclick="goTo(15)" data-slide="15"><span class="chapter-number">16</span> Deployment scenarios (3/3)</button>
+  <button class="chapter-item" onclick="goTo(16)" data-slide="16"><span class="chapter-number">17</span> Security considerations</button>
 
   <div class="sidebar-group">Forward</div>
-  <button class="chapter-item" onclick="goTo(14)" data-slide="14"><span class="chapter-number">15</span> Use cases</button>
-  <button class="chapter-item" onclick="goTo(15)" data-slide="15"><span class="chapter-number">16</span> Open questions</button>
-  <button class="chapter-item" onclick="goTo(16)" data-slide="16"><span class="chapter-number">17</span> Next steps</button>
+  <button class="chapter-item" onclick="goTo(17)" data-slide="17"><span class="chapter-number">18</span> Use cases</button>
+  <button class="chapter-item" onclick="goTo(18)" data-slide="18"><span class="chapter-number">19</span> Open questions</button>
+  <button class="chapter-item" onclick="goTo(19)" data-slide="19"><span class="chapter-number">20</span> Next steps</button>
 </nav>
 
 <!-- ============================================================
-     MAIN
-     ============================================================ -->
+  MAIN
+  ============================================================ -->
 <div id="main">
   <div id="stage">
     <div id="counter" aria-live="polite" aria-atomic="true">1 / 17</div>
@@ -902,7 +910,7 @@ svg.icon { width: 22px; height: 22px; }
     <div class="slide active" id="slide-1">
       <div class="title-left">
         <div class="eyebrow">Mplify · Work in Progress</div>
-        <div class="title-main">Agentic LSO<br>Reference Architecture</div>
+        <div class="title-main">Agentic LSO<br>Blueprint and Architecture</div>
         <div class="title-sub">A work-in-progress snapshot of the reference architecture and blueprints — for Mplify member review and discussion.</div>
         <div class="title-meta">
           <div>Working Group<a href="https://members.mplify.net/s/detail/a2cUI00002FvSKWYA3" target="_blank" rel="noopener">Agentic LSO Reference Architecture and Blueprints (MP0092)</a></div>
@@ -933,8 +941,8 @@ svg.icon { width: 22px; height: 22px; }
 
       <div class="card-grid-3">
         <div class="card">
-          <div class="card-title">The role MEF 51.1 played for LSO APIs.</div>
-          <div class="card-text">The Reference Architecture is being developed to underpin the agentic layer the way MEF 51.1 underpinned the LSO API programme — defining entities, interfaces, and how they relate to stakeholders.</div>
+          <div class="card-title">The role MEF 55.1 played for LSO APIs.</div>
+          <div class="card-text">The Reference Architecture is being developed to underpin the agentic layer the way MEF 55.1 underpinned the LSO API programme — defining entities, interfaces, and how they relate to stakeholders.</div>
         </div>
         <div class="card">
           <div class="card-title">What the current draft specifies.</div>
@@ -1053,7 +1061,7 @@ svg.icon { width: 22px; height: 22px; }
               <rect x="14" y="14" width="7" height="7" rx="1"/>
             </svg>
           </div>
-          <div class="card-title">Blueprint inventory — current scope</div>
+          <div class="card-title">Blueprint demo — current scope</div>
           <div class="card-text">One Blueprint per MCP Server type in the Reference Architecture (today: Product Catalog, Address Validation, POQ, Quote, Product Order, Product Inventory), plus one or more Agent Blueprints.</div>
         </div>
         </div>
@@ -1175,8 +1183,99 @@ svg.icon { width: 22px; height: 22px; }
       </div>
     </div>
 
-    <!-- ========== SLIDE 9: NON-LSO APIs ========== -->
+    <!-- ========== SLIDE 9: STANDARD PRODUCT PAYLOADS ========== -->
     <div class="slide slide-light" id="slide-9">
+      <div class="slide-eyebrow">Design considerations <span class="status-pill pill-progress">In progress</span></div>
+      <div class="slide-title">Standard Product <span>Payloads</span></div>
+      <div class="slide-lead">The AI equivalent of the LSO Blending tool — far simpler. Each standard product ships as a self-contained copy-paste package, ready for immediate use and further customisation.</div>
+
+      <div class="arch-layout">
+        <div style="display:flex;flex-direction:column;gap:14px;min-height:0;overflow:auto;">
+          <div class="card" style="border-left:4px solid var(--orange);border-radius:0 8px 8px 0;">
+            <div class="card-title">Replacing the LSO Blending tool</div>
+            <div class="card-text">The LSO Blending tool required engineers to manually identify, combine, and validate the right Mplify product specifications. Standard Product Payloads deliver that knowledge pre-packaged — structured for direct AI agent consumption, with no manual merging required.</div>
+          </div>
+          <div class="card">
+            <div class="card-title">Content preparation flow</div>
+            <div class="card-text">Business Requirements (Std.) → Schema and Dev Guide (Std.) → AI Agent Assets (Guide, Validation, Examples)</div>
+          </div>
+          <div class="card" style="border-color:var(--orange);">
+            <div class="card-title" style="color:var(--orange);">For discussion</div>
+            <div class="card-text" style="color:var(--orange);font-weight:500;">Is this the right set of components for a standard product package? Are there additional assets — or components to remove?</div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:10px;min-height:0;overflow:auto;">
+          <div style="font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);margin-bottom:2px;">Package contents · draft blueprint</div>
+          <div class="layer-item" style="background:rgba(253,120,1,0.10);border-left:4px solid var(--orange);">
+            <div class="layer-name">Registry Entry</div>
+            <div class="layer-desc">Keyword-to-product mapping — lets the agent discover which product applies to a buyer request from natural-language terms.</div>
+          </div>
+          <div class="layer-item" style="background:rgba(61,123,199,0.10);">
+            <div class="layer-name">Knowledge</div>
+            <div class="layer-desc">Enumerated list of all assets with descriptions — the agent's index for discovering what is available and what each asset covers.</div>
+          </div>
+          <div class="layer-item" style="background:rgba(36,78,158,0.08);">
+            <div class="layer-name">AI-Guide</div>
+            <div class="layer-desc">An AI-agent-optimised rewrite of the Mplify standard developer guide — structured for reasoning, not human reading.</div>
+          </div>
+          <div class="layer-item" style="background:rgba(121,0,114,0.07);">
+            <div class="layer-name">Examples</div>
+            <div class="layer-desc">A curated JSON collection of representative payloads covering common and edge-case scenarios for this product.</div>
+          </div>
+          <div class="layer-item" style="background:rgba(254,191,16,0.12);border-left:4px solid var(--yellow);">
+            <div class="layer-name">Validation Rules</div>
+            <div class="layer-desc">All requirements explicitly extracted from the guide into a structured list — the agent's fast-path for compliance checking without re-reading the full guide.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SLIDE 10: HARNESS ENGINEERING ========== -->
+    <div class="slide slide-light" id="slide-10">
+      <div class="slide-eyebrow">Design considerations <span class="status-pill pill-candidate">Proposed term</span></div>
+      <div class="slide-title">Harness <span>Engineering</span></div>
+      <div class="slide-lead">The implementation discipline that sits between an architectural specification and a working agentic deployment. A harness adapts a general-purpose component — an LLM, an existing API, a test runner — to a specific, constrained, verifiable role in the Agentic LSO stack.</div>
+
+      <div class="card-grid-3">
+        <div class="num-card num-card-top-orange">
+          <div class="num-badge num-orange">01</div>
+          <div class="card-title">Context Harnesses</div>
+          <div class="card-text">Pre-packaged bundles of knowledge, instructions, examples, and validation rules that condition a general-purpose AI agent to operate correctly within a specific product domain — without human pre-processing. Standard Product Payloads are the reference implementation.</div>
+          <div class="card-callout">Shapes the model's understanding.</div>
+        </div>
+
+        <div class="num-card num-card-top-orange">
+          <div class="num-badge num-orange">02</div>
+          <div class="card-title">Protocol Harnesses</div>
+          <div class="card-text">MCP Servers act as protocol harnesses: they adapt LSO (or non-LSO) APIs into AI-consumable tool surfaces. The agent interacts only with the harness interface; what lies behind it — a legacy system, microservice, or emulator — is an implementation detail.</div>
+          <div class="card-callout">Shapes the model's reach.</div>
+        </div>
+
+        <div class="num-card num-card-top-orange">
+          <div class="num-badge num-orange">03</div>
+          <div class="card-title">Validation Harnesses</div>
+          <div class="card-text">Emulators and conformance test suites are validation harnesses: scaffolding that replays known-good flows, asserts Blueprint conformance, and provides the assurance signals needed before connecting to live partners.</div>
+          <div class="card-callout">Shapes the model's trustworthiness.</div>
+        </div>
+
+        <div class="num-card num-card-top-orange" style="grid-column: 1 / -1; display:flex; align-items:flex-start; gap:20px;">
+          <div class="num-badge num-orange" style="flex-shrink:0;">?</div>
+          <div>
+            <div class="mini-label warn">For discussion</div>
+            <div class="card-title" style="margin-bottom:8px;">Can we be 100% sure the agent does exactly what we want?</div>
+            <div class="card-text">Unlike code, agent behaviour is probabilistic — the harness constrains it, but does not fully determine it. What level of assurance is achievable, and what does "good enough" look like for inter-provider LSO flows?</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:20px; padding:14px 20px; background:rgba(0,1,54,0.04); border-left:3px solid var(--navy); border-radius:0 6px 6px 0;">
+        <div style="font-family:'DM Sans',sans-serif; font-size:13px; color:var(--navy);">Blueprints specify <strong style="font-weight:600;">what</strong> a conforming harness must do. Harness engineering is <strong style="font-weight:600;">how</strong> you build one — and the core implementation skill the Agentic LSO programme produces.</div>
+      </div>
+    </div>
+
+    <!-- ========== SLIDE 11: NON-LSO APIs ========== -->
+    <div class="slide slide-light" id="slide-11">
       <div class="slide-eyebrow">Design considerations <span class="status-pill pill-progress">In progress</span></div>
       <div class="slide-title">Supporting <span>non-LSO APIs</span></div>
       <div class="slide-lead">Agentic LSO can wrap pre-existing, non-standard provider APIs — important for members who have not yet implemented LSO APIs (and may not).</div>
@@ -1214,8 +1313,8 @@ svg.icon { width: 22px; height: 22px; }
       </div>
     </div>
 
-    <!-- ========== SLIDE 10: SANDBOXES & EMULATION ========== -->
-    <div class="slide slide-light" id="slide-10">
+    <!-- ========== SLIDE 12: SANDBOXES & EMULATION ========== -->
+    <div class="slide slide-light" id="slide-12">
       <div class="slide-eyebrow">Operational readiness <span class="status-pill pill-progress">In progress</span></div>
       <div class="slide-title">Sandboxes and <span>emulation</span></div>
       <div class="slide-lead">Companies can safely trial new Agentic LSO components — their own or third-party — against the verified Mplify emulator before connecting to live partners.</div>
@@ -1255,8 +1354,8 @@ svg.icon { width: 22px; height: 22px; }
       </div>
     </div>
 
-    <!-- ========== SLIDE 11: CERTIFICATION ========== -->
-    <div class="slide slide-light" id="slide-11">
+    <!-- ========== SLIDE 13: CERTIFICATION ========== -->
+    <div class="slide slide-light" id="slide-13">
       <div class="slide-eyebrow">Certification <span class="status-pill pill-progress">In progress</span></div>
       <div class="slide-title">Agentic LSO and <span>Mplify certification</span></div>
       <div class="slide-lead">Agentic LSO has a dual relationship with certification. Both directions are in scope; sequencing is open.</div>
@@ -1293,8 +1392,8 @@ svg.icon { width: 22px; height: 22px; }
       </div>
     </div>
 
-    <!-- ========== SLIDE 12: AGENT DEPLOYMENT SCENARIOS — TWO-PARTY (1/3) ========== -->
-    <div class="slide slide-light" id="slide-12">
+    <!-- ========== SLIDE 14: AGENT DEPLOYMENT SCENARIOS — TWO-PARTY (1/3) ========== -->
+    <div class="slide slide-light" id="slide-14">
       <div class="slide-eyebrow">Design considerations · Part 1 of 3 <span class="status-pill pill-open">Open question</span></div>
       <div class="slide-title">Agent deployment scenarios — <span>use cases 1 &amp; 2</span></div>
       <div class="slide-lead">Two initial topologies showing where the agentic surface lives — varying only in which side runs the agent and MCP servers.</div>
@@ -1392,8 +1491,8 @@ svg.icon { width: 22px; height: 22px; }
       </div>
     </div>
 
-    <!-- ========== SLIDE 13: AGENT DEPLOYMENT SCENARIOS — TWO-PARTY (2/3) ========== -->
-    <div class="slide slide-light" id="slide-13">
+    <!-- ========== SLIDE 15: AGENT DEPLOYMENT SCENARIOS — TWO-PARTY (2/3) ========== -->
+    <div class="slide slide-light" id="slide-15">
       <div class="slide-eyebrow">Design considerations · Part 2 of 3 <span class="status-pill pill-open">Open question</span></div>
       <div class="slide-title">Agent deployment scenarios — <span>use cases 3 &amp; 4</span></div>
       <div class="slide-lead">Two topologies where the buyer operates an agent — varying in whether it talks to the seller's MCP servers directly or negotiates with a seller agent over A2A.</div>
@@ -1491,18 +1590,18 @@ svg.icon { width: 22px; height: 22px; }
       </div>
     </div>
 
-    <!-- ========== SLIDE 14: AGENT DEPLOYMENT SCENARIOS — MULTI-PARTY ========== -->
-    <div class="slide slide-light" id="slide-14">
+    <!-- ========== SLIDE 16: AGENT DEPLOYMENT SCENARIOS — MULTI-PARTY ========== -->
+    <div class="slide slide-light" id="slide-16" style="padding: 36px 50px;">
       <div class="slide-eyebrow">Design considerations · Part 3 of 3 <span class="status-pill pill-open">Open question</span></div>
-      <div class="slide-title">Agent deployment scenarios — <span>multi-party</span></div>
-      <div class="slide-lead">Beyond the two-party cases, Agentic LSO has to support topologies with more than two participants. These raise additional questions about identity, trust boundaries, and concurrency.</div>
+      <div class="slide-title" style="margin-bottom:16px;">Agent deployment scenarios — <span>multi-party</span></div>
+      <div class="slide-lead" style="margin-bottom:16px;font-size:13.5px;">Beyond the two-party cases, Agentic LSO has to support topologies with more than two participants. These raise additional questions about identity, trust boundaries, and concurrency.</div>
 
-      <div class="card-grid-2">
-        <div class="num-card num-card-top-blue" style="display:flex;flex-direction:column;">
-          <div class="num-badge num-blue">05</div>
-          <div class="card-title">Third-party agents in the middle</div>
-          <div class="card-text">An intermediary agent — broker, aggregator, or marketplace — sits between buyer and seller agents. Raises clear questions about Legal Identity, trust boundaries, and where Blueprint conformance applies.</div>
-          <div style="flex:1;min-height:120px;margin-top:14px;display:flex;align-items:center;justify-content:center;">
+      <div class="card-grid-2" style="gap:18px;">
+        <div class="num-card num-card-top-blue" style="display:flex;flex-direction:column;padding:16px 18px;">
+          <div class="num-badge num-blue" style="font-size:22px;margin-bottom:6px;">05</div>
+          <div class="card-title" style="font-size:15px;margin-bottom:7px;">Third-party agents in the middle</div>
+          <div class="card-text" style="font-size:12.5px;">An intermediary agent — broker, aggregator, or marketplace — sits between buyer and seller agents. Raises clear questions about Legal Identity, trust boundaries, and where Blueprint conformance applies.</div>
+          <div style="flex:1;min-height:80px;margin-top:10px;display:flex;align-items:center;justify-content:center;">
             <pre class="mermaid" id="uc5-diagram" style="width:100%;">flowchart LR
     subgraph Buyer["Buyer"]
         BuyerUser((Buyer))
@@ -1546,11 +1645,11 @@ svg.icon { width: 22px; height: 22px; }
           </div>
         </div>
 
-        <div class="num-card num-card-top-blue" style="display:flex;flex-direction:column;">
-          <div class="num-badge num-blue">06</div>
-          <div class="card-title">One buyer, many sellers</div>
-          <div class="card-text">A buyer agent interacts with multiple seller agents — sequentially for comparison, or simultaneously for parallel quoting. Concurrency, fairness, and disclosure of competing offers all need consideration.</div>
-          <div style="flex:1;min-height:120px;margin-top:14px;display:flex;align-items:center;justify-content:center;">
+        <div class="num-card num-card-top-blue" style="display:flex;flex-direction:column;padding:16px 18px;">
+          <div class="num-badge num-blue" style="font-size:22px;margin-bottom:6px;">06</div>
+          <div class="card-title" style="font-size:15px;margin-bottom:7px;">One buyer, many sellers</div>
+          <div class="card-text" style="font-size:12.5px;">A buyer agent interacts with multiple seller agents — sequentially for comparison, or simultaneously for parallel quoting. Concurrency, fairness, and disclosure of competing offers all need consideration.</div>
+          <div style="flex:1;min-height:80px;margin-top:10px;display:flex;align-items:center;justify-content:center;">
             <pre class="mermaid" id="uc6-diagram" style="width:100%;">flowchart LR
     subgraph Buyer["Buyer"]
         BuyerAgent((Buyer Agent))
@@ -1576,48 +1675,88 @@ svg.icon { width: 22px; height: 22px; }
       </div>
     </div>
 
-    <!-- ========== SLIDE 15: USE CASES ========== -->
-    <div class="slide slide-light" id="slide-15">
-      <div class="slide-eyebrow">What next <span class="status-pill pill-candidate">Candidate list</span></div>
-      <div class="slide-title">Use cases — <span>where to focus first</span></div>
-      <div class="slide-lead">The six deployment scenarios from slides 12–14, consolidated for prioritisation. Which should the Reference Architecture and Blueprints focus on first — and where would your organisation commit pilot resources? Are there deployment topologies missing from this list?</div>
+    <!-- ========== SLIDE 17: SECURITY CONSIDERATIONS ========== -->
+    <div class="slide slide-light" id="slide-17" style="padding: 36px 50px;">
+      <div class="slide-eyebrow">Design considerations <span class="status-pill pill-open">Cross-cutting concern</span></div>
+      <div class="slide-title" style="margin-bottom:14px;">Security — <span>across trust boundaries</span></div>
+      <div class="slide-lead" style="margin-bottom:16px;font-size:13.5px;">Each deployment scenario from slides 14–16 defines a different set of trust boundaries between participants. Security requirements are not uniform — they shift depending on who owns which components and where automated decisions cross organisational borders.</div>
 
-      <div class="card-grid-3" style="grid-template-rows: 1fr 1fr;">
-        <div class="num-card num-card-top-orange">
-          <div class="num-badge num-orange">01</div>
-          <div class="card-title">Seller-side agent only</div>
-          <div class="card-text">A seller exposes an agent (and MCP servers) to the world; the buyer interacts through traditional means — portal, human operator, or scripted LSO API calls. <span class="mini-label" style="display:inline;margin:0;">Slide 12</span></div>
+      <div class="card-grid-2" style="gap:14px;">
+        <div class="num-card num-card-top-orange" style="padding:16px 18px;">
+          <div class="num-badge num-orange" style="font-size:18px;margin-bottom:6px;">01</div>
+          <div class="card-title" style="font-size:14px;margin-bottom:5px;">Agent identity &amp; legal-entity binding</div>
+          <div class="card-text" style="font-size:12px;">An agent acting on behalf of a buyer or seller must be cryptographically bound to a recognised legal entity. Trust anchors, certificate chains, and revocation must be defined — especially for A2A (Slide 15) and broker/multi-party topologies (Slide 16) where no human confirms each individual action.</div>
         </div>
-        <div class="num-card num-card-top-orange">
-          <div class="num-badge num-orange">02</div>
-          <div class="card-title">Buyer-side agent only</div>
-          <div class="card-text">A buyer operates an agent and MCP servers that consume LSO APIs directly. The seller side is unchanged — only a back-end system is exposed. <span class="mini-label" style="display:inline;margin:0;">Slide 12</span></div>
+        <div class="num-card num-card-top-orange" style="padding:16px 18px;">
+          <div class="num-badge num-orange" style="font-size:18px;margin-bottom:6px;">02</div>
+          <div class="card-title" style="font-size:14px;margin-bottom:5px;">Authorisation at MCP &amp; A2A boundaries</div>
+          <div class="card-text" style="font-size:12px;">Each integration boundary — LSO API, MCP tool call, A2A message — requires its own access-control model. A buyer agent calling a seller MCP server (Slide 15) must be scoped to permitted operations only; third-party chains (Slide 16) raise delegated-authority and transitive-trust questions.</div>
         </div>
-        <div class="num-card num-card-top-orange">
-          <div class="num-badge num-orange">03</div>
-          <div class="card-title">Buyer Agent — Seller MCP</div>
-          <div class="card-text">A buyer-side agent connects directly to the seller's MCP servers. The buyer handles orchestration; the seller exposes MCP tooling only. <span class="mini-label" style="display:inline;margin:0;">Slide 13</span></div>
+        <div class="num-card num-card-top-orange" style="padding:16px 18px;">
+          <div class="num-badge num-orange" style="font-size:18px;margin-bottom:6px;">03</div>
+          <div class="card-title" style="font-size:14px;margin-bottom:5px;">Prompt injection &amp; adversarial inputs</div>
+          <div class="card-text" style="font-size:12px;">LLM-based agents are susceptible to prompt injection through malicious tool responses or crafted A2A messages. Seller or intermediary data returned to a buyer agent — catalogue entries, product descriptions, error messages — could embed instructions that redirect agent behaviour across all topologies.</div>
         </div>
-        <div class="num-card num-card-top-orange">
-          <div class="num-badge num-orange">04</div>
-          <div class="card-title">A2A — buyer and seller agents</div>
-          <div class="card-text">Both sides run agents that negotiate over A2A. The canonical Agentic LSO topology and the one the Reference Architecture is primarily drawn against. <span class="mini-label" style="display:inline;margin:0;">Slide 13</span></div>
+        <div class="num-card num-card-top-orange" style="padding:16px 18px;">
+          <div class="num-badge num-orange" style="font-size:18px;margin-bottom:6px;">04</div>
+          <div class="card-title" style="font-size:14px;margin-bottom:5px;">Data minimisation &amp; confidentiality</div>
+          <div class="card-text" style="font-size:12px;">Agent context windows accumulate sensitive commercial data across tool calls. What data is shared, persisted in agent memory, or logged must be governed — particularly in broker topologies (Slide 16) where an intermediary sees both buyer intent and seller pricing simultaneously.</div>
         </div>
-        <div class="num-card num-card-top-blue">
-          <div class="num-badge num-blue">05</div>
-          <div class="card-title">Third-party agents in the middle</div>
-          <div class="card-text">An intermediary agent — broker, aggregator, or marketplace — sits between buyer and seller agents. Raises questions about Legal Identity, trust boundaries, and Blueprint conformance. <span class="mini-label" style="display:inline;margin:0;">Slide 14</span></div>
+        <div class="num-card num-card-top-blue" style="padding:16px 18px;">
+          <div class="num-badge num-blue" style="font-size:18px;margin-bottom:6px;">05</div>
+          <div class="card-title" style="font-size:14px;margin-bottom:5px;">Audit trail &amp; non-repudiation</div>
+          <div class="card-text" style="font-size:12px;">Automated agents commit to orders, quotes, and SLAs without real-time human sign-off. Immutable, signed logs of agent decisions and the inputs that drove them are required for dispute resolution — and may carry regulatory implications depending on jurisdiction and the deployment topology in use.</div>
         </div>
-        <div class="num-card num-card-top-blue">
-          <div class="num-badge num-blue">06</div>
-          <div class="card-title">One buyer, many sellers</div>
-          <div class="card-text">A buyer agent interacts with multiple seller agents — sequentially for comparison, or simultaneously for parallel quoting. Raises concurrency, fairness, and disclosure questions. <span class="mini-label" style="display:inline;margin:0;">Slide 14</span></div>
+        <div class="num-card num-card-top-blue" style="padding:16px 18px;">
+          <div class="num-badge num-blue" style="font-size:18px;margin-bottom:6px;">06</div>
+          <div class="card-title" style="font-size:14px;margin-bottom:5px;">Blueprint conformance as a security control</div>
+          <div class="card-text" style="font-size:12px;">Restricting agents to Mplify Blueprint-defined workflows limits the attack surface — a conformant agent cannot be instructed to invoke arbitrary operations. Enforcing Blueprint conformance at every trust boundary (Slides 14–16) turns an interoperability mechanism into a policy-enforcement point.</div>
         </div>
       </div>
     </div>
 
-    <!-- ========== SLIDE 16: OPEN QUESTIONS ========== -->
-    <div class="slide slide-light" id="slide-16">
+    <!-- ========== SLIDE 18: USE CASES ========== -->
+    <div class="slide slide-light" id="slide-18" style="padding: 36px 50px;">
+      <div class="slide-eyebrow">What next <span class="status-pill pill-candidate">Candidate list</span></div>
+      <div class="slide-title" style="margin-bottom:14px;">Use cases — <span>where to focus first</span></div>
+      <div class="slide-lead" style="margin-bottom:16px;font-size:13.5px;">The six deployment scenarios from slides 14–16, consolidated for prioritisation. Which should the Reference Architecture and Blueprints focus on first — and where would your organisation commit pilot resources? Are there deployment topologies missing from this list?</div>
+
+      <div class="card-grid-3" style="grid-template-rows: 1fr 1fr; gap: 14px;">
+        <div class="num-card num-card-top-orange" style="padding:16px 18px;">
+          <div class="num-badge num-orange" style="font-size:22px;margin-bottom:6px;">01</div>
+          <div class="card-title" style="font-size:14px;margin-bottom:6px;">Seller-side agent only</div>
+          <div class="card-text" style="font-size:12px;">A seller exposes an agent (and MCP servers) to the world; the buyer interacts through traditional means — portal, human operator, or scripted LSO API calls. <span class="mini-label" style="display:inline;margin:0;">Slide 14</span></div>
+        </div>
+        <div class="num-card num-card-top-orange" style="padding:16px 18px;">
+          <div class="num-badge num-orange" style="font-size:22px;margin-bottom:6px;">02</div>
+          <div class="card-title" style="font-size:14px;margin-bottom:6px;">Buyer-side agent only</div>
+          <div class="card-text" style="font-size:12px;">A buyer operates an agent and MCP servers that consume LSO APIs directly. The seller side is unchanged — only a back-end system is exposed. <span class="mini-label" style="display:inline;margin:0;">Slide 14</span></div>
+        </div>
+        <div class="num-card num-card-top-orange" style="padding:16px 18px;">
+          <div class="num-badge num-orange" style="font-size:22px;margin-bottom:6px;">03</div>
+          <div class="card-title" style="font-size:14px;margin-bottom:6px;">Buyer Agent — Seller MCP</div>
+          <div class="card-text" style="font-size:12px;">A buyer-side agent connects directly to the seller's MCP servers. The buyer handles orchestration; the seller exposes MCP tooling only. <span class="mini-label" style="display:inline;margin:0;">Slide 15</span></div>
+        </div>
+        <div class="num-card num-card-top-orange" style="padding:16px 18px;">
+          <div class="num-badge num-orange" style="font-size:22px;margin-bottom:6px;">04</div>
+          <div class="card-title" style="font-size:14px;margin-bottom:6px;">A2A — buyer and seller agents</div>
+          <div class="card-text" style="font-size:12px;">Both sides run agents that negotiate over A2A. The canonical Agentic LSO topology and the one the Reference Architecture is primarily drawn against. <span class="mini-label" style="display:inline;margin:0;">Slide 15</span></div>
+        </div>
+        <div class="num-card num-card-top-blue" style="padding:16px 18px;">
+          <div class="num-badge num-blue" style="font-size:22px;margin-bottom:6px;">05</div>
+          <div class="card-title" style="font-size:14px;margin-bottom:6px;">Third-party agents in the middle</div>
+          <div class="card-text" style="font-size:12px;">An intermediary agent — broker, aggregator, or marketplace — sits between buyer and seller agents. Raises questions about Legal Identity, trust boundaries, and Blueprint conformance. <span class="mini-label" style="display:inline;margin:0;">Slide 16</span></div>
+        </div>
+        <div class="num-card num-card-top-blue" style="padding:16px 18px;">
+          <div class="num-badge num-blue" style="font-size:22px;margin-bottom:6px;">06</div>
+          <div class="card-title" style="font-size:14px;margin-bottom:6px;">One buyer, many sellers</div>
+          <div class="card-text" style="font-size:12px;">A buyer agent interacts with multiple seller agents — sequentially for comparison, or simultaneously for parallel quoting. Raises concurrency, fairness, and disclosure questions. <span class="mini-label" style="display:inline;margin:0;">Slide 16</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SLIDE 19: OPEN QUESTIONS ========== -->
+    <div class="slide slide-light" id="slide-19">
       <div class="slide-eyebrow">Open questions <span class="status-pill pill-open">Member input requested</span></div>
       <div class="slide-title">Where <span>we need your input</span></div>
       <div class="slide-lead">The questions surfaced through this deck, consolidated in one place. This is the operative slide of the session — please come ready to contribute.</div>
@@ -1634,35 +1773,35 @@ svg.icon { width: 22px; height: 22px; }
           <div class="question-numeral">02</div>
           <div class="question-body">
             <div class="question-ref">Refers to Slide 5</div>
-            <div class="question-text">Where on the spectrum between rich-server and minimised-scope should the reference Blueprints sit?</div>
+            <div class="question-text">What should be the balance between the Agent vs. MCP Server</div>
           </div>
         </div>
         <div class="question-card">
           <div class="question-numeral">03</div>
           <div class="question-body">
-            <div class="question-ref">Refers to Slide 6</div>
-            <div class="question-text">Which position on sub-agent Blueprint conformance — always, only top-level, or conditional at trust boundaries — should the programme adopt?</div>
+            <div class="question-ref">Refers to Slides 14 &amp; 16</div>
+            <div class="question-text">Which deployment scenarios should the Reference Architecture and Blueprints prioritise? Are there topologies missing from our list?</div>
           </div>
         </div>
         <div class="question-card">
           <div class="question-numeral">04</div>
           <div class="question-body">
-            <div class="question-ref">Refers to Slides 11 &amp; 12</div>
-            <div class="question-text">Which deployment scenarios should the Reference Architecture and Blueprints prioritise? Are there topologies missing from our list?</div>
+            <div class="question-ref">Implementation focus</div>
+            <div class="question-text">What programming language and MCP/agent framework (e.g. Claude, LangGraph, others) should Mplify target for reference implementations? Should the programme mandate a specific stack or remain framework-agnostic?</div>
           </div>
         </div>
-        <div class="question-card" style="grid-column: 1 / -1;">
+        <div class="question-card">
           <div class="question-numeral">05</div>
           <div class="question-body">
-            <div class="question-ref">Refers to Slide 13</div>
-            <div class="question-text">Which use cases would your organisation commit pilot resources to? What is missing from the candidate list?</div>
+            <div class="question-ref">Deliverable</div>
+            <div class="question-text">What is the expected deliverable for the Blueprint? Guidelines, examples, reference implementation, product?</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ========== SLIDE 17: NEXT STEPS ========== -->
-    <div class="slide slide-light" id="slide-17">
+    <!-- ========== SLIDE 20: NEXT STEPS ========== -->
+    <div class="slide slide-light" id="slide-20">
       <div class="slide-eyebrow">What next · How to engage</div>
       <div class="slide-title">Next <span>steps</span></div>
 
@@ -1675,22 +1814,15 @@ svg.icon { width: 22px; height: 22px; }
             <li>
               <div class="next-marker">01</div>
               <div class="next-content">
-                <strong>Working-group meetings &amp; live drafts</strong>
-                <span>Cadence, meeting links, and the location of the live Reference Architecture and Blueprint drafts — <span class="placeholder">TO BE INSERTED</span></span>
+                <strong>Working-group meetings</strong>
+                <span>Project: Agentic LSO Reference Architecture and Blueprints, calls - Fridays 3 p.m. CEST / 9 a.m. ET</span>
               </div>
             </li>
             <li>
               <div class="next-marker">02</div>
               <div class="next-content">
                 <strong>Call for pilot volunteers</strong>
-                <span>If your organisation is interested in piloting any of the use cases on Slide 11, the engagement channel is <span class="placeholder">TO BE INSERTED</span>.</span>
-              </div>
-            </li>
-            <li>
-              <div class="next-marker">03</div>
-              <div class="next-content">
-                <strong>Next deliverable</strong>
-                <span>Indicative timeline — <span class="placeholder">TO BE INSERTED</span> (e.g. <em>"Draft Blueprints v0.x for member review by Qx"</em>).</span>
+                <span>If your organization is interested in developing or piloting any of the use cases, please contact lc@mplify.net</span>
               </div>
             </li>
           </ul>
@@ -1711,12 +1843,7 @@ let current = 0;
 
 function updateUI() {
   slides.forEach((s, i) => s.classList.toggle('active', i === current));
-  chapterItems.forEach((c, i) => {
-    const isActive = i === current;
-    c.classList.toggle('active', isActive);
-    if (isActive) c.setAttribute('aria-current', 'true');
-    else c.removeAttribute('aria-current');
-  });
+  chapterItems.forEach((c, i) => c.classList.toggle('active', i === current));
   counter.textContent = (current + 1) + ' / ' + slides.length;
   if (window.__mermaid && window.__diagramsReady) {
     window.__diagramsReady.then(() =>
