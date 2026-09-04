@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Presentation Title — Mplify</title>
+<link href="https://fonts.googleapis.com/css2?family=Sansation:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* =================== BRAND TOKENS =================== */
+:root {
+  --navy:     #000136;
+  --blue:     #3D7BC7;
+  --orange:   #FD7801;
+  --dkblue:   #244E9E;
+  --yellow:   #FEBF10;
+  --gray:     #A1A1A1;
+  --purple:   #790072;
+  --charcoal: #555555;
+  --light:    #F0F1F2;
+  --white:    #FFFFFF;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: #1a1a2e;
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  color: var(--navy);
+}
+
+/* =================== SIDEBAR =================== */
+#sidebar {
+  width: 220px;
+  min-width: 220px;
+  background: var(--navy);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+#sidebar-logo {
+  padding: 16px 20px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  margin-bottom: 12px;
+  min-height: 32px;
+  /* Reserved for a future logo asset. Insert <img src="..." style="width:100px;"> when available.
+     Do not add placeholder text. */
+}
+
+.chapter-item {
+  padding: 8px 20px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11.5px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.55);
+  border-left: 3px solid transparent;
+  transition: all 0.2s;
+  line-height: 1.3;
+}
+
+.chapter-item:hover {
+  color: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.05);
+}
+
+.chapter-item.active {
+  color: var(--orange);
+  border-left-color: var(--orange);
+  background: rgba(253,120,1,0.08);
+  font-weight: 600;
+}
+
+/* Keyboard focus — keep visible and on-brand */
+.chapter-item:focus-visible,
+.nav-arrow:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 2px;
+}
+
+/* Strip default button chrome from chapter items rendered as <button> */
+button.chapter-item {
+  border: 0;
+  background: transparent;
+  text-align: left;
+  width: 100%;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+button.chapter-item.active {
+  background: rgba(253,120,1,0.08);
+}
+
+.chapter-number {
+  display: inline-block;
+  width: 16px;
+  font-size: 10px;
+  opacity: 0.6;
+  margin-right: 4px;
+}
+
+/* =================== MAIN STAGE =================== */
+#main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#counter {
+  position: absolute;
+  top: 14px;
+  right: 20px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: var(--gray);
+  z-index: 100;
+  background: rgba(255,255,255,0.9);
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+#stage {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: var(--light);
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: none;
+  background: var(--white);
+  padding: 60px 70px;
+  overflow: hidden;
+}
+
+.slide.active { display: flex; flex-direction: column; }
+
+/* Default a light backdrop for content slides; opt out per-slide with background:var(--white) */
+.slide-light { background: var(--light); }
+
+/* =================== NAV ARROWS =================== */
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.95);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  color: var(--navy);
+  transition: all 0.2s;
+}
+.nav-arrow:hover { background: var(--orange); color: white; }
+#prev { left: 12px; }
+#next { right: 12px; }
+
+/* =================== GRADIENT BAR =================== */
+.gradient-bar {
+  height: 6px;
+  background: linear-gradient(to right, var(--orange), var(--blue), var(--yellow));
+  flex-shrink: 0;
+}
+
+/* =================== TITLE SLIDE ===================
+   Single full-width panel. There is NO right-hand TOC / contents
+   panel on the title slide. The sidebar is the only navigation. */
+#slide-1 {
+  background: var(--white);
+  padding: 0;
+}
+
+.title-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 70px;
+}
+
+.eyebrow {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--orange);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+
+.title-main {
+  font-family: 'Sansation', sans-serif;
+  font-size: 64px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.05;
+  margin-bottom: 20px;
+}
+
+.title-sub {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 17px;
+  color: var(--charcoal);
+  line-height: 1.6;
+  max-width: 460px;
+}
+
+/* =================== SECTION HEADER =================== */
+.slide-eyebrow {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--orange);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.slide-title {
+  font-family: 'Sansation', sans-serif;
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.15;
+  margin-bottom: 36px;
+}
+
+.slide-title span { color: var(--orange); }
+
+/* =================== CARD GRIDS =================== */
+.card-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  flex: 1;
+  align-content: start;
+}
+
+.card-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  flex: 1;
+}
+
+/* =================== CARD VARIANTS =================== */
+.card {
+  background: var(--white);
+  border-radius: 8px;
+  padding: 28px 24px;
+  border: 1px solid #E8E9EB;
+}
+
+.card-light {
+  background: var(--light);
+  border-radius: 8px;
+  padding: 28px 24px;
+}
+
+.card-orange-left {
+  border-left: 4px solid var(--orange);
+  background: var(--white);
+  border-radius: 0 8px 8px 0;
+  padding: 24px 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.card-title {
+  font-family: 'Sansation', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 10px;
+}
+
+.card-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: var(--charcoal);
+  line-height: 1.65;
+}
+
+/* =================== ICONS =================== */
+.icon-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  flex-shrink: 0;
+}
+.icon-blue   { background: rgba(61,123,199,0.1); }
+.icon-orange { background: rgba(253,120,1,0.1); }
+svg.icon { width: 24px; height: 24px; }
+
+/* =================== NUMBERED CARDS =================== */
+.num-card {
+  background: var(--white);
+  border-radius: 8px;
+  padding: 24px 22px;
+  border: 1px solid #E8E9EB;
+  position: relative;
+}
+.num-card-top-orange { border-top: 3px solid var(--orange); }
+.num-card-top-blue   { border-top: 3px solid var(--blue); }
+
+.num-badge {
+  font-family: 'Sansation', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.num-orange { color: var(--orange); }
+.num-blue   { color: var(--blue); }
+
+/* =================== DEFINITION SLIDE =================== */
+.definition-box {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 50px 60px;
+  text-align: center;
+  box-shadow: 0 4px 30px rgba(0,1,54,0.08);
+  max-width: 800px;
+  margin: auto;
+}
+
+.definition-term {
+  font-family: 'Sansation', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--blue);
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  margin-bottom: 20px;
+}
+
+.definition-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 22px;
+  color: var(--navy);
+  line-height: 1.65;
+  font-weight: 400;
+}
+
+.definition-note {
+  font-size: 14px;
+  color: var(--gray);
+  margin-top: 20px;
+  font-style: italic;
+}
+
+/* =================== FLOW STEPS =================== */
+.flow-container {
+  display: flex;
+  gap: 0;
+  flex: 1;
+  align-items: stretch;
+}
+
+.flow-step {
+  flex: 1;
+  background: var(--white);
+  padding: 28px 24px;
+  border-right: 2px solid var(--light);
+  position: relative;
+}
+.flow-step:last-child { border-right: none; }
+
+.flow-arrow {
+  position: absolute;
+  right: -16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  background: var(--orange);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  font-size: 14px;
+  color: white;
+}
+
+.flow-badge {
+  display: inline-block;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  margin-bottom: 14px;
+}
+.badge-draft     { background: rgba(61,123,199,0.12); color: var(--blue); }
+.badge-recommend { background: rgba(253,120,1,0.12); color: var(--orange); }
+.badge-manage    { background: rgba(36,78,158,0.12); color: var(--dkblue); }
+.badge-human     { background: rgba(121,0,114,0.12); color: var(--purple); }
+
+.flow-number {
+  font-family: 'Sansation', sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--light);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     SIDEBAR — one .chapter-item per slide, in the same order
+     Use <button> not <div> so items are focusable and keyboard-operable.
+     ============================================================ -->
+<nav id="sidebar" aria-label="Slide navigation">
+  <div id="sidebar-logo"><!-- Reserved for a future logo asset. Do not add placeholder text. --></div>
+  <button class="chapter-item active" onclick="goTo(0)" data-slide="0" aria-current="true"><span class="chapter-number">01</span>Title Slide</button>
+  <button class="chapter-item"        onclick="goTo(1)" data-slide="1"><span class="chapter-number">02</span>Section Example</button>
+  <button class="chapter-item"        onclick="goTo(2)" data-slide="2"><span class="chapter-number">03</span>Definition Example</button>
+  <!-- Add one .chapter-item per slide. Keep numbering and order in sync with .slide elements below. -->
+</nav>
+
+<!-- ============================================================
+     MAIN — stage with slides + gradient bar at the bottom
+     ============================================================ -->
+<div id="main">
+  <div id="stage">
+    <div id="counter" aria-live="polite" aria-atomic="true">1 / 3</div>
+    <button class="nav-arrow" id="prev" onclick="prevSlide()" aria-label="Previous slide">&#8592;</button>
+    <button class="nav-arrow" id="next" onclick="nextSlide()" aria-label="Next slide">&#8594;</button>
+
+    <!-- ========== SLIDE 1: TITLE ==========
+         Single full-width panel. The deck has ONE navigation bar — the sidebar on the left.
+         Do not reintroduce a right-hand TOC / contents panel here.
+         ============================================== -->
+    <div class="slide active" id="slide-1">
+      <div class="title-left">
+        <div class="eyebrow">Eyebrow Label</div>
+        <div class="title-main">Presentation Title</div>
+        <div class="title-sub">A one- or two-sentence subtitle that gives the reader the framing of the deck without restating the title.</div>
+      </div>
+    </div>
+
+    <!-- ========== SLIDE 2: SECTION EXAMPLE ==========
+         Standard content slide pattern: eyebrow + title + card grid.
+         Pick ONE content pattern per slide (card grid, flow, definition, etc.) — don't mix.
+         ============================================== -->
+    <div class="slide slide-light" id="slide-2">
+      <div class="slide-eyebrow">Section Label</div>
+      <div class="slide-title">Slide title with <span>orange highlight</span></div>
+      <div class="card-grid-3">
+        <div class="card">
+          <div class="card-title">Card Title</div>
+          <div class="card-text">Body copy. Aim for 30–55 words per card; if you need more, the slide is doing too much.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Card Title</div>
+          <div class="card-text">Body copy. Aim for 30–55 words per card; if you need more, the slide is doing too much.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Card Title</div>
+          <div class="card-text">Body copy. Aim for 30–55 words per card; if you need more, the slide is doing too much.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SLIDE 3: DEFINITION EXAMPLE ==========
+         A single centred card for defining a key term. The wrapping flex
+         container vertically centres the box within the slide.
+         ============================================== -->
+    <div class="slide" id="slide-3">
+      <div class="slide-eyebrow">Introducing</div>
+      <div class="slide-title">What is a <span>Key Term</span>?</div>
+      <div style="flex:1; display:flex; align-items:center;">
+        <div class="definition-box" style="max-width:100%; width:100%;">
+          <div class="definition-term">Key Term · Definition</div>
+          <div class="definition-text">
+            The concise, authoritative definition of the term — written in plain technical English, one or two sentences, no marketing language.
+          </div>
+          <div style="width: 80px; height: 3px; background: linear-gradient(to right, var(--orange), var(--blue)); margin: 28px auto;"></div>
+          <div class="definition-note">Optional supporting note in italics — context, caveat, or one-line implication.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add additional .slide blocks here. Each one needs a matching .chapter-item in the sidebar.
+         The sidebar is the only navigation — do not add a TOC panel to the title slide.
+         See §2 of CLAUDE.md. -->
+
+  </div><!-- /#stage -->
+
+  <div class="gradient-bar"></div>
+</div><!-- /#main -->
+
+<!-- ============================================================
+     NAVIGATION — keep this script as-is. Slides and chapter items
+     are matched by DOM order; .chapter-item count must equal .slide count.
+     ============================================================ -->
+<script>
+const slides = document.querySelectorAll('.slide');
+const chapterItems = document.querySelectorAll('.chapter-item');
+const counter = document.getElementById('counter');
+let current = 0;
+
+function updateUI() {
+  slides.forEach((s, i) => s.classList.toggle('active', i === current));
+  chapterItems.forEach((c, i) => {
+    const isActive = i === current;
+    c.classList.toggle('active', isActive);
+    if (isActive) c.setAttribute('aria-current', 'true');
+    else c.removeAttribute('aria-current');
+  });
+  counter.textContent = (current + 1) + ' / ' + slides.length;
+}
+
+function goTo(n) {
+  current = Math.max(0, Math.min(slides.length - 1, n));
+  updateUI();
+}
+
+function nextSlide() { goTo(current + 1); }
+function prevSlide() { goTo(current - 1); }
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSlide();
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   prevSlide();
+});
+
+updateUI();
+</script>
+</body>
+</html>
