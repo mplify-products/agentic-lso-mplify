@@ -2,7 +2,7 @@
 
 ## Document purpose
 
-This narrative is the planning document for an HTML slide deck (built per `mplify-presentation-context.md`) that introduces Mplify member SMEs to the current state of work on the **Agentic LSO Reference Architecture** and the associated **Agentic LSO Blueprints**.
+This narrative is the planning document for an HTML slide deck (built per `CLAUDE.md`) that introduces Mplify member SMEs to the current state of work on the **Agentic LSO Reference Architecture** and the associated **Agentic LSO Blueprints**.
 
 It is not the slide copy. It is the editorial brief: for each slide it states the **audience takeaway**, the **layout pattern** (mapped to a section of the Mplify design guide), the **content points** the slide must make, and any **discussion prompts** intended for the SME audience.
 
@@ -33,7 +33,7 @@ Practical consequences for the build:
 ## Audience and framing
 
 - **Audience:** Mplify member subject matter experts — people who already know LSO, MEF/Mplify standards, and the LSO API programme. They do not need to be sold on the value of standards work; they need to be brought up to speed on current thinking and invited into the open decisions.
-- **Tone:** Direct, progress-reporting cadence. *"We are progressing X. The current draft proposes Y. Question Z is open for member input."* Match the Mplify voice in `mplify-presentation-context.md` §7.
+- **Tone:** Direct, progress-reporting cadence. *"We are progressing X. The current draft proposes Y. Question Z is open for member input."* Match the Mplify voice in `CLAUDE.md` §7.
 - **Outcome:** SMEs leave understanding (a) what Agentic LSO is in its current working form, (b) what the Reference Architecture and Blueprints are and how they relate, (c) which design directions the committee is leaning toward, (d) the specific questions where SME input is wanted, and (e) how to engage with the next phase (use cases, pilots, certification).
 
 ---
@@ -210,7 +210,7 @@ Slides 12 and 13 close the loop with an audience that is being asked to engage, 
 
 - **Title:** Use cases — where to focus first
 - **Eyebrow:** `WHAT NEXT · CANDIDATE LIST`
-- **Layout:** §3.3 `card-grid-3` with `num-card` styling, alternating orange and blue top borders (orange for 1–3, blue for 4–6 per the colour assignment rule in `mplify-presentation-context.md` §1).
+- **Layout:** §3.3 `card-grid-3` with `num-card` styling, alternating orange and blue top borders (orange for 1–3, blue for 4–6 per the colour assignment rule in `CLAUDE.md` §1).
 - **Audience takeaway:** A candidate shortlist of use cases for the first Agentic LSO pilots, with brief rationale. The list is open — SMEs are asked to weigh in on prioritisation and additions.
 - **Content points** *(candidate list, for member discussion):*
   1. **Quote-to-Order for Carrier Ethernet** — the canonical LSO flow; well-understood, easy to compare against existing API behaviour.
@@ -254,7 +254,7 @@ Slides 12 and 13 close the loop with an audience that is being asked to engage, 
 
 ## Cross-cutting notes for the HTML build
 
-These notes apply across the deck and should be honoured in implementation. They mirror conventions from `mplify-presentation-context.md`.
+These notes apply across the deck and should be honoured in implementation. They mirror conventions from `CLAUDE.md`.
 
 - **In-progress signalling.** Title slide carries `MPLIFY · WORK IN PROGRESS` in the eyebrow. Most other slides carry an "· IN PROGRESS", "· OPEN QUESTION", "· CURRENT DRAFT", or "· CANDIDATE LIST" suffix on their eyebrow. The signal should be consistent and unmissable without dominating the visual hierarchy.
 - **Sidebar.** One `.chapter-item` per slide, 13 entries. Numbers `01`–`13`. The sidebar is the only navigation surface — no right-hand TOC on the title slide (§3.1 of the design guide).
