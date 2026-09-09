@@ -779,22 +779,30 @@ table.prog tbody tr.dim td { color: #7A7A88; }
    Hover holds while the pointer is on the panel because .dz stays a DOM
    descendant of the band it came from.
 
-   Three ways in. The pointer (:hover) and the keyboard (:focus-within)
-   were here first; .zoomed is the third, set by the stepping script at
-   the foot of the file so a presentation clicker - which can send nothing
-   but Left and Right - can open each diagram in turn.
+   Three ways in: the pointer (:hover), the keyboard (:focus-within), and
+   .zoomed, set by the stepping script at the foot of the file so a
+   presentation clicker - which can send nothing but Left and Right - can
+   open each diagram in turn.
 
-   While the clicker is stepping a slide, that slide carries .stepping and
-   the pointer and focus triggers stand down. Without that, a mouse left
-   resting anywhere over the grid opens a second fixed panel on top of the
-   one the presenter meant to show, which on a projector is a mess. */
+   Two guards keep those three from fighting each other:
+
+   body.pointer-idle - the arrows have driven more recently than the mouse
+   has moved. On a podium the mouse is usually one nobody is touching, and
+   a cursor parked over a tile would otherwise hold that tile open, or
+   re-open it the instant the arrows closed something else. Moving the
+   mouse a little clears it and hover works again immediately. It gates
+   :hover only; :focus-within is a keyboard trigger and is left alone.
+
+   .stepping - a diagram is currently open by arrow key. Hover stands down
+   until it closes, so the pointer cannot open a second fixed panel on top
+   of the one being presented. */
 :is(#slide-12,#slide-14,#slide-15) .uc-diagram { display: block; cursor: zoom-in; }
 :is(#slide-12,#slide-14,#slide-15) .uc-diagram:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
 :is(#slide-12,#slide-14,#slide-15) .dz-slot { position: relative; width: 100%; padding-top: 20%; }   /* 560 x 112 viewBox */
 :is(#slide-12,#slide-14,#slide-15) .dz { position: absolute; top: 0; right: 0; bottom: 0; left: 0; }
 :is(#slide-12,#slide-14,#slide-15) .dz svg { width: 100%; height: 100%; max-height: none; display: block; }
 
-:is(#slide-12,#slide-14,#slide-15):not(.stepping) .uc-diagram:hover .dz,
+body:not(.pointer-idle) :is(#slide-12,#slide-14,#slide-15):not(.stepping) .uc-diagram:hover .dz,
 :is(#slide-12,#slide-14,#slide-15):not(.stepping) .uc-diagram:focus-within .dz,
 :is(#slide-12,#slide-14,#slide-15) .uc-diagram.zoomed .dz {
   position: fixed; left: 324px; right: 44px; top: 50%; bottom: auto; height: auto;
@@ -805,15 +813,15 @@ table.prog tbody tr.dim td { color: #7A7A88; }
   animation: dz-in 0.16s ease-out;
 }
 /* the slot it left behind should not read as an empty box */
-:is(#slide-12,#slide-14,#slide-15):not(.stepping) .uc-diagram:hover,
+body:not(.pointer-idle) :is(#slide-12,#slide-14,#slide-15):not(.stepping) .uc-diagram:hover,
 :is(#slide-12,#slide-14,#slide-15):not(.stepping) .uc-diagram:focus-within,
 :is(#slide-12,#slide-14,#slide-15) .uc-diagram.zoomed { background: transparent; }
 
-:is(#slide-12,#slide-14,#slide-15):not(.stepping) .uc-diagram:hover .dz svg,
+body:not(.pointer-idle) :is(#slide-12,#slide-14,#slide-15):not(.stepping) .uc-diagram:hover .dz svg,
 :is(#slide-12,#slide-14,#slide-15):not(.stepping) .uc-diagram:focus-within .dz svg,
 :is(#slide-12,#slide-14,#slide-15) .uc-diagram.zoomed .dz svg { height: auto; }
 
-:is(#slide-12,#slide-14,#slide-15):not(.stepping) .uc-diagram:hover .dz::before,
+body:not(.pointer-idle) :is(#slide-12,#slide-14,#slide-15):not(.stepping) .uc-diagram:hover .dz::before,
 :is(#slide-12,#slide-14,#slide-15):not(.stepping) .uc-diagram:focus-within .dz::before,
 :is(#slide-12,#slide-14,#slide-15) .uc-diagram.zoomed .dz::before {
   content: attr(data-zoom); display: block;
@@ -2414,7 +2422,7 @@ function applyStop() {
   });
   const slide = slides[current];
   if (!slide) return;
-  if (stop > 0) slide.classList.add('stepping');
+  if (stop % 2 === 1) slide.classList.add('stepping');
   if (stop % 2 === 1) {
     const tile = tilesIn(slide)[(stop - 1) / 2];
     if (tile) tile.classList.add('zoomed');
@@ -2457,7 +2465,29 @@ function prevSlide() {
   else if (current > 0) goTo(current - 1, lastStop(current - 1));
 }
 
+/* ---- Whichever input moved last owns hover --------------------------------
+   A clicker is just a keyboard, so there is nothing about the device to
+   detect. What matters is which input moved last. The arrows take hover's
+   turn away; the pointer takes it back the moment it actually moves, by a
+   smidge - no timer, no delay.
+
+   This is what stops a mouse nobody is touching from holding a tile open,
+   or from re-opening one the instant the arrows closed something else.
+
+   A move only counts if the coordinates changed: browsers will dispatch a
+   mousemove at unchanged coordinates when content shifts under a
+   stationary cursor, which is precisely the case being guarded against. */
+let pointerAt = null;
+document.addEventListener('mousemove', e => {
+  if (pointerAt && e.clientX === pointerAt[0] && e.clientY === pointerAt[1]) return;
+  pointerAt = [e.clientX, e.clientY];
+  document.body.classList.remove('pointer-idle');
+}, { passive: true });
+
+const NAV_KEYS = ['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp', 'Home', 'End'];
+
 document.addEventListener('keydown', e => {
+  if (NAV_KEYS.indexOf(e.key) !== -1) document.body.classList.add('pointer-idle');
   if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSlide();
   if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   prevSlide();
   if (e.key === 'Home') goTo(0);

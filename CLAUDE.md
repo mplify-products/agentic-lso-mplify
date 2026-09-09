@@ -149,10 +149,13 @@ Returning to the full grid between diagrams is deliberate: the audience re-orien
 
 The script keeps a `stop` counter alongside `current`. Even stops show the plain slide; odd stop *k* opens diagram *(k−1)/2*. **DOM order is presentation order** — reorder the tiles in the markup and the walk reorders with them. No list of slide numbers exists in the script, and slides with no diagrams have a single stop and behave exactly as before.
 
-Two classes carry the state:
+Three classes carry the state:
 
 - `.zoomed` on a tile opens its panel, as a third trigger beside `:hover` and `:focus-within`.
-- `.stepping` on the slide, set whenever `stop > 0`, stands the pointer and focus triggers down. Without it a mouse left resting anywhere over the grid opens a second fixed panel on top of the one the presenter meant to show.
+- `.stepping` on the slide, set while a diagram is open by arrow key, stands hover and focus down so the pointer cannot open a second fixed panel on top of the one being presented.
+- `.pointer-idle` on `<body>`, set on any navigation keypress and cleared by the next real mouse movement. **Whichever input moved last owns hover.** A clicker is just a keyboard, so there is nothing about the device to detect — and on a podium the mouse is usually one nobody is touching. Without this, a cursor parked over a tile holds that tile open, or re-opens it the moment the arrows close something else. Nudging the mouse restores hover instantly; there is no timer.
+
+`.pointer-idle` gates `:hover` only. `:focus-within` is a keyboard trigger and is deliberately left ungated, so tabbing still works with the mouse untouched. A mousemove only counts if the coordinates changed — browsers dispatch one at unchanged coordinates when content shifts under a stationary cursor, which is precisely the case being guarded against.
 
 **The `#slide-N` scoping in those selectors is load-bearing.** The per-slide fill tuning further down the file sets things like `#slide-7 .dz svg { height: 100% }`, and an ID beats any number of classes — so the lightbox rules have to carry an ID too. Keep the `:is(#slide-A,#slide-B,#slide-C)` prefix and update the list when a deck's diagram slides move. The counter shows the position within a slide (`7 / 11 · 2 of 4`) while a diagram is open.
 
