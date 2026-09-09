@@ -771,25 +771,32 @@ table.prog tbody tr.dim td { color: #7A7A88; }
 .note-bar strong { color: var(--navy); font-weight: 600; }
 .note-bar.o { border-left-color: var(--orange); }
 
-/* =================== SLIDE 11 / 13 / 14 - HOVER TO ENLARGE ===================
+/* =================== SLIDES 12 / 14 / 15 - ENLARGE A DIAGRAM ===================
    The trigger is the diagram band alone, so reading a tile's text never
    fires it. Each diagram lives in a fixed-aspect slot, so lifting it out
    never reflows the tile; .dz then becomes a centred lightbox panel, and
    its huge box-shadow spread is the scrim - no extra element needed.
    Hover holds while the pointer is on the panel because .dz stays a DOM
-   descendant of the band it came from. */
-#slide-12 .uc-diagram, #slide-15 .uc-diagram, #slide-14 .uc-diagram { display: block; cursor: zoom-in; }
-#slide-12 .uc-diagram:focus-visible, #slide-15 .uc-diagram:focus-visible, #slide-14 .uc-diagram:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
-#slide-12 .dz-slot, #slide-15 .dz-slot, #slide-14 .dz-slot { position: relative; width: 100%; padding-top: 20%; }   /* 560 x 112 viewBox */
-#slide-12 .dz, #slide-15 .dz, #slide-14 .dz { position: absolute; top: 0; right: 0; bottom: 0; left: 0; }
-#slide-12 .dz svg, #slide-15 .dz svg, #slide-14 .dz svg { width: 100%; height: 100%; max-height: none; display: block; }
+   descendant of the band it came from.
 
-#slide-12 .uc-diagram:hover .dz,
-#slide-12 .uc-diagram:focus-within .dz,
-#slide-15 .uc-diagram:hover .dz,
-#slide-15 .uc-diagram:focus-within .dz,
-#slide-14 .uc-diagram:hover .dz,
-#slide-14 .uc-diagram:focus-within .dz {
+   Three ways in. The pointer (:hover) and the keyboard (:focus-within)
+   were here first; .zoomed is the third, set by the stepping script at
+   the foot of the file so a presentation clicker - which can send nothing
+   but Left and Right - can open each diagram in turn.
+
+   While the clicker is stepping a slide, that slide carries .stepping and
+   the pointer and focus triggers stand down. Without that, a mouse left
+   resting anywhere over the grid opens a second fixed panel on top of the
+   one the presenter meant to show, which on a projector is a mess. */
+:is(#slide-12,#slide-14,#slide-15) .uc-diagram { display: block; cursor: zoom-in; }
+:is(#slide-12,#slide-14,#slide-15) .uc-diagram:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+:is(#slide-12,#slide-14,#slide-15) .dz-slot { position: relative; width: 100%; padding-top: 20%; }   /* 560 x 112 viewBox */
+:is(#slide-12,#slide-14,#slide-15) .dz { position: absolute; top: 0; right: 0; bottom: 0; left: 0; }
+:is(#slide-12,#slide-14,#slide-15) .dz svg { width: 100%; height: 100%; max-height: none; display: block; }
+
+:is(#slide-12,#slide-14,#slide-15):not(.stepping) .uc-diagram:hover .dz,
+:is(#slide-12,#slide-14,#slide-15):not(.stepping) .uc-diagram:focus-within .dz,
+:is(#slide-12,#slide-14,#slide-15) .uc-diagram.zoomed .dz {
   position: fixed; left: 324px; right: 44px; top: 50%; bottom: auto; height: auto;
   transform: translateY(-50%); z-index: 200;
   background: var(--white); border: 1px solid #E8E9EB; border-radius: 14px;
@@ -798,24 +805,17 @@ table.prog tbody tr.dim td { color: #7A7A88; }
   animation: dz-in 0.16s ease-out;
 }
 /* the slot it left behind should not read as an empty box */
-#slide-12 .uc-diagram:hover,
-#slide-12 .uc-diagram:focus-within,
-#slide-15 .uc-diagram:hover,
-#slide-15 .uc-diagram:focus-within,
-#slide-14 .uc-diagram:hover,
-#slide-14 .uc-diagram:focus-within { background: transparent; }
-#slide-12 .uc-diagram:hover .dz svg,
-#slide-12 .uc-diagram:focus-within .dz svg,
-#slide-15 .uc-diagram:hover .dz svg,
-#slide-15 .uc-diagram:focus-within .dz svg,
-#slide-14 .uc-diagram:hover .dz svg,
-#slide-14 .uc-diagram:focus-within .dz svg { height: auto; }
-#slide-12 .uc-diagram:hover .dz::before,
-#slide-12 .uc-diagram:focus-within .dz::before,
-#slide-15 .uc-diagram:hover .dz::before,
-#slide-15 .uc-diagram:focus-within .dz::before,
-#slide-14 .uc-diagram:hover .dz::before,
-#slide-14 .uc-diagram:focus-within .dz::before {
+:is(#slide-12,#slide-14,#slide-15):not(.stepping) .uc-diagram:hover,
+:is(#slide-12,#slide-14,#slide-15):not(.stepping) .uc-diagram:focus-within,
+:is(#slide-12,#slide-14,#slide-15) .uc-diagram.zoomed { background: transparent; }
+
+:is(#slide-12,#slide-14,#slide-15):not(.stepping) .uc-diagram:hover .dz svg,
+:is(#slide-12,#slide-14,#slide-15):not(.stepping) .uc-diagram:focus-within .dz svg,
+:is(#slide-12,#slide-14,#slide-15) .uc-diagram.zoomed .dz svg { height: auto; }
+
+:is(#slide-12,#slide-14,#slide-15):not(.stepping) .uc-diagram:hover .dz::before,
+:is(#slide-12,#slide-14,#slide-15):not(.stepping) .uc-diagram:focus-within .dz::before,
+:is(#slide-12,#slide-14,#slide-15) .uc-diagram.zoomed .dz::before {
   content: attr(data-zoom); display: block;
   font-family: 'Sansation', sans-serif; font-size: 24px; font-weight: 700;
   color: var(--navy); margin-bottom: 16px;
@@ -824,13 +824,11 @@ table.prog tbody tr.dim td { color: #7A7A88; }
   from { opacity: 0; transform: translateY(-50%) scale(0.97); }
 }
 @media (prefers-reduced-motion: reduce) {
-  #slide-12 .uc-diagram:hover .dz,
-  #slide-12 .uc-diagram:focus-within .dz,
-  #slide-15 .uc-diagram:hover .dz,
-  #slide-15 .uc-diagram:focus-within .dz,
-  #slide-14 .uc-diagram:hover .dz,
-  #slide-14 .uc-diagram:focus-within .dz { animation: none; }
+  :is(#slide-12,#slide-14,#slide-15) .uc-diagram:hover .dz,
+  :is(#slide-12,#slide-14,#slide-15) .uc-diagram:focus-within .dz,
+  :is(#slide-12,#slide-14,#slide-15) .uc-diagram.zoomed .dz { animation: none; }
 }
+
 /* =================== PER-SLIDE FILL TUNING ===================
    The base scale above is set by the densest slides (3, 10, 12).
    Slides that carry less copy would otherwise show a band of dead
@@ -966,6 +964,74 @@ table.prog tbody tr.dim td { color: #7A7A88; }
 #slide-15 .uc-grid-2x3 { grid-template-columns: repeat(2, 1fr); grid-template-rows: 1fr auto 1fr 1fr; }
 #slide-15 .uc-split   { grid-column: 1 / -1; height: 5px; border-radius: 3px; background: var(--navy); margin: -4px 0; }
 #slide-12 .uc-text    { margin-bottom: 0; }
+/* =================== PRINT / PDF EXPORT ===================
+   On screen the deck is one 1920x1080 stage showing exactly one slide.
+   On paper every slide has to exist at once, in order, one per page, so
+   print mode dismantles the stage: the fit transform goes to 1, the
+   absolutely positioned slides become a plain vertical stack, and the
+   sidebar, arrows and counter - all screen furniture - are dropped.
+
+   The page is the stage, not the whole deck. 1920 less the 272px sidebar
+   is 1648; 1080 less the 8px gradient bar is 1072. Printing at exactly
+   that size means every slide reproduces as authored, with no reflow and
+   nothing re-tuned for paper. The gradient bar is redrawn per page as an
+   ::after strip so each page keeps the brand edge.
+
+   buildPrintPages() at the foot of the file wraps each slide in a page and
+   gives every zoomable diagram a page of its own - at tile size those
+   560x112 SVGs are unreadable in print. The wrappers are display:contents
+   on screen, so they are invisible to the live deck and nothing has to be
+   torn down after printing. */
+.print-page { display: contents; }
+.print-page.print-zoom { display: none; }
+
+@page { size: 17.16667in 11.25in; margin: 0; }   /* 1648 x 1080 px at 96dpi */
+
+@media print {
+  /* backgrounds and SVG fills are the deck, not decoration - keep them */
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+  html, body { width: auto; height: auto; overflow: visible; display: block; background: #FFF; }
+  #sidebar, #counter, .nav-arrow, .gradient-bar, .screen-only { display: none !important; }
+  #deck  { transform: none; width: auto; height: auto; display: block; overflow: visible; background: #FFF; }
+  #main  { display: block; overflow: visible; }
+  #stage { position: static; overflow: visible; }
+
+  .print-page {
+    display: block; position: relative;
+    width: 1648px; height: 1080px; overflow: hidden;
+    break-after: page; page-break-after: always; background: var(--white);
+  }
+  .print-page:last-child { break-after: auto; page-break-after: auto; }
+  .print-page::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 8px;
+    background: linear-gradient(to right, var(--orange), var(--blue), var(--yellow));
+  }
+  /* a slide on paper: the same box as on screen, no longer the only one */
+  .print-page > .slide { position: absolute; inset: 0 0 8px 0; display: flex !important; flex-direction: column; }
+
+  /* a diagram given a page to itself */
+  .print-page.print-zoom { display: flex; flex-direction: column; justify-content: center; padding: 90px 110px 98px; background: var(--light); }
+  .print-zoom-kicker {
+    font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600;
+    letter-spacing: 1.8px; text-transform: uppercase; color: var(--orange); margin-bottom: 14px;
+  }
+  .print-zoom-title {
+    font-family: 'Sansation', sans-serif; font-size: 42px; font-weight: 700;
+    color: var(--navy); margin-bottom: 44px; line-height: 1.15;
+  }
+  .print-zoom > svg { width: 100%; height: auto; display: block; }
+
+  /* nothing on paper should be caught mid-zoom */
+  .uc-diagram.zoomed .dz, .uc-diagram:hover .dz, .uc-diagram:focus-within .dz {
+    position: absolute !important; inset: 0 !important; transform: none !important;
+    box-shadow: none !important; border: 0 !important; padding: 0 !important;
+    background: none !important; animation: none !important; z-index: auto !important;
+  }
+  .uc-diagram.zoomed .dz::before, .uc-diagram:hover .dz::before, .uc-diagram:focus-within .dz::before { content: none !important; }
+  .uc-diagram.zoomed .dz svg, .uc-diagram:hover .dz svg, .uc-diagram:focus-within .dz svg { height: 100% !important; }
+}
+
 </style>
 </head>
 <body>
@@ -1536,7 +1602,7 @@ table.prog tbody tr.dim td { color: #7A7A88; }
 
     <!-- ========== SLIDE 12: WHAT ASSEMBLES FROM THE BRICKS ========== -->
     <div class="slide slide-light" id="slide-12">
-      <div class="slide-eyebrow">Adoption &middot; Deployment topologies<span style="color:var(--gray); font-weight:400; letter-spacing:1.4px; text-transform:none; margin-left:16px;">hover a diagram to enlarge it</span></div>
+      <div class="slide-eyebrow">Adoption &middot; Deployment topologies<span class="screen-only" style="color:var(--gray); font-weight:400; letter-spacing:1.4px; text-transform:none; margin-left:16px;">hover a diagram, or step them with the arrows</span></div>
       <div class="slide-title">Same bricks, <span>four different deployments</span></div>
       <div class="slide-lead" style="margin-bottom:18px;">
         Agent.Fergie.1 ships one L2 agent, eight MCP servers, skills, knowledge packs and a capability statement.
@@ -2316,10 +2382,44 @@ function fitDeck() {
 window.addEventListener('resize', fitDeck);
 fitDeck();
 
-const slides = document.querySelectorAll('.slide');
+const slides = Array.from(document.querySelectorAll('.slide'));
 const chapterItems = document.querySelectorAll('.chapter-item');
 const counter = document.getElementById('counter');
 let current = 0;
+
+/* ---- Stepping the diagrams with a clicker ----------------------------------
+   Slides 12, 14 and 15 carry .uc-diagram tiles whose 560x112 SVGs are far too
+   small to read from the room. On screen you enlarge one by hovering it, but
+   a presentation clicker cannot hover - it sends Left and Right and nothing
+   else. So on those slides the arrows walk the diagrams: the whole slide,
+   then one diagram enlarged, then the whole slide again, and on.
+
+   Returning to the full grid between diagrams is deliberate: the audience
+   re-orients on the 2x2 before each new detail.
+
+   A slide with N diagrams therefore has 2N+1 stops - even stops show the
+   slide, odd stops open diagram (stop-1)/2. DOM order is presentation
+   order, so re-ordering the tiles in the markup re-orders the walk, and no
+   list of slide numbers is kept anywhere. A slide with no diagrams has a
+   single stop and behaves exactly as it always did. */
+let stop = 0;
+
+function tilesIn(slide) { return slide ? Array.from(slide.querySelectorAll('.uc-diagram')) : []; }
+function lastStop(i)    { return tilesIn(slides[i]).length * 2; }
+
+function applyStop() {
+  slides.forEach(s => {
+    s.classList.remove('stepping');
+    tilesIn(s).forEach(t => t.classList.remove('zoomed'));
+  });
+  const slide = slides[current];
+  if (!slide) return;
+  if (stop > 0) slide.classList.add('stepping');
+  if (stop % 2 === 1) {
+    const tile = tilesIn(slide)[(stop - 1) / 2];
+    if (tile) tile.classList.add('zoomed');
+  }
+}
 
 function updateUI() {
   slides.forEach((s, i) => s.classList.toggle('active', i === current));
@@ -2333,17 +2433,29 @@ function updateUI() {
       c.removeAttribute('aria-current');
     }
   });
-  counter.textContent = (current + 1) + ' / ' + slides.length;
+  const tiles = tilesIn(slides[current]).length;
+  counter.textContent = (current + 1) + ' / ' + slides.length
+    + (stop % 2 === 1 ? '  \u00b7  ' + ((stop + 1) / 2) + ' of ' + tiles : '');
+  applyStop();
 }
 
-function goTo(n) {
+/* atStop lets prevSlide re-enter the previous slide at its final stop, so
+   walking backwards retraces the same path forwards took. */
+function goTo(n, atStop) {
   current = Math.max(0, Math.min(slides.length - 1, n));
+  stop = atStop === undefined ? 0 : Math.max(0, Math.min(lastStop(current), atStop));
   updateUI();
   if (history.replaceState) history.replaceState(null, '', '#' + (current + 1));
 }
 
-function nextSlide() { goTo(current + 1); }
-function prevSlide() { goTo(current - 1); }
+function nextSlide() {
+  if (stop < lastStop(current)) { stop++; updateUI(); }
+  else goTo(current + 1);
+}
+function prevSlide() {
+  if (stop > 0) { stop--; updateUI(); }
+  else if (current > 0) goTo(current - 1, lastStop(current - 1));
+}
 
 document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSlide();
@@ -2358,15 +2470,59 @@ document.addEventListener('keydown', e => {
   }
 });
 
+/* ---- Print / PDF -----------------------------------------------------------
+   Cmd+P and Save as PDF works from any browser; tools/export-pdf.sh drives
+   the same path through headless Chrome for a one-command export.
+
+   Both land here. Each slide is moved into a .print-page wrapper, and every
+   zoomable diagram gets a page of its own straight after the slide it came
+   from, carrying the same data-zoom caption the on-screen lightbox shows.
+   The wrappers are display:contents on screen, so the live deck neither
+   sees them nor needs them torn down afterwards.
+
+   Idempotent: printing twice does not build the pages twice. */
+let printBuilt = false;
+function buildPrintPages() {
+  if (printBuilt) return;
+  printBuilt = true;
+  slides.forEach((slide, i) => {
+    const page = document.createElement('div');
+    page.className = 'print-page';
+    slide.parentNode.insertBefore(page, slide);
+    page.appendChild(slide);
+
+    let after = page;
+    tilesIn(slide).forEach(tile => {
+      const dz = tile.querySelector('.dz');
+      const svg = dz && dz.querySelector('svg');
+      if (!svg) return;
+      const zoomPage = document.createElement('div');
+      zoomPage.className = 'print-page print-zoom';
+      const kicker = document.createElement('div');
+      kicker.className = 'print-zoom-kicker';
+      kicker.textContent = 'Slide ' + (i + 1);
+      const title = document.createElement('div');
+      title.className = 'print-zoom-title';
+      title.textContent = dz.getAttribute('data-zoom') || '';
+      zoomPage.appendChild(kicker);
+      zoomPage.appendChild(title);
+      zoomPage.appendChild(svg.cloneNode(true));
+      after.parentNode.insertBefore(zoomPage, after.nextSibling);
+      after = zoomPage;
+    });
+  });
+}
+window.addEventListener('beforeprint', buildPrintPages);
+if (/[?&]print\b/.test(location.search)) buildPrintPages();
+
 // Deep-link support: open the deck at #7 to land on slide 7.
 function slideFromHash() {
   const n = parseInt((location.hash || '').slice(1), 10);
   return (Number.isFinite(n) && n >= 1 && n <= slides.length) ? n - 1 : 0;
 }
-window.addEventListener('hashchange', () => { current = slideFromHash(); updateUI(); });
+window.addEventListener('hashchange', () => { goTo(slideFromHash()); });
 
-current = slideFromHash();
-updateUI();
+goTo(slideFromHash());
 </script>
 </body>
 </html>

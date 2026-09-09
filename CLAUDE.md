@@ -137,6 +137,25 @@ updateUI();
 
 `onclick="goTo(N)"` on each chapter item, and `onclick="nextSlide()/prevSlide()"` on the arrow buttons.
 
+Current decks extend this with three things, all still framework-free: `f` toggles fullscreen (where the 1920x1080 canvas lands 1:1 on a beamer), `#7` in the URL deep-links to slide 7, and `goTo`/`nextSlide`/`prevSlide` take the diagram stops described above into account.
+
+### Stepping diagrams with a clicker
+
+Slides that carry `.uc-diagram` tiles enlarge one on hover, into a fixed lightbox panel (see §3 and the ENLARGE A DIAGRAM block in the deck's `<style>`). A presentation clicker cannot hover — it sends Left and Right and nothing else — so on those slides the arrow keys walk the diagrams instead of leaving the slide:
+
+    slide  ->  diagram 1  ->  slide  ->  diagram 2  ->  slide  ->  ...  ->  next slide
+
+Returning to the full grid between diagrams is deliberate: the audience re-orients on the grid before each new detail. A slide with N diagrams therefore has **2N+1 stops** and takes 2N+1 presses to cross. Left arrow retraces the same path, and re-entering a slide backwards lands on its final stop.
+
+The script keeps a `stop` counter alongside `current`. Even stops show the plain slide; odd stop *k* opens diagram *(k−1)/2*. **DOM order is presentation order** — reorder the tiles in the markup and the walk reorders with them. No list of slide numbers exists in the script, and slides with no diagrams have a single stop and behave exactly as before.
+
+Two classes carry the state:
+
+- `.zoomed` on a tile opens its panel, as a third trigger beside `:hover` and `:focus-within`.
+- `.stepping` on the slide, set whenever `stop > 0`, stands the pointer and focus triggers down. Without it a mouse left resting anywhere over the grid opens a second fixed panel on top of the one the presenter meant to show.
+
+**The `#slide-N` scoping in those selectors is load-bearing.** The per-slide fill tuning further down the file sets things like `#slide-7 .dz svg { height: 100% }`, and an ID beats any number of classes — so the lightbox rules have to carry an ID too. Keep the `:is(#slide-A,#slide-B,#slide-C)` prefix and update the list when a deck's diagram slides move. The counter shows the position within a slide (`7 / 11 · 2 of 4`) while a diagram is open.
+
 ### Adding a slide (the two-place sync rule)
 
 Slides and sidebar items are matched by DOM order — the script's `querySelectorAll('.slide')` and `querySelectorAll('.chapter-item')` walk the document top to bottom and pair index-by-index. **Adding a slide therefore means editing two places, in the same order, with the same indexing:**
@@ -396,10 +415,30 @@ When building a new Mplify HTML presentation, work through this list:
 
 ---
 
+## 5.1 Exporting to PDF
+
+A deck prints to PDF with no tooling and no separate build. The print stylesheet lives in the deck itself (the PRINT / PDF EXPORT block in its `<style>`), so **Cmd+P → Save as PDF** in any browser and the scripted export below take the identical path and cannot drift apart.
+
+    tools/export-pdf.sh                     # index.html -> index.pdf
+    tools/export-pdf.sh path/to/deck.html   # -> path/to/deck.pdf
+
+The script drives headless Chrome; set `CHROME=` if it is installed somewhere unusual. It watches for the PDF to stop growing and then stops the browser, because headless Chrome frequently writes the file and declines to exit.
+
+What print mode does:
+
+- **Dismantles the stage.** The fit transform goes to 1, the absolutely positioned slides become a plain vertical stack, and the sidebar, counter and arrows are dropped as screen furniture. Anything else that is screen-only guidance — the "hover a diagram" hint, for instance — takes `.screen-only` and is dropped with them.
+- **Prints at stage size, not deck size.** 1920 less the 272px sidebar is 1648; 1080 less the 8px gradient bar is 1072. `@page { size: 17.16667in 11.25in }` is exactly 1648 x 1080 px at 96dpi, so every slide reproduces as authored with no reflow and nothing re-tuned for paper. The gradient bar is redrawn per page as an `::after` strip.
+- **Gives every zoomable diagram a page of its own,** straight after the slide it belongs to, captioned with the same `data-zoom` text the on-screen lightbox shows. At tile size those 560x112 SVGs are unreadable in print. An 11-slide deck with 13 diagrams comes out at 24 pages.
+- **Forces `print-color-adjust: exact`.** The backgrounds and SVG fills *are* the deck, not decoration.
+
+`buildPrintPages()` wraps each slide in a `.print-page`. The wrappers are `display: contents` on screen, so the live deck neither sees them nor needs them torn down after printing. It runs on `beforeprint`, and on load when the URL carries `?print=1` — headless Chrome does not reliably fire `beforeprint`, which is why the script appends that query.
+
+---
+
 ## 6. What this format is *not*
 
 - It is **not** Reveal.js. Don't import reveal.css or use `<section>` for slides. The standalone HTML format uses `<div class="slide">` with absolute positioning.
-- It is **not** for printable PDFs. The layout is designed for screen presentation at roughly 16:9.
+- It is **not** laid out for paper first. The design target is screen presentation at 16:9 — but a PDF is a supported output, see §5.1.
 - It is **not** meant to be edited collaboratively in real time. It's a deliverable artefact, built in one shot.
 - It does **not** use Tailwind, Bootstrap, or any utility framework. All styling is hand-written CSS in a single `<style>` block.
 
