@@ -778,18 +778,18 @@ table.prog tbody tr.dim td { color: #7A7A88; }
    its huge box-shadow spread is the scrim - no extra element needed.
    Hover holds while the pointer is on the panel because .dz stays a DOM
    descendant of the band it came from. */
-#slide-7 .uc-diagram, #slide-10 .uc-diagram, #slide-9 .uc-diagram { display: block; cursor: zoom-in; }
-#slide-7 .uc-diagram:focus-visible, #slide-10 .uc-diagram:focus-visible, #slide-9 .uc-diagram:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
-#slide-7 .dz-slot, #slide-10 .dz-slot, #slide-9 .dz-slot { position: relative; width: 100%; padding-top: 20%; }   /* 560 x 112 viewBox */
-#slide-7 .dz, #slide-10 .dz, #slide-9 .dz { position: absolute; top: 0; right: 0; bottom: 0; left: 0; }
-#slide-7 .dz svg, #slide-10 .dz svg, #slide-9 .dz svg { width: 100%; height: 100%; max-height: none; display: block; }
+#slide-12 .uc-diagram, #slide-15 .uc-diagram, #slide-14 .uc-diagram { display: block; cursor: zoom-in; }
+#slide-12 .uc-diagram:focus-visible, #slide-15 .uc-diagram:focus-visible, #slide-14 .uc-diagram:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+#slide-12 .dz-slot, #slide-15 .dz-slot, #slide-14 .dz-slot { position: relative; width: 100%; padding-top: 20%; }   /* 560 x 112 viewBox */
+#slide-12 .dz, #slide-15 .dz, #slide-14 .dz { position: absolute; top: 0; right: 0; bottom: 0; left: 0; }
+#slide-12 .dz svg, #slide-15 .dz svg, #slide-14 .dz svg { width: 100%; height: 100%; max-height: none; display: block; }
 
-#slide-7 .uc-diagram:hover .dz,
-#slide-7 .uc-diagram:focus-within .dz,
-#slide-10 .uc-diagram:hover .dz,
-#slide-10 .uc-diagram:focus-within .dz,
-#slide-9 .uc-diagram:hover .dz,
-#slide-9 .uc-diagram:focus-within .dz {
+#slide-12 .uc-diagram:hover .dz,
+#slide-12 .uc-diagram:focus-within .dz,
+#slide-15 .uc-diagram:hover .dz,
+#slide-15 .uc-diagram:focus-within .dz,
+#slide-14 .uc-diagram:hover .dz,
+#slide-14 .uc-diagram:focus-within .dz {
   position: fixed; left: 324px; right: 44px; top: 50%; bottom: auto; height: auto;
   transform: translateY(-50%); z-index: 200;
   background: var(--white); border: 1px solid #E8E9EB; border-radius: 14px;
@@ -798,24 +798,24 @@ table.prog tbody tr.dim td { color: #7A7A88; }
   animation: dz-in 0.16s ease-out;
 }
 /* the slot it left behind should not read as an empty box */
-#slide-7 .uc-diagram:hover,
-#slide-7 .uc-diagram:focus-within,
-#slide-10 .uc-diagram:hover,
-#slide-10 .uc-diagram:focus-within,
-#slide-9 .uc-diagram:hover,
-#slide-9 .uc-diagram:focus-within { background: transparent; }
-#slide-7 .uc-diagram:hover .dz svg,
-#slide-7 .uc-diagram:focus-within .dz svg,
-#slide-10 .uc-diagram:hover .dz svg,
-#slide-10 .uc-diagram:focus-within .dz svg,
-#slide-9 .uc-diagram:hover .dz svg,
-#slide-9 .uc-diagram:focus-within .dz svg { height: auto; }
-#slide-7 .uc-diagram:hover .dz::before,
-#slide-7 .uc-diagram:focus-within .dz::before,
-#slide-10 .uc-diagram:hover .dz::before,
-#slide-10 .uc-diagram:focus-within .dz::before,
-#slide-9 .uc-diagram:hover .dz::before,
-#slide-9 .uc-diagram:focus-within .dz::before {
+#slide-12 .uc-diagram:hover,
+#slide-12 .uc-diagram:focus-within,
+#slide-15 .uc-diagram:hover,
+#slide-15 .uc-diagram:focus-within,
+#slide-14 .uc-diagram:hover,
+#slide-14 .uc-diagram:focus-within { background: transparent; }
+#slide-12 .uc-diagram:hover .dz svg,
+#slide-12 .uc-diagram:focus-within .dz svg,
+#slide-15 .uc-diagram:hover .dz svg,
+#slide-15 .uc-diagram:focus-within .dz svg,
+#slide-14 .uc-diagram:hover .dz svg,
+#slide-14 .uc-diagram:focus-within .dz svg { height: auto; }
+#slide-12 .uc-diagram:hover .dz::before,
+#slide-12 .uc-diagram:focus-within .dz::before,
+#slide-15 .uc-diagram:hover .dz::before,
+#slide-15 .uc-diagram:focus-within .dz::before,
+#slide-14 .uc-diagram:hover .dz::before,
+#slide-14 .uc-diagram:focus-within .dz::before {
   content: attr(data-zoom); display: block;
   font-family: 'Sansation', sans-serif; font-size: 24px; font-weight: 700;
   color: var(--navy); margin-bottom: 16px;
@@ -824,129 +824,148 @@ table.prog tbody tr.dim td { color: #7A7A88; }
   from { opacity: 0; transform: translateY(-50%) scale(0.97); }
 }
 @media (prefers-reduced-motion: reduce) {
-  #slide-7 .uc-diagram:hover .dz,
-  #slide-7 .uc-diagram:focus-within .dz,
-  #slide-10 .uc-diagram:hover .dz,
-  #slide-10 .uc-diagram:focus-within .dz,
-  #slide-9 .uc-diagram:hover .dz,
-  #slide-9 .uc-diagram:focus-within .dz { animation: none; }
+  #slide-12 .uc-diagram:hover .dz,
+  #slide-12 .uc-diagram:focus-within .dz,
+  #slide-15 .uc-diagram:hover .dz,
+  #slide-15 .uc-diagram:focus-within .dz,
+  #slide-14 .uc-diagram:hover .dz,
+  #slide-14 .uc-diagram:focus-within .dz { animation: none; }
 }
 /* =================== PER-SLIDE FILL TUNING ===================
-   The base scale above is set by the densest slides (5, 7).
+   The base scale above is set by the densest slides (3, 10, 12).
    Slides that carry less copy would otherwise show a band of dead
    white at the foot of every card, so each one gets its own step up
    the same type scale, plus vertical centring where a little slack
    survives. Sizes only - no slide changes its structure here except
-   slide 4, whose 2x2 grid left one quadrant permanently empty. */
+   slide 9, whose 2x2 grid left one quadrant permanently empty. */
 
-/* --- 3: how far the Fergie artifacts reach --- */
+/* --- 3: the two release types. The pair used to hug the middle of the
+       slide, which left a void above and below; it now fills the stage
+       and each card centres its own copy. --- */
+#slide-3 .card-grid-2.hug { flex: 1 1 auto; margin: 0; }
+#slide-3 .card-orange-left,
+#slide-3 .card-blue-left { display: flex; flex-direction: column; justify-content: center; }
+#slide-3 .card-title  { font-size: 27px; }
+#slide-3 .card-text   { font-size: 22px; }
+#slide-3 .tick-list li { font-size: 22px; margin-bottom: 13px; }
+#slide-3 .mini-label  { font-size: 15px; }
+#slide-3 .card-callout { font-size: 20px; }
+
+/* --- 6: four packaging cards, two short and two dense --- */
+#slide-6 .card { display: flex; flex-direction: column; justify-content: center; }
+#slide-6 .card:nth-child(1) .card-text,
+#slide-6 .card:nth-child(2) .card-text { font-size: 22px; }
+#slide-6 .card:nth-child(1) .card-title,
+#slide-6 .card:nth-child(2) .card-title { font-size: 27px; }
+
+/* --- 8: how far the Fergie artifacts reach --- */
 /* Each merged cell of the source matrix is one run of identical versions, so
    the merge itself is the compatibility span: it gets the light fill, and the
    Fergie sub-column inside it the strong one. --a and --b are that
    sub-column's edges as a share of the merged width, set per cell. */
-#slide-3 table.matrix tbody th, #slide-3 table.matrix tbody td { height: 42px; }
-#slide-3 table.matrix td.band {
+#slide-8 table.matrix tbody th, #slide-8 table.matrix tbody td { height: 42px; }
+#slide-8 table.matrix td.band {
   background: linear-gradient(90deg,
     rgba(253,120,1,0.14) 0 var(--a),
     rgba(253,120,1,0.44) var(--a) var(--b),
     rgba(253,120,1,0.14) var(--b) 100%);
   color: var(--navy); font-weight: 600;
 }
-#slide-3 table.matrix td.band > span { position: relative; left: var(--m, 0); display: inline-block; }
-#slide-3 table.matrix td.band-one { background: rgba(253,120,1,0.44); color: var(--navy); font-weight: 700; }
-#slide-3 table.matrix th.rel.fg   { background: rgba(253,120,1,0.44); color: var(--navy); box-shadow: inset 0 -4px 0 var(--orange); }
-#slide-3 table.matrix th.api.bp   { box-shadow: inset 5px 0 0 var(--orange); font-weight: 700; }
+#slide-8 table.matrix td.band > span { position: relative; left: var(--m, 0); display: inline-block; }
+#slide-8 table.matrix td.band-one { background: rgba(253,120,1,0.44); color: var(--navy); font-weight: 700; }
+#slide-8 table.matrix th.rel.fg   { background: rgba(253,120,1,0.44); color: var(--navy); box-shadow: inset 0 -4px 0 var(--orange); }
+#slide-8 table.matrix th.api.bp   { box-shadow: inset 5px 0 0 var(--orange); font-weight: 700; }
 .legend-swatch.fg  { background: rgba(253,120,1,0.44); }
 .legend-swatch.fgl { background: rgba(253,120,1,0.14); }
 .legend-swatch.bp  { background: var(--navy); box-shadow: inset 5px 0 0 var(--orange); }
 
-/* --- 4: six short scope cards --- */
-#slide-4 .card { display: flex; flex-direction: column; }
-#slide-4 .card-title { font-size: 28px; }
-#slide-4 .card-text  { font-size: 24px; line-height: 1.5; }
-#slide-4 .mini-label { font-size: 15px; }
-#slide-4 .note-bar   { font-size: 19.5px; }
+/* --- 9: six short scope cards --- */
+#slide-9 .card { display: flex; flex-direction: column; }
+#slide-9 .card-title { font-size: 28px; }
+#slide-9 .card-text  { font-size: 24px; line-height: 1.5; }
+#slide-9 .mini-label { font-size: 15px; }
+#slide-9 .note-bar   { font-size: 19.5px; }
 
-/* --- 5: three tiles across, not a 2x2 with an empty corner --- */
-#slide-5 .card-grid-2x2 { grid-template-columns: repeat(3, 1fr); grid-template-rows: 1fr; }
+/* --- 10: three tiles across, not a 2x2 with an empty corner --- */
+#slide-10 .card-grid-2x2 { grid-template-columns: repeat(3, 1fr); grid-template-rows: 1fr; }
 
-#slide-5 .num-badge { font-size: 44px; }
-#slide-5 .card-title { font-size: 28px; }
-#slide-5 .tick-list li { font-size: 24px; margin-bottom: 15px; }
-#slide-5 .card-callout { font-size: 21px; }
+#slide-10 .num-badge { font-size: 44px; }
+#slide-10 .card-title { font-size: 28px; }
+#slide-10 .tick-list li { font-size: 24px; margin-bottom: 15px; }
+#slide-10 .card-callout { font-size: 21px; }
 
-/* --- 8: four onboarding steps, very little copy each --- */
-#slide-8 .flow-step   { padding: 40px 34px; }
-#slide-8 .flow-badge  { font-size: 15.5px; }
-#slide-8 .flow-number { font-size: 104px; margin-bottom: 18px; }
-#slide-8 .card-title  { font-size: 33px; margin-bottom: 18px; }
-#slide-8 .card-text   { font-size: 27px; line-height: 1.5; }
+/* --- 13: four onboarding steps, very little copy each --- */
+#slide-13 .flow-step   { padding: 40px 34px; }
+#slide-13 .flow-badge  { font-size: 15.5px; }
+#slide-13 .flow-number { font-size: 104px; margin-bottom: 18px; }
+#slide-13 .card-title  { font-size: 33px; margin-bottom: 18px; }
+#slide-13 .card-text   { font-size: 27px; line-height: 1.5; }
 
-/* --- 9: three placement options, each a diagram over three bullets --- */
+/* --- 14: three placement options, each a diagram over three bullets --- */
 /* two title lines reserved, so the three diagrams start on one line */
-#slide-9 .card-title    { font-size: 26px; margin-bottom: 12px; min-height: 63px; }
-#slide-9 .tick-list li  { font-size: 19px; margin-bottom: 10px; }
-#slide-9 .mini-label    { font-size: 14px; }
-#slide-9 .note-bar      { font-size: 18px; }
+#slide-14 .card-title    { font-size: 26px; margin-bottom: 12px; min-height: 63px; }
+#slide-14 .tick-list li  { font-size: 19px; margin-bottom: 10px; }
+#slide-14 .mini-label    { font-size: 14px; }
+#slide-14 .note-bar      { font-size: 18px; }
 /* a little tighter than the two-card version, to keep headroom under the
    longest option card if its copy is edited later */
-#slide-9 .card-blue-left,
-#slide-9 .card-orange-left,
-#slide-9 .card-purple-left { padding: 24px 26px; }
-#slide-9 .uc-diagram    { background: var(--light); border-radius: 8px;
+#slide-14 .card-blue-left,
+#slide-14 .card-orange-left,
+#slide-14 .card-purple-left { padding: 24px 26px; }
+#slide-14 .uc-diagram    { background: var(--light); border-radius: 8px;
                            padding: 4px 6px; margin: 14px 0 4px; }
-#slide-9 .dz-slot       { padding-top: 34.4%; }   /* 360 x 124 viewBox */
+#slide-14 .dz-slot       { padding-top: 34.4%; }   /* 360 x 124 viewBox */
 
-/* --- 11: three axes of evolution --- */
+/* --- 16: three axes of evolution --- */
 /* One isometric figure carries the slide: three arrows out of a single
    origin (Agent.Fergie.1), each with its own milestones, then one caption
    per axis in the matching colour. The figure takes all the height the
    captions leave, and the viewBox is drawn at 1540 x 660 so its units are
    very nearly slide pixels. */
-#slide-11 .axes-fig     { flex: 1; min-height: 0; display: flex; margin: 2px 0 20px; }
-#slide-11 .axes-fig svg { width: 100%; height: 100%; display: block; }
-#slide-11 .axis-legend  { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
-#slide-11 .axis-card    { background: var(--white); border: 1px solid #E8E9EB; border-radius: 10px;
+#slide-16 .axes-fig     { flex: 1; min-height: 0; display: flex; margin: 2px 0 20px; }
+#slide-16 .axes-fig svg { width: 100%; height: 100%; display: block; }
+#slide-16 .axis-legend  { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+#slide-16 .axis-card    { background: var(--white); border: 1px solid #E8E9EB; border-radius: 10px;
                           border-top: 4px solid var(--gray); padding: 18px 26px 20px; }
-#slide-11 .axis-card.ax-agent  { border-top-color: var(--orange); }
-#slide-11 .axis-card.ax-fergie { border-top-color: var(--blue); }
-#slide-11 .axis-card.ax-sdk    { border-top-color: var(--purple); }
-#slide-11 .axis-card .phase-label { font-size: 15.5px; }
-#slide-11 .axis-card .card-title  { font-size: 27px; margin-bottom: 6px; }
-#slide-11 .axis-card .card-text   { font-size: 20px; line-height: 1.45; }
+#slide-16 .axis-card.ax-agent  { border-top-color: var(--orange); }
+#slide-16 .axis-card.ax-fergie { border-top-color: var(--blue); }
+#slide-16 .axis-card.ax-sdk    { border-top-color: var(--purple); }
+#slide-16 .axis-card .phase-label { font-size: 15.5px; }
+#slide-16 .axis-card .card-title  { font-size: 27px; margin-bottom: 6px; }
+#slide-16 .axis-card .card-text   { font-size: 20px; line-height: 1.45; }
 
-/* --- 7: four deployment tiles, each a diagram plus body copy, between
+/* --- 12: four deployment tiles, each a diagram plus body copy, between
        a lead and a note bar - the tightest slide in the deck --- */
-#slide-7 .slide-lead { font-size: 20px; }
-#slide-7 .uc-name    { font-size: 22px; }
-#slide-7 .uc-text    { font-size: 17.5px; line-height: 1.45; }
-#slide-7 .note-bar   { font-size: 17.5px; padding: 14px 22px; margin-top: 16px; }
-#slide-7 .uc-card    { padding: 16px 22px !important; }
-#slide-7 .uc-head    { margin-bottom: 2px; }
-#slide-7 .uc-diagram { padding: 10px 12px !important; margin-bottom: 8px !important; }
+#slide-12 .slide-lead { font-size: 20px; }
+#slide-12 .uc-name    { font-size: 22px; }
+#slide-12 .uc-text    { font-size: 17.5px; line-height: 1.45; }
+#slide-12 .note-bar   { font-size: 17.5px; padding: 14px 22px; margin-top: 16px; }
+#slide-12 .uc-card    { padding: 16px 22px !important; }
+#slide-12 .uc-head    { margin-bottom: 2px; }
+#slide-12 .uc-diagram { padding: 10px 12px !important; margin-bottom: 8px !important; }
 
-/* --- 6: the four points beside the YAML panel --- */
-#slide-6 .arch-left        { gap: 24px; }
-#slide-6 .arch-point-text  { font-size: 21px; }
-#slide-6 .arch-point-marker { font-size: 21px; }
+/* --- 11: the four points beside the YAML panel --- */
+#slide-11 .arch-left        { gap: 24px; }
+#slide-11 .arch-point-text  { font-size: 21px; }
+#slide-11 .arch-point-marker { font-size: 21px; }
 
-/* --- 10: the diagram is the payload, so let it take the whole tile ---
+/* --- 15: the diagram is the payload, so let it take the whole tile ---
    Each slot drops its fixed aspect ratio and fills the card instead;
    the SVG keeps its own proportions through preserveAspectRatio. */
-#slide-10 .uc-diagram,
-#slide-7 .uc-diagram { background: transparent; display: flex; flex-direction: column; flex: 1; min-height: 0; }
-#slide-10 .uc-diagram { margin-bottom: 0; padding: 2px 0 !important; }
-#slide-7 .uc-diagram { padding: 0 !important; margin-bottom: 10px !important; }
-#slide-10 .dz-slot,
-#slide-7 .dz-slot    { padding-top: 0 !important; flex: 1; min-height: 0; }
-#slide-10 .dz svg,
-#slide-7 .dz svg     { width: 100%; height: 100%; }
-#slide-10 .uc-name    { margin-bottom: 8px; }
+#slide-15 .uc-diagram,
+#slide-12 .uc-diagram { background: transparent; display: flex; flex-direction: column; flex: 1; min-height: 0; }
+#slide-15 .uc-diagram { margin-bottom: 0; padding: 2px 0 !important; }
+#slide-12 .uc-diagram { padding: 0 !important; margin-bottom: 10px !important; }
+#slide-15 .dz-slot,
+#slide-12 .dz-slot    { padding-top: 0 !important; flex: 1; min-height: 0; }
+#slide-15 .dz svg,
+#slide-12 .dz svg     { width: 100%; height: 100%; }
+#slide-15 .uc-name    { margin-bottom: 8px; }
 /* Two columns, not three: these diagrams are wide and flat, so in a wider
    cell they stop being width-starved and grow into the height instead. */
-#slide-10 .uc-grid-2x3 { grid-template-columns: repeat(2, 1fr); grid-template-rows: 1fr auto 1fr 1fr; }
-#slide-10 .uc-split   { grid-column: 1 / -1; height: 5px; border-radius: 3px; background: var(--navy); margin: -4px 0; }
-#slide-7 .uc-text    { margin-bottom: 0; }
+#slide-15 .uc-grid-2x3 { grid-template-columns: repeat(2, 1fr); grid-template-rows: 1fr auto 1fr 1fr; }
+#slide-15 .uc-split   { grid-column: 1 / -1; height: 5px; border-radius: 3px; background: var(--navy); margin: -4px 0; }
+#slide-12 .uc-text    { margin-bottom: 0; }
 </style>
 </head>
 <body>
@@ -980,24 +999,31 @@ table.prog tbody tr.dim td { color: #7A7A88; }
 
   <div class="sidebar-group">Programme</div>
   <button class="chapter-item active" onclick="goTo(0)" data-slide="0" aria-current="true"><span class="chapter-number">01</span>Cover</button>
+  <button class="chapter-item" onclick="goTo(1)"  data-slide="1"><span class="chapter-number">02</span>Projects and roadmap</button>
+
+  <div class="sidebar-group">Release framework</div>
+  <button class="chapter-item" onclick="goTo(2)"  data-slide="2"><span class="chapter-number">03</span>GA and MR defined</button>
+  <button class="chapter-item" onclick="goTo(3)"  data-slide="3"><span class="chapter-number">04</span>A GA on the matrix</button>
+  <button class="chapter-item" onclick="goTo(4)"  data-slide="4"><span class="chapter-number">05</span>After the MR</button>
+  <button class="chapter-item" onclick="goTo(5)"  data-slide="5"><span class="chapter-number">06</span>Packaging and URNs</button>
 
   <div class="sidebar-group">Blueprint release</div>
-  <button class="chapter-item" onclick="goTo(1)"  data-slide="1"><span class="chapter-number">02</span>Agent.Fergie.1</button>
-  <button class="chapter-item" onclick="goTo(2)"  data-slide="2"><span class="chapter-number">03</span>Release compatibility</button>
-  <button class="chapter-item" onclick="goTo(3)"  data-slide="3"><span class="chapter-number">04</span>What is in the release</button>
-  <button class="chapter-item" onclick="goTo(4)"  data-slide="4"><span class="chapter-number">05</span>Progress since Lisbon</button>
-  <button class="chapter-item" onclick="goTo(5)"  data-slide="5"><span class="chapter-number">06</span>Capability Statement</button>
+  <button class="chapter-item" onclick="goTo(6)"  data-slide="6"><span class="chapter-number">07</span>Agent.Fergie.1</button>
+  <button class="chapter-item" onclick="goTo(7)"  data-slide="7"><span class="chapter-number">08</span>Release compatibility</button>
+  <button class="chapter-item" onclick="goTo(8)"  data-slide="8"><span class="chapter-number">09</span>What is in the release</button>
+  <button class="chapter-item" onclick="goTo(9)"  data-slide="9"><span class="chapter-number">10</span>Progress since Lisbon</button>
+  <button class="chapter-item" onclick="goTo(10)" data-slide="10"><span class="chapter-number">11</span>Capability Statement</button>
 
   <div class="sidebar-group">Adoption</div>
-  <button class="chapter-item" onclick="goTo(6)"  data-slide="6"><span class="chapter-number">07</span>Four deployments</button>
-  <button class="chapter-item" onclick="goTo(7)"  data-slide="7"><span class="chapter-number">08</span>Easy onboarding</button>
-  <button class="chapter-item" onclick="goTo(8)"  data-slide="8"><span class="chapter-number">09</span>LSO to ASR mapping</button>
+  <button class="chapter-item" onclick="goTo(11)" data-slide="11"><span class="chapter-number">12</span>Four deployments</button>
+  <button class="chapter-item" onclick="goTo(12)" data-slide="12"><span class="chapter-number">13</span>Easy onboarding</button>
+  <button class="chapter-item" onclick="goTo(13)" data-slide="13"><span class="chapter-number">14</span>LSO to ASR mapping</button>
 
   <div class="sidebar-group">Coverage vs v2</div>
-  <button class="chapter-item" onclick="goTo(9)"  data-slide="9"><span class="chapter-number">10</span>Use case coverage</button>
+  <button class="chapter-item" onclick="goTo(14)" data-slide="14"><span class="chapter-number">15</span>Use case coverage</button>
 
   <div class="sidebar-group">Forward</div>
-  <button class="chapter-item" onclick="goTo(10)" data-slide="10"><span class="chapter-number">11</span>Blueprint roadmap</button>
+  <button class="chapter-item" onclick="goTo(15)" data-slide="15"><span class="chapter-number">16</span>Blueprint roadmap</button>
 </nav>
 
 <!-- ============================================================
@@ -1005,7 +1031,7 @@ table.prog tbody tr.dim td { color: #7A7A88; }
      ============================================================ -->
 <div id="main">
   <div id="stage">
-    <div id="counter" aria-live="polite" aria-atomic="true">1 / 11</div>
+    <div id="counter" aria-live="polite" aria-atomic="true">1 / 16</div>
     <button class="nav-arrow" id="prev" onclick="prevSlide()" aria-label="Previous slide">&#8592;</button>
     <button class="nav-arrow" id="next" onclick="nextSlide()" aria-label="Next slide">&#8594;</button>
 
@@ -1015,20 +1041,263 @@ table.prog tbody tr.dim td { color: #7A7A88; }
         <div class="eyebrow">Mplify &middot; Work in progress</div>
         <div class="title-main">Agentic LSO &mdash;<br>Blueprint &amp; Release Update</div>
         <div class="title-sub">
-          Where the Agentic LSO Blueprint and the Agent
-          Architecture stand today &mdash; </br> and the decisions still open to the membership.
+          Where the LSO SDK release framework, the Agentic LSO Blueprint and the v2 Agent
+          Reference Architecture stand today &mdash; and the decisions still open to the membership.
         </div>
         <div class="title-meta">
-          <div>Event<strong>Mplify Member Summit - Americas, Boston</strong></div>
-          <div>Date<strong>September 24, 2026</strong></div>
+          <div>Event<strong>Mplify Member Workdays, Boston</strong></div>
+          <div>Date<strong>September 21-24, 2026</strong></div>
           <div>Presented by<strong>Micha&#322; &#321;&#261;czy&#324;ski, Amartus</strong></div>
         </div>
         <div class="cover-flag">Work in progress &middot; For member review</div>
       </div>
     </div>
 
-    <!-- ========== SLIDE 2: BLUEPRINT RELEASE ANNOUNCEMENT ========== -->
-    <div class="slide" id="slide-2">
+    <!-- ========== SLIDE 2: LSO PROJECTS AND ROADMAP ========== -->
+    <div class="slide slide-light" id="slide-2">
+      <div class="slide-eyebrow">Programme status &middot; In progress</div>
+      <div class="slide-title">LSO projects &mdash; what is <span>landing in 2026</span></div>
+      <div class="slide-lead">
+        The API suite is mature. Almost every deliverable on the 2026 board is a
+        <strong>Product Attribute set, a Product Schema or a Developer Guide</strong> &mdash; not an API revision.
+        That is the change the new release framework has to absorb.
+      </div>
+      <div class="arch-figure" style="flex:1; min-height:0;">
+        <img src="Roadmap.png" alt="LSO project roadmap: deliverables, standard type, Mplify document number, project status and 2026 sprint calendar, with Kylie, Lisbon and Boston milestones marked.">
+        <div class="arch-caption">LSO project board, sprints 2026 &mdash; working view, subject to change</div>
+      </div>
+      <div class="ann-row">
+        <div class="ann o"><strong>Done</strong>MCP Toolchain Requirements Phase&nbsp;1 &middot; Internet Access 139.1 &middot; Common Product Attributes (184) &middot; Cross Connect (176, 189) &middot; Cyber Security Alert Notifications (177).</div>
+        <div class="ann"><strong>In progress</strong>Google Cloud Interconnect (179, 188) &middot; Carrier Ethernet (183, 190) &middot; SD-WAN (178, 191) &middot; SAI/CPE &middot; Wavelength L0 and L1 attributes.</div>
+        <div class="ann" style="border-left-color:var(--gray)"><strong>Paused or proposed</strong>Product Order API revision (57.3 in progress, 123.2 not planned) &middot; Product Inventory API revision (81.1, 116.2) &middot; CSA Notification Service is a new proposal.</div>
+      </div>
+    </div>
+
+    <!-- ========== SLIDE 3: GA AND MARKETING RELEASES ========== -->
+    <div class="slide slide-light" id="slide-3">
+      <div class="slide-eyebrow">Release framework &middot; Working draft</div>
+      <div class="slide-title">Two release types replace the <span>fixed six-month cadence</span></div>
+      <div class="slide-lead">
+        Historically: two releases a year at fixed intervals &mdash; predictable while many APIs moved in parallel.
+        With the API suite stable, that cadence now produces <em>empty releases</em>. The draft framework separates
+        <strong>availability</strong> from <strong>narrative</strong>.
+      </div>
+      <div class="card-grid-2 hug">
+        <div class="card-orange-left">
+          <div class="mini-label warn">Type 1</div>
+          <div class="card-title">LSO General Availability Release &mdash; GA</div>
+          <div class="card-text">An LSO SDK that accumulates one or more new or modified APIs or Payloads since the last Marketing Release.</div>
+          <ul class="tick-list orange">
+            <li><strong>Triggered by change</strong>, not by calendar &mdash; timing chosen jointly by the membership and staff.</li>
+            <li><strong>Named</strong> by appending <code>-GA</code> to the next MR name &mdash; <code>Lana-GA</code>.</li>
+            <li><strong>Contains</strong> new and modified assets <em>plus</em> everything unmodified from the previous MR.</li>
+            <li>Each further API or Payload published is <strong>added to the same GA</strong>.</li>
+            <li><strong>Never two versions</strong> of one asset in a GA. A bugfix is allowed; a new feature version is not.</li>
+            <li>Only assets that have <strong>passed the Publish Ballot</strong> can enter a GA.</li>
+          </ul>
+        </div>
+        <div class="card-blue-left">
+          <div class="mini-label">Type 2</div>
+          <div class="card-title">LSO Marketing Release &mdash; MR</div>
+          <div class="card-text">Triggered by a decision jointly made by the LSO and Marketing Committees and Mplify staff, on the understanding that there is a theme or narrative that differentiates it from the previous MR.</div>
+          <ul class="tick-list">
+            <li><strong>Only published Mplify Standards</strong> can be included.</li>
+            <li>All content of the GA is <strong>included in the next MR</strong>.</li>
+            <li>After an MR is published, <strong>its GA version is removed</strong>.</li>
+            <li>The MR carries the public story: announcement, roadmaps, API Catalog, full README.</li>
+          </ul>
+          <div class="card-callout">Cadence follows content, not the calendar.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SLIDE 4: GA ON THE COMPATIBILITY MATRIX (Figure 1) ==========
+         Redrawn from "Figure 1 — Example of General Availability (LSO Lana-GA) on the
+         release compatibility diagram". All 15 API rows, 12 release columns, every
+         version value and every cell merge are reproduced from the source figure.
+         ============================================== -->
+    <div class="slide" id="slide-4">
+      <div class="slide-eyebrow">Release framework &middot; Worked example</div>
+      <div class="slide-title">A GA on the compatibility matrix &mdash; <span>LSO Lana-GA</span></div>
+      <div class="matrix-wrap">
+        <table class="matrix">
+          <caption class="sr-only">LSO release compatibility matrix showing the Lana-GA general availability release</caption>
+          <thead>
+            <tr>
+              <th class="corner" rowspan="2">LSO APIs</th>
+              <th class="banner" colspan="12">LSO API Releases</th>
+            </tr>
+            <tr>
+              <th class="rel">Aretha</th><th class="rel">Billie</th><th class="rel">Celine</th><th class="rel">Dolly</th>
+              <th class="rel">Ella</th><th class="rel">Fergie</th><th class="rel">Grace</th><th class="rel">Haley</th>
+              <th class="rel">Irene</th><th class="rel">Janis</th><th class="rel mr">Kylie</th><th class="rel ga">Lana-GA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th class="api">Geographic Address</th>
+              <td class="alt">v6.0.0-RC</td><td>v7.0.0-RC</td><td class="alt" colspan="6">v7.0.1</td><td>v8.0.0-RC</td><td class="alt" colspan="2">v8.0.0</td><td class="ga"></td></tr>
+            <tr><th class="api">Geographic Site</th>
+              <td class="alt">v6.0.0-RC</td><td>v7.0.0-RC</td><td class="alt" colspan="6">v7.0.1</td><td>v8.0.0-RC</td><td class="alt" colspan="2">v8.0.0</td><td class="ga"></td></tr>
+            <tr><th class="api">Product Offering Qualification</th>
+              <td class="alt">6.0.0-RC</td><td>7.0.0-RC</td><td class="alt" colspan="6">v7.0.1</td><td>v8.0.0-RC</td><td class="alt" colspan="2">v8.0.0</td><td class="ga"></td></tr>
+            <tr><th class="api">Quote</th>
+              <td class="alt">6.0.0-RC</td><td>7.0.0-RC</td><td>8.0.0</td><td class="alt" colspan="5">v8.0.1</td><td>v9.0.0-RC</td><td class="alt" colspan="2">v10.0.0</td><td class="ga">v11.0.0</td></tr>
+            <tr><th class="api">Product Order</th>
+              <td class="alt">v6.0.0-RC</td><td>v7.0.0-RC</td><td>v8.0.0-RC</td><td class="alt">v9.0.0-RC</td><td colspan="4">v10.0.0</td><td class="alt">v11.0.0-RC</td><td colspan="2">v11.0.1</td><td class="ga">v12.0.0</td></tr>
+            <tr><th class="api">Product Inventory</th>
+              <td class="alt">v6.0.0-RC</td><td>v7.0.0-RC</td><td class="alt">v7.0.1</td><td colspan="5">v7.0.2</td><td class="alt">v8.0.0-RC</td><td colspan="2">v8.0.0</td><td class="ga">v9.0.0</td></tr>
+            <tr><th class="api">Trouble Ticket</th>
+              <td class="hatch"></td><td class="alt">v1.0.0-RC</td><td>v2.0.0-RC</td><td class="alt">v3.0.0-RC</td><td colspan="4">v4.0.0</td><td class="alt">v5.0.0-RC</td><td colspan="2">v5.0.0</td><td class="ga"></td></tr>
+            <tr><th class="api">Appointment</th>
+              <td class="hatch" colspan="3"></td><td class="alt">v1.0.0-RC</td><td colspan="4">v2.0.0</td><td class="alt">v3.0.0-RC</td><td colspan="2">v3.0.1</td><td class="ga"></td></tr>
+            <tr><th class="api">Work Order</th>
+              <td class="hatch" colspan="3"></td><td class="alt">v1.0.0-RC</td><td colspan="4">v2.0.0</td><td class="alt">v3.0.0-RC</td><td colspan="2">v3.0.0</td><td class="ga"></td></tr>
+            <tr><th class="api">Billing</th>
+              <td class="hatch" colspan="4"></td><td class="alt">v1.0.0-RC</td><td colspan="3">v2.0.0</td><td class="alt">v3.0.0-RC</td><td colspan="2">v3.0.1</td><td class="ga"></td></tr>
+            <tr><th class="api">Product Catalog</th>
+              <td class="hatch" colspan="5"></td><td class="alt">v1.0.0-RC</td><td colspan="2">v2.0.0-RC</td><td class="alt">v3.0.0-RC</td><td colspan="2">v4.0.1</td><td class="ga"></td></tr>
+            <tr><th class="api">Product Offering Availability</th>
+              <td class="hatch" colspan="5" rowspan="2"></td><td class="alt" rowspan="2">v1.0.0-RC</td><td rowspan="2">v2.0.0-RC</td><td class="alt" rowspan="2">v3.0.0-RC</td><td rowspan="2">v4.0.0-RC</td><td class="alt" colspan="2" rowspan="2">v4.0.0</td><td class="ga" rowspan="2"></td></tr>
+            <tr><th class="api">Pricing Discovery</th></tr>
+            <tr><th class="api">Circuit Impairment &amp; Maintenance</th>
+              <td class="hatch" colspan="9"></td><td class="alt">v1.0.0-RC</td><td>v1.0.0</td><td class="ga"></td></tr>
+            <tr><th class="api">Cyber Security Alerts</th>
+              <td class="hatch" colspan="11"></td><td class="ga">v1.0.0</td></tr>
+          </tbody>
+        </table>
+        <div class="matrix-legend">
+          <div class="legend-key"><span class="legend-swatch val"></span>Published version</div>
+          <div class="legend-key"><span class="legend-swatch hatch"></span>API did not exist in that release</div>
+          <div class="legend-key"><span class="legend-swatch mr"></span>Last Marketing Release (Kylie, Feb 2026)</div>
+          <div class="legend-key"><span class="legend-swatch ga"></span>Open GA column &mdash; blank means carried forward unchanged</div>
+        </div>
+      </div>
+      <div class="ann-row">
+        <div class="ann o"><strong>The GA accumulates</strong>Quote v11.0.0, Product Order v12.0.0, Product Inventory v9.0.0 and the first Cyber Security Alerts v1.0.0 are available <em>now</em>, in one release, without waiting for the Lana MR.</div>
+        <div class="ann"><strong>Blank does not mean missing</strong>Geographic Address, Trouble Ticket, Appointment and the rest are not re-cut. Lana-GA carries them forward at their Kylie versions.</div>
+        <div class="ann"><strong>One version per asset</strong>Lana-GA may take a bugfix to Quote v11.0.0, but not a v11.1.0 &mdash; so the mapping from asset version to Marketing Release stays unambiguous.</div>
+      </div>
+    </div>
+
+    <!-- ========== SLIDE 5: AFTER THE MARKETING RELEASE (Figure 2) ==========
+         Redrawn from "Figure 2 — Example of Release Compatibility Diagram after the
+         LSO Lana Marketing Release". 15 API rows, 13 release columns.
+         ============================================== -->
+    <div class="slide" id="slide-5">
+      <div class="slide-eyebrow">Release framework &middot; Worked example</div>
+      <div class="slide-title">&hellip;and after the <span>Lana Marketing Release</span></div>
+      <div class="matrix-wrap">
+        <table class="matrix">
+          <thead>
+            <tr>
+              <th class="corner" rowspan="2">LSO APIs</th>
+              <th class="banner" colspan="13">LSO API Releases</th>
+            </tr>
+            <tr>
+              <th class="rel">Aretha</th><th class="rel">Billie</th><th class="rel">Celine</th><th class="rel">Dolly</th>
+              <th class="rel">Ella</th><th class="rel">Fergie</th><th class="rel">Grace</th><th class="rel">Haley</th>
+              <th class="rel">Irene</th><th class="rel">Janis</th><th class="rel">Kylie</th><th class="rel mr">Lana</th><th class="rel ga">Minnie-GA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th class="api">Geographic Address</th>
+              <td class="alt">v6.0.0-RC</td><td>v7.0.0-RC</td><td class="alt" colspan="6">v7.0.1</td><td>v8.0.0-RC</td><td class="alt" colspan="3">v8.0.0</td><td class="ga"></td></tr>
+            <tr><th class="api">Geographic Site</th>
+              <td class="alt">v6.0.0-RC</td><td>v7.0.0-RC</td><td class="alt" colspan="6">v7.0.1</td><td>v8.0.0-RC</td><td class="alt" colspan="3">v8.0.0</td><td class="ga"></td></tr>
+            <tr><th class="api">Product Offering Qualification</th>
+              <td class="alt">6.0.0-RC</td><td>7.0.0-RC</td><td class="alt" colspan="6">v7.0.1</td><td>v8.0.0-RC</td><td class="alt" colspan="3">v8.0.0</td><td class="ga"></td></tr>
+            <tr><th class="api">Quote</th>
+              <td class="alt">6.0.0-RC</td><td>7.0.0-RC</td><td>8.0.0</td><td class="alt" colspan="5">v8.0.1</td><td>v9.0.0-RC</td><td class="alt" colspan="2">v10.0.0</td><td>v11.0.0</td><td class="ga"></td></tr>
+            <tr><th class="api">Product Order</th>
+              <td class="alt">v6.0.0-RC</td><td>v7.0.0-RC</td><td>v8.0.0-RC</td><td class="alt">v9.0.0-RC</td><td colspan="4">v10.0.0</td><td class="alt">v11.0.0-RC</td><td colspan="2">v11.0.1</td><td class="alt">v12.0.0</td><td class="ga"></td></tr>
+            <tr><th class="api">Product Inventory</th>
+              <td class="alt">v6.0.0-RC</td><td>v7.0.0-RC</td><td class="alt">v7.0.1</td><td colspan="5">v7.0.2</td><td class="alt">v8.0.0-RC</td><td colspan="2">v8.0.0</td><td class="alt">v9.0.0</td><td class="ga"></td></tr>
+            <tr><th class="api">Trouble Ticket</th>
+              <td class="hatch"></td><td class="alt">v1.0.0-RC</td><td>v2.0.0-RC</td><td class="alt">v3.0.0-RC</td><td colspan="4">v4.0.0</td><td class="alt">v5.0.0-RC</td><td colspan="3">v5.0.0</td><td class="ga"></td></tr>
+            <tr><th class="api">Appointment</th>
+              <td class="hatch" colspan="3"></td><td class="alt">v1.0.0-RC</td><td colspan="4">v2.0.0</td><td class="alt">v3.0.0-RC</td><td colspan="3">v3.0.1</td><td class="ga"></td></tr>
+            <tr><th class="api">Work Order</th>
+              <td class="hatch" colspan="3"></td><td class="alt">v1.0.0-RC</td><td colspan="4">v2.0.0</td><td class="alt">v3.0.0-RC</td><td colspan="3">v3.0.0</td><td class="ga"></td></tr>
+            <tr><th class="api">Billing</th>
+              <td class="hatch" colspan="4"></td><td class="alt">v1.0.0-RC</td><td colspan="3">v2.0.0</td><td class="alt">v3.0.0-RC</td><td colspan="3">v3.0.1</td><td class="ga"></td></tr>
+            <tr><th class="api">Product Catalog</th>
+              <td class="hatch" colspan="5"></td><td class="alt">v1.0.0-RC</td><td colspan="2">v2.0.0-RC</td><td class="alt">v3.0.0-RC</td><td colspan="3">v4.0.1</td><td class="ga"></td></tr>
+            <tr><th class="api">Product Offering Availability</th>
+              <td class="hatch" colspan="5" rowspan="2"></td><td class="alt" rowspan="2">v1.0.0-RC</td><td rowspan="2">v2.0.0-RC</td><td class="alt" rowspan="2">v3.0.0-RC</td><td rowspan="2">v4.0.0-RC</td><td class="alt" colspan="3" rowspan="2">v4.0.0</td><td class="ga" rowspan="2"></td></tr>
+            <tr><th class="api">Pricing Discovery</th></tr>
+            <tr><th class="api">Circuit Impairment &amp; Maintenance</th>
+              <td class="hatch" colspan="9"></td><td class="alt">v1.0.0-RC</td><td colspan="2">v1.0.0</td><td class="ga"></td></tr>
+            <tr><th class="api">Cyber Security Alerts</th>
+              <td class="hatch" colspan="11"></td><td class="alt">v1.0.0</td><td class="ga"></td></tr>
+          </tbody>
+        </table>
+        <div class="matrix-legend">
+          <div class="legend-key"><span class="legend-swatch val"></span>Published version</div>
+          <div class="legend-key"><span class="legend-swatch hatch"></span>API did not exist in that release</div>
+          <div class="legend-key"><span class="legend-swatch mr"></span>Lana is now the Marketing Release</div>
+          <div class="legend-key"><span class="legend-swatch ga"></span>Minnie-GA &mdash; the next GA column, empty until the next Publish Ballot</div>
+        </div>
+      </div>
+      <div class="ann-row">
+        <div class="ann o"><strong>The GA is absorbed, then removed</strong>Everything that sat in Lana-GA is now in the Lana MR at the same versions &mdash; and Lana-GA itself no longer exists.</div>
+        <div class="ann"><strong>Unmodified assets extend</strong>Geographic Address stays v8.0.0, Product Catalog v4.0.1. The Lana column inherits them rather than re-versioning them.</div>
+        <div class="ann"><strong>A new GA column opens</strong>Minnie-GA starts empty and fills as each new asset passes its Publish Ballot &mdash; the cycle restarts with no fixed date attached.</div>
+      </div>
+    </div>
+
+    <!-- ========== SLIDE 6: RELEASE PACKAGING ========== -->
+    <div class="slide slide-light" id="slide-6">
+      <div class="slide-eyebrow">Release packaging &middot; Working draft</div>
+      <div class="slide-title">One package, <span>new URNs</span>, one repository</div>
+      <div class="slide-lead">
+        Up to and including <strong>LSO Kylie (February 2026)</strong>, each release was organised per Interface Reference Point &mdash;
+        six artifacts: Sonata, Cantata, Legato, Allegro, Interlude, Presto. In practice Cantata and Sonata were identical,
+        and so were Allegro and Interlude. After Kylie, that split goes away &mdash; for both GA and MR.
+      </div>
+      <div class="card-grid-2" style="grid-template-rows: 1fr 1fr;">
+        <div class="card">
+          <div class="mini-label warn">Packaging</div>
+          <div class="card-title">One LSO SDK Release package</div>
+          <div class="card-text">A single package that includes the assets from all IRPs. The MEF 55.1 product-layer / service-layer split still describes the architecture &mdash; it no longer shapes the download.</div>
+        </div>
+        <div class="card">
+          <div class="mini-label warn">API URLs</div>
+          <div class="card-title">The IRP name leaves the URL</div>
+          <div class="card-text">
+            <code class="inl">/mefApi/sonata/productOrderingManagement/v10/</code><br>
+            becomes<br>
+            <code class="inl">/mplifyApi/productOrderingManagement/v11/</code>
+          </div>
+          <div class="card-text" style="margin-top:8px;">API versions continue from those of LSO Sonata and LSO Legato &mdash; no renumbering.</div>
+        </div>
+        <div class="card">
+          <div class="mini-label">Schema URNs</div>
+          <div class="card-title">Product and Service URNs reframed</div>
+          <div class="card-text">
+            <code class="inl">urn:mef:lso:spec:cantata-sonata:internet-access:v1.0.0:all</code><br>
+            becomes<br>
+            <code class="inl">urn:mplify:lso:spec:product:internet-access:v2.0.0:all</code>
+          </div>
+          <ul class="tick-list">
+            <li><code>mef</code> &rarr; <code>mplify</code>; <code>sonata</code> and <code>cantata-sonata</code> &rarr; <code>product</code>; <code>legato</code> &rarr; <code>service</code>.</li>
+            <li>Applies <strong>only to new or updated artifacts</strong> &mdash; unmodified URNs stay exactly as they are.</li>
+            <li>URN versions continue per respective Product and Service.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="mini-label">Source control</div>
+          <div class="card-title">One new Git repository</div>
+          <ul class="tick-list">
+            <li>A single <strong>Mplify-private</strong> repository, open to <strong>Mplify members</strong>, for development of both GA and MR.</li>
+            <li>The existing public repositories <strong>remain available</strong> for history and reference of previous LSO SDK releases.</li>
+          </ul>
+          <div class="card-callout">Nothing is deleted &mdash; but new assets land in one place from now on.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SLIDE 7: BLUEPRINT RELEASE ANNOUNCEMENT ========== -->
+    <div class="slide" id="slide-7">
       <div class="slide-eyebrow">Agentic LSO Blueprint &middot; Release announcement</div>
       <div class="slide-title">The first Blueprint release has a name</div>
       <div class="announce">
@@ -1055,15 +1324,15 @@ table.prog tbody tr.dim td { color: #7A7A88; }
       </div>
     </div>
 
-    <!-- ========== SLIDE 3: HOW FAR THE FERGIE ARTIFACTS REACH ==========
-         The compatibility matrix, minus the Lana-GA column. Every merged cell in
+    <!-- ========== SLIDE 8: HOW FAR THE FERGIE ARTIFACTS REACH ==========
+         The slide 4 matrix, minus the Lana-GA column. Every merged cell in
          the source figure is exactly one run of identical versions, so a
          merge IS the compatibility span: the eight APIs the Blueprint uses
          carry the Fergie version across the whole merge. The merge is
          painted light, the Fergie sub-column inside it strong (--a / --b
          are the sub-column's edges as a share of the merged width).
          ================================================================ -->
-    <div class="slide" id="slide-3">
+    <div class="slide" id="slide-8">
       <div class="slide-eyebrow">Agent.Fergie.1 &middot; Release compatibility</div>
       <div class="slide-title">The artifacts reach wider than <span>one release</span></div>
       <div class="matrix-wrap">
@@ -1124,8 +1393,8 @@ table.prog tbody tr.dim td { color: #7A7A88; }
       </div>
     </div>
 
-    <!-- ========== SLIDE 4: RELEASE SCOPE IN TEXT ========== -->
-    <div class="slide slide-light" id="slide-4">
+    <!-- ========== SLIDE 9: RELEASE SCOPE IN TEXT ========== -->
+    <div class="slide slide-light" id="slide-9">
       <div class="slide-eyebrow">Agentic LSO Blueprint &middot; Scope</div>
       <div class="slide-title">What is inside <span>Agent.Fergie.1</span></div>
       <div class="card-grid-3" style="grid-template-rows: 1fr 1fr; flex:1;">
@@ -1167,8 +1436,8 @@ table.prog tbody tr.dim td { color: #7A7A88; }
       </div>
     </div>
 
-    <!-- ========== SLIDE 5: PROGRESS SINCE LISBON ========== -->
-    <div class="slide slide-light" id="slide-5">
+    <!-- ========== SLIDE 10: PROGRESS SINCE LISBON ========== -->
+    <div class="slide slide-light" id="slide-10">
       <div class="slide-eyebrow">Since Lisbon &middot; In progress</div>
       <div class="slide-title">Major progress since <span>Lisbon</span></div>
       <div class="card-grid-2x2">
@@ -1207,8 +1476,8 @@ table.prog tbody tr.dim td { color: #7A7A88; }
       </div>
     </div>
 
-    <!-- ========== SLIDE 6: CAPABILITY STATEMENT ========== -->
-    <div class="slide slide-light" id="slide-6">
+    <!-- ========== SLIDE 11: CAPABILITY STATEMENT ========== -->
+    <div class="slide slide-light" id="slide-11">
       <div class="slide-eyebrow">Contract &middot; Beyond Architecture v2</div>
       <div class="slide-title">The <span>Seller Capability Statement</span></div>
       <div class="card-orange-left" style="display:flex; align-items:center; gap:34px; padding:20px 32px; margin-bottom:18px;">
@@ -1265,8 +1534,8 @@ table.prog tbody tr.dim td { color: #7A7A88; }
       </div>
     </div>
 
-    <!-- ========== SLIDE 7: WHAT ASSEMBLES FROM THE BRICKS ========== -->
-    <div class="slide slide-light" id="slide-7">
+    <!-- ========== SLIDE 12: WHAT ASSEMBLES FROM THE BRICKS ========== -->
+    <div class="slide slide-light" id="slide-12">
       <div class="slide-eyebrow">Adoption &middot; Deployment topologies<span style="color:var(--gray); font-weight:400; letter-spacing:1.4px; text-transform:none; margin-left:16px;">hover a diagram to enlarge it</span></div>
       <div class="slide-title">Same bricks, <span>four different deployments</span></div>
       <div class="slide-lead" style="margin-bottom:18px;">
@@ -1465,8 +1734,8 @@ table.prog tbody tr.dim td { color: #7A7A88; }
       </div>
     </div>
 
-    <!-- ========== SLIDE 8: ENTERPRISE ONBOARDING ========== -->
-    <div class="slide slide-light" id="slide-8">
+    <!-- ========== SLIDE 13: ENTERPRISE ONBOARDING ========== -->
+    <div class="slide slide-light" id="slide-13">
       <div class="slide-eyebrow">Use case &middot; Current draft</div>
       <div class="slide-title">Enterprise onboarding &mdash; <span>from zero to first order</span></div>
       <div class="slide-lead">
@@ -1506,13 +1775,13 @@ table.prog tbody tr.dim td { color: #7A7A88; }
       </div>
     </div>
 
-    <!-- ========== SLIDE 9: LSO TO ASR MAPPING ==========
+    <!-- ========== SLIDE 14: LSO TO ASR MAPPING ==========
          Three placements for the LSO/ASR mapping, one card each. All three
          diagrams share one convention on a 360 x 124 viewBox: Buyer zone with
          the L2 agent, an LSO MCP hop into the Seller zone, and an ASR hop into
          the BSS - so only the middle of the chain differs between options.
          ============================================== -->
-    <div class="slide slide-light" id="slide-9">
+    <div class="slide slide-light" id="slide-14">
       <div class="slide-eyebrow">Use case &middot; Open question</div>
       <div class="slide-title">LSO to <span>ASR</span> &mdash; where should the mapping live?</div>
       <div class="slide-lead">
@@ -1653,8 +1922,8 @@ table.prog tbody tr.dim td { color: #7A7A88; }
       </div>
     </div>
 
-    <!-- ========== SLIDE 10: UC COVERAGE — ALL SIX, 2x3 MATRIX ========== -->
-    <div class="slide slide-light" id="slide-10">
+    <!-- ========== SLIDE 15: UC COVERAGE — ALL SIX, 2x3 MATRIX ========== -->
+    <div class="slide slide-light" id="slide-15">
       <div class="slide-eyebrow">Blueprint vs Architecture v2</div>
       <div class="slide-title">Use case <span>coverage</span></div>
       <div class="uc-grid-2x3">
@@ -1910,14 +2179,14 @@ table.prog tbody tr.dim td { color: #7A7A88; }
       </div>
     </div>
 
-    <!-- ========== SLIDE 11: THREE AXES OF EVOLUTION ==========
+    <!-- ========== SLIDE 16: THREE AXES OF EVOLUTION ==========
          Agent.Fergie.1 sits at the origin of an isometric frame. Three
          independent directions lead out of it: the agent stack (vertical),
          API coverage inside the same release (horizontal) and the LSO SDK
          release train (the receding diagonal). Milestones are ticks on the
          axes; the three captions repeat the axis colours.
          ====================================================== -->
-    <div class="slide slide-light" id="slide-11">
+    <div class="slide slide-light" id="slide-16">
       <div class="slide-eyebrow">Blueprint roadmap &middot; Three axes of evolution</div>
       <div class="slide-title">What comes after <span>Agent.Fergie.1</span></div>
       <div class="slide-lead">
