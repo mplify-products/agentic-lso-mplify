@@ -47,18 +47,32 @@ Always orange → blue → yellow, left to right. This is a recognisable Mplify 
 
 ### Typography
 
-```html
-<link href="https://fonts.googleapis.com/css2?family=Sansation:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-```
-
 Two faces only:
 
-- **Sansation** (700) — display face. Use for: slide titles, card titles, numeric badges, big quotes, definition terms, layer names. This is the brand's voice.
-- **DM Sans** (300/400/500/600) — body face. Use for: body copy (`.card-text`), eyebrows, navigation, counter, badges, captions.
+- **Sansation** (400/700) — display face. Use for: slide titles, card titles, numeric badges, big quotes, definition terms, layer names. This is the brand's voice.
+- **Roboto** (400/500/600/700) — body face. Use for: body copy (`.card-text`), eyebrows, navigation, counter, badges, captions, and the `font-family` attribute on text inside inline SVG diagrams.
 
-`body { font-family: 'DM Sans', sans-serif; }` is the default. Override with `font-family: 'Sansation', sans-serif;` only on titular/display elements.
+`body { font-family: 'Roboto', sans-serif; }` is the default. Override with `font-family: 'Sansation', sans-serif;` only on titular/display elements.
 
-**Do not** introduce additional fonts (no Roboto, no Inter, no Helvetica fallbacks beyond `sans-serif`). The Mplify Reveal.js decks use Sansation/Roboto; the standalone HTML presentation format uses Sansation/DM Sans. Don't mix them up.
+**Do not** introduce further fonts (no Inter, no Helvetica fallbacks beyond `sans-serif`). Sansation/Roboto is now the pairing for both the Reveal.js decks and this standalone format — earlier revisions of this guide specified DM Sans here, which put the two formats out of step. Decks built before that change carry DM Sans; converting one means the CSS declarations *and* the `font-family` attributes inside every inline SVG.
+
+### Fonts are embedded, not linked
+
+The faces are carried inside each deck as base64 woff2 in a `<style id="brand-fonts">` block. There is no Google Fonts link and no network request of any kind. A deck is opened on whatever laptop is wired to the projector, on whatever network the venue has that morning, and Sansation is not a font most machines carry.
+
+Three rules follow from this, all of them learned by getting them wrong first. The full reasoning is in the comment at the head of that block; the short version:
+
+1. **Never link the faces.** Chrome's print-to-PDF embeds a subset of whatever it actually rendered with, so a linked face that loses the race to print yields a PDF silently set in fallback.
+2. **Never use a variable font.** Chrome renders one correctly on screen and then declines to embed it in the PDF at all, falling back to Helvetica on paper. Google Fonts serves Roboto as a variable file when several weights are requested at once and as a static instance when exactly one is — so fetch one weight per request.
+3. **Ship latin *and* latin-ext.** Mplify decks carry Polish names. Without the ext faces, `Ł ł ą ń ż ó ć` fall back mid-word, inside the presenter's own name. Every weight gets a `unicode-range` pair.
+
+To change or add a face: fetch each weight separately from `fonts.googleapis.com/css2?family=…:wght@<one weight>`, take both the `latin` and `latin-ext` woff2, base64 them into one `@font-face` line each with the matching `unicode-range`, and regenerate the font-test reference (next section).
+
+### Font test (press T)
+
+Any deck can prove its own typography on an unfamiliar machine: press **T** for a panel showing the live rendering beside a PNG of a known-good one, plus a verdict that measures each family against a forced fallback rather than trusting the eye. Escape or T closes it.
+
+Regenerate the reference after any font change: open the deck with `?fontspec=1`, which strips it to the specimen alone, and screenshot at **660 x 302 with device scale factor 2**. Base64 that PNG into the `<img>` in the `#fonttest` block. Keep the specimen honest — it should exercise the weights the deck actually embeds, and at least one latin-ext string.
 
 ---
 
@@ -414,7 +428,7 @@ When building a new Mplify HTML presentation, work through this list:
 7. **Sanity-check the colour balance.** Orange should appear as ~10–15% of visible colour on any given slide. If a slide is mostly orange, dial it back.
 8. **Keep body copy short.** `.card-text` paragraphs read best at 30–55 words. If a card needs more, the slide is doing too much.
 9. **Test arrow-key navigation and chapter clicks** before delivering. Tab through the deck too — keyboard focus should be visible at every step (see §4 Accessibility minimum).
-10. **No external dependencies** beyond the Google Fonts link. Everything else is inline CSS, inline SVG, and a tiny JS block. The deck should work offline once loaded.
+10. **No external dependencies at all.** Fonts are embedded as base64 woff2; everything else is inline CSS, inline SVG, and a small JS block. A finished deck makes no network requests and works offline from the first paint, not merely once loaded.
 
 ---
 
@@ -433,6 +447,7 @@ What print mode does:
 - **Prints at stage size, not deck size.** 1920 less the 272px sidebar is 1648; 1080 less the 8px gradient bar is 1072. `@page { size: 17.16667in 11.25in }` is exactly 1648 x 1080 px at 96dpi, so every slide reproduces as authored with no reflow and nothing re-tuned for paper. The gradient bar is redrawn per page as an `::after` strip.
 - **Gives every zoomable diagram a page of its own,** straight after the slide it belongs to, captioned with the same `data-zoom` text the on-screen lightbox shows. At tile size those 560x112 SVGs are unreadable in print. An 11-slide deck with 13 diagrams comes out at 24 pages.
 - **Forces `print-color-adjust: exact`.** The backgrounds and SVG fills *are* the deck, not decoration.
+- **Embeds the type.** Chrome writes a subset of each face it rendered with into the PDF, so the exported file carries Sansation and Roboto with it and reads correctly on a machine that has neither. This only holds because the faces are embedded and static — see *Fonts are embedded, not linked* in §1 for the two ways it silently stops holding. Worth spot-checking after any font change: `strings deck.pdf | grep BaseFont` should show Roboto and Sansation and no `Helvetica`.
 
 `buildPrintPages()` wraps each slide in a `.print-page`. The wrappers are `display: contents` on screen, so the live deck neither sees them nor needs them torn down after printing. It runs on `beforeprint`, and on load when the URL carries `?print=1` — headless Chrome does not reliably fire `beforeprint`, which is why the script appends that query.
 
@@ -444,6 +459,7 @@ What print mode does:
 - It is **not** laid out for paper first. The design target is screen presentation at 16:9 — but a PDF is a supported output, see §5.1.
 - It is **not** meant to be edited collaboratively in real time. It's a deliverable artefact, built in one shot.
 - It does **not** use Tailwind, Bootstrap, or any utility framework. All styling is hand-written CSS in a single `<style>` block.
+- It does **not** fetch anything at runtime — no font CDN, no script CDN, no remote images. If a deck needs an asset, the asset goes inside the file.
 
 ---
 
