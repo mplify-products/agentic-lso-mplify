@@ -1127,6 +1127,7 @@ body:not(.pointer-idle) :is(#slide-12,#slide-14,#slide-15):not(.stepping) .uc-di
         padding: 7px 14px; border-radius: 16px; }
 .ft-v.ok  { background: rgba(28,138,90,0.12); color: var(--green); }
 .ft-v.bad { background: rgba(253,120,1,0.16); color: #B34E00; }
+.ft-v.warn { background: rgba(254,191,16,0.22); color: #7A5A00; }
 .ft-hint { font-family: 'Roboto', sans-serif; font-size: 12px; color: var(--gray); margin-top: 14px; }
 
 .fontspec { width: 660px; height: 302px; background: #FFFFFF; padding: 18px 22px;
@@ -2616,31 +2617,89 @@ document.addEventListener('keydown', e => {
    laptop should be the type the deck was built with. T shows the proof:
    live rendering beside a capture of a known-good one.
 
-   fontActive() does not trust the eye. It measures a string in the family
-   against the same string in a forced fallback and calls the family active
-   only if the widths differ - which catches a substitute close enough to
-   look plausible from the back of a room. document.fonts.check() is asked
-   too, and either saying yes is enough, since the two fail differently. */
+   fontActive() measures in the DOM, not on a canvas. An earlier version used
+   canvas measureText and reported Sansation as missing in Safari while it was
+   plainly rendering on the same screen - WebKit does not resolve webfonts for
+   canvas the way it does for layout, so measureText hands back fallback
+   metrics. Laying out a real span is the path that actually decides what the
+   audience sees, so that is the path to measure.
+
+   The test compares the family against three generics. A family that is not
+   available collapses onto whichever generic follows it, so its width matches
+   that generic exactly; one that is available holds its own width against all
+   three. Comparing against three rather than one removes the chance of a
+   coincidental metric match. */
 function fontActive(family) {
-  const c = document.createElement('canvas').getContext('2d');
   const probe = 'Handgloves 0123456789 mmmiiiwww';
-  const measure = stack => { c.font = '48px ' + stack; return c.measureText(probe).width; };
-  const widthDiffers = Math.abs(measure("'" + family + "', monospace") - measure('monospace')) > 0.5;
-  let declared = false;
-  try { declared = document.fonts && document.fonts.check("16px '" + family + "'"); } catch (e) {}
-  return widthDiffers || declared;
+  const span = document.createElement('span');
+  span.textContent = probe;
+  span.style.cssText = 'position:absolute;left:-9999px;top:-9999px;white-space:nowrap;' +
+                       'font-size:100px;font-weight:400;line-height:1;';
+  document.body.appendChild(span);
+  const widthOf = stack => { span.style.fontFamily = stack; return span.getBoundingClientRect().width; };
+  const generics = ['monospace', 'serif', 'sans-serif'];
+  const bare = generics.map(widthOf);
+  const withFamily = generics.map(g => widthOf("'" + family + "', " + g));
+  span.parentNode.removeChild(span);
+  return withFamily.some((w, i) => Math.abs(w - bare[i]) > 0.5);
+}
+
+/* A face is not obliged to activate until something needs it, so ask for the
+   ones under test by name and wait before judging them. */
+function readyFonts() {
+  if (!document.fonts) return Promise.resolve();
+  const wanted = ["400 20px 'Roboto'", "600 20px 'Roboto'", "700 20px 'Roboto'",
+                  "400 20px 'Sansation'", "700 20px 'Sansation'"];
+  let chain = [];
+  try { chain = wanted.map(f => document.fonts.load(f)); } catch (e) {}
+  chain.push(document.fonts.ready);
+  return Promise.all(chain).catch(() => {});
+}
+
+/* Rendering correctly is not proof the EMBEDDED face did it: a machine with
+   the font installed looks identical either way, and that machine will not be
+   the one in the projection booth. Only an @font-face rule produces a FontFace
+   entry, so one reporting 'loaded' is the embedded face and nothing else. This
+   is the difference that matters on a borrowed laptop. */
+function embeddedFaceLoaded(family) {
+  if (!document.fonts) return false;
+  let hit = false;
+  try {
+    document.fonts.forEach(f => {
+      if (f.family.replace(/['"]/g, '') === family && f.status === 'loaded') hit = true;
+    });
+  } catch (e) {}
+  return hit;
 }
 
 function renderVerdicts() {
   const box = document.getElementById('ft-verdicts');
+  const detail = document.getElementById('ft-detail');
   if (!box) return;
   box.innerHTML = '';
-  ['Roboto', 'Sansation'].forEach(f => {
-    const ok = fontActive(f);
-    const el = document.createElement('div');
-    el.className = 'ft-v ' + (ok ? 'ok' : 'bad');
-    el.textContent = ok ? f + ' \u2014 active' : f + ' \u2014 NOT ACTIVE, type is falling back';
-    box.appendChild(el);
+  readyFonts().then(() => {
+    ['Roboto', 'Sansation'].forEach(f => {
+      const ok = fontActive(f);
+      const own = embeddedFaceLoaded(f);
+      const el = document.createElement('div');
+      el.className = 'ft-v ' + (!ok ? 'bad' : own ? 'ok' : 'warn');
+      el.textContent = !ok ? f + ' \u2014 NOT ACTIVE, type is falling back'
+                     : own ? f + ' \u2014 active, from the embedded face'
+                           : f + ' \u2014 rendering from a font installed on this machine, '
+                                 + 'not from the embedded face';
+      box.appendChild(el);
+    });
+    /* Rendering correctly is not by itself proof the EMBEDDED faces did it -
+       a machine with the font installed would look the same. This counts the
+       @font-face rules the browser actually took, which is the part that has
+       to survive the trip to a laptop that has neither font. */
+    if (detail && document.fonts && typeof document.fonts.size === 'number') {
+      let loaded = 0;
+      try { document.fonts.forEach(f => { if (f.status === 'loaded') loaded++; }); } catch (e) {}
+      detail.textContent = document.fonts.size + ' faces embedded in this file, ' + loaded +
+        ' activated so far. Fewer than 12 embedded means a face failed to parse.' +
+        ' A green badge means this deck carries its own type and needs nothing installed.';
+    }
   });
 }
 
@@ -2742,6 +2801,7 @@ goTo(slideFromHash());
       </div>
     </div>
     <div class="ft-verdicts" id="ft-verdicts"></div>
+    <div class="ft-hint" id="ft-detail"></div>
     <div class="ft-hint">T or Escape closes. Fonts are embedded in this file - no network needed.</div>
   </div>
 </div>

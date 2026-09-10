@@ -70,7 +70,12 @@ To change or add a face: fetch each weight separately from `fonts.googleapis.com
 
 ### Font test (press T)
 
-Any deck can prove its own typography on an unfamiliar machine: press **T** for a panel showing the live rendering beside a PNG of a known-good one, plus a verdict that measures each family against a forced fallback rather than trusting the eye. Escape or T closes it.
+Any deck can prove its own typography on an unfamiliar machine: press **T** for a panel showing the live rendering beside a PNG of a known-good one, plus a verdict per family. Escape or T closes it.
+
+The verdict answers two questions, because on a machine that has the font installed they have different answers:
+
+- **Is it rendering?** Measured by laying out a real span against three generic families — not `canvas.measureText`, which WebKit does not resolve webfonts for, and which reported Sansation missing while it was visibly rendering.
+- **Is it rendering from the *embedded* face?** Only an `@font-face` rule creates a `FontFace` entry, so one reporting `loaded` proves the embedded copy did the work. A green badge means the deck needs nothing installed; an amber one means it looks right here and would break on a clean laptop.
 
 Regenerate the reference after any font change: open the deck with `?fontspec=1`, which strips it to the specimen alone, and screenshot at **660 x 302 with device scale factor 2**. Base64 that PNG into the `<img>` in the `#fonttest` block. Keep the specimen honest — it should exercise the weights the deck actually embeds, and at least one latin-ext string.
 
