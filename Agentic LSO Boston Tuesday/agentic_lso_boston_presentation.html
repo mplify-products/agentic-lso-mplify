@@ -2520,7 +2520,17 @@ let current = 0;
 let stop = 0;
 
 function tilesIn(slide) { return slide ? Array.from(slide.querySelectorAll('.uc-diagram')) : []; }
-function lastStop(i)    { return tilesIn(slides[i]).length * 2; }
+
+/* The tiles the arrow keys walk. data-no-step takes tiles out of the walk
+   without taking them out of the deck: on a slide, every tile on it; on a
+   single tile, just that one. They still open on hover and on focus, and
+   they still get their own pages in the PDF - the walk is a presenting
+   aid, and some tiles are reference material the presenter would never
+   stop the room to open. */
+function stepTiles(slide) {
+  return tilesIn(slide).filter(t => !t.closest('[data-no-step]'));
+}
+function lastStop(i)    { return stepTiles(slides[i]).length * 2; }
 
 function applyStop() {
   slides.forEach(s => {
@@ -2531,7 +2541,7 @@ function applyStop() {
   if (!slide) return;
   if (stop % 2 === 1) slide.classList.add('stepping');
   if (stop % 2 === 1) {
-    const tile = tilesIn(slide)[(stop - 1) / 2];
+    const tile = stepTiles(slide)[(stop - 1) / 2];
     if (tile) tile.classList.add('zoomed');
   }
 }
@@ -2548,7 +2558,7 @@ function updateUI() {
       c.removeAttribute('aria-current');
     }
   });
-  const tiles = tilesIn(slides[current]).length;
+  const tiles = stepTiles(slides[current]).length;
   counter.textContent = (current + 1) + ' / ' + slides.length
     + (stop % 2 === 1 ? '  \u00b7  ' + ((stop + 1) / 2) + ' of ' + tiles : '');
   applyStop();

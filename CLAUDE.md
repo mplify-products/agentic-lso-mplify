@@ -166,6 +166,8 @@ Slides that carry `.uc-diagram` tiles enlarge one on hover, into a fixed lightbo
 
 Returning to the full grid between diagrams is deliberate: the audience re-orients on the grid before each new detail. A slide with N diagrams therefore has **2N+1 stops** and takes 2N+1 presses to cross. Left arrow retraces the same path, and re-entering a slide backwards lands on its final stop.
 
+**Skipping tiles: `data-no-step`.** Not every tile is something a presenter stops the room to open — a popup listing a hundred documents is reference material for someone reading the deck later. Put `data-no-step` on a slide to take all of its tiles out of the arrow walk, or on a single tile to take just that one out; a slide can mix both. Skipped tiles still open on hover and keyboard focus and still get their own PDF pages, because print deliberately uses the full tile list (`tilesIn`) while the walk uses `stepTiles`. The counter's "2 of 3" counts only stepped tiles, so it never announces a stop the arrows will not reach. If a slide's hint says "step with the arrows", change it when you opt that slide out.
+
 The script keeps a `stop` counter alongside `current`. Even stops show the plain slide; odd stop *k* opens diagram *(k−1)/2*. **DOM order is presentation order** — reorder the tiles in the markup and the walk reorders with them. No list of slide numbers exists in the script, and slides with no diagrams have a single stop and behave exactly as before.
 
 Three classes carry the state:
