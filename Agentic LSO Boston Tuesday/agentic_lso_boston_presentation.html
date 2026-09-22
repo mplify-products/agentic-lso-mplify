@@ -2570,7 +2570,11 @@ function goTo(n, atStop) {
   current = Math.max(0, Math.min(slides.length - 1, n));
   stop = atStop === undefined ? 0 : Math.max(0, Math.min(lastStop(current), atStop));
   updateUI();
-  if (history.replaceState) history.replaceState(null, '', '#' + (current + 1));
+  // Sandboxed viewers (SharePoint's preview, the portal's HTML viewer) run the
+  // deck in an opaque-origin srcdoc frame, where the relative '#N' resolves
+  // against the host's URL and replaceState throws a SecurityError. The slide
+  // has already rendered by this point; only the URL fragment is lost.
+  try { if (history.replaceState) history.replaceState(null, '', '#' + (current + 1)); } catch (e) {}
 }
 
 function nextSlide() {
