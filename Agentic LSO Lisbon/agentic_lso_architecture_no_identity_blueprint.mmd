@@ -1,19 +1,38 @@
+%%{init: {"flowchart": {"wrappingWidth": 600}}}%%
 flowchart LR
     Buyer(("Buyer (Human)")) -->|chat| Agent((L2 Agent))
 
     Agent -->|MCP| PC[Product Catalog MCP Server]
     Agent -->|MCP| AV[Address Validation MCP Server]
+    Agent -->|MCP| SITE[Site MCP Server]
     Agent -->|MCP| POQ[POQ MCP Server]
     Agent -->|MCP| QUOTE[Quote MCP Server]
     Agent -->|MCP| ORDER[Product Order MCP Server]
     Agent -->|MCP| INV[Product Inventory MCP Server]
+    Agent -->|MCP| TT[Trouble Ticket MCP Server]
+
+    subgraph BP[" "]
+        Agent
+        PC
+        AV
+        SITE
+        POQ
+        QUOTE
+        ORDER
+        INV
+        TT
+    end
+    style BP fill:transparent,stroke:#FD7801,stroke-width:5px
 
     PC -->|LSO API| BSE[Mplify  OIT]
     AV -->|LSO API| BSE
+    SITE -->|LSO API| BSE
     POQ -->|LSO API| BSE
     QUOTE -->|LSO API| BSE
     ORDER -->|LSO API| BSE
     INV -->|LSO API| BSE
+    TT -->|LSO API| BSE
+
 
     classDef actor fill:#e5e7eb,stroke:#4b5563,color:#111827,stroke-width:2px;
     classDef agent fill:#bae6fd,stroke:#0369a1,color:#0c4a6e,stroke-width:2px;
@@ -23,5 +42,5 @@ flowchart LR
 
     class Buyer actor;
     class Agent agent;
-    class PC,AV,POQ,QUOTE,ORDER,INV mcp;
+    class PC,AV,SITE,POQ,QUOTE,ORDER,INV,TT mcp;
     class BSE backend;
