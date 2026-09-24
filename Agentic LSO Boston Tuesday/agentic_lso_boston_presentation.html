@@ -2606,7 +2606,29 @@ document.addEventListener('mousemove', e => {
   document.body.classList.remove('pointer-idle');
 }, { passive: true });
 
-const NAV_KEYS = ['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp', 'Home', 'End'];
+/* Clickers do not agree on what to send. The arrows this deck was first built
+   for are the minority: most handsets in a hotel AV kit send PageDown and
+   PageUp, and some send Space. They all mean the one thing, so they all do the
+   one thing - a step, not a slide, exactly as the arrows do. Backspace comes
+   along as Space's conventional partner.
+
+   Space navigates even when a control has focus. The chapter list and the two
+   arrows are <button>s, which Space would otherwise activate; a slide's links
+   are <a href>, which Space does not activate in any browser. Enter activates
+   either, so the keyboard path to every control survives. The case Space has
+   to get right is the other one: a presenter who picked a chapter with the
+   mouse and then thumbs the clicker, where re-firing that chapter's goTo()
+   would look like a freeze. */
+const NAV_KEYS = ['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp', 'Home', 'End',
+                  'PageDown', 'PageUp', ' ', 'Backspace'];
+
+/* The four new keys need preventDefault where the arrows never did. The body
+   does not scroll, but the chapter list does, so PageDown with focus in the
+   sidebar would scroll it out from under the slide; Space would do the same;
+   Backspace is still a history-back gesture in older browsers. The arrows are
+   left alone - they have been in front of an audience, and this is not the
+   change to alter them. */
+const PREVENT = ['PageDown', 'PageUp', ' ', 'Backspace'];
 
 document.addEventListener('keydown', e => {
   // The font test is a modal: it swallows navigation while it is open.
@@ -2614,8 +2636,9 @@ document.addEventListener('keydown', e => {
   if (e.key === 't' || e.key === 'T') { toggleFontTest(); return; }
   if (testOpen) { if (e.key === 'Escape') toggleFontTest(false); return; }
   if (NAV_KEYS.indexOf(e.key) !== -1) document.body.classList.add('pointer-idle');
-  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSlide();
-  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   prevSlide();
+  if (PREVENT.indexOf(e.key) !== -1) e.preventDefault();
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') nextSlide();
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp'   || e.key === 'PageUp'   || e.key === 'Backspace') prevSlide();
   if (e.key === 'Home') goTo(0);
   if (e.key === 'End')  goTo(slides.length - 1);
   // 'f' fills the screen, which is where the canvas lands exactly 1:1 on a
